@@ -22,7 +22,7 @@
  	
     </style>
 </head>
-<body>123123
+<body>
     <header id="header" class="deactive">
         
         <nav class="navbar">
