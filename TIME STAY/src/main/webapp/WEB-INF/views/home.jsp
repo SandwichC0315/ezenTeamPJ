@@ -7,7 +7,7 @@
 	<title>Home</title>
 </head>
 <body>
-<h1> fsfdㄹㄴㄹㅇㄴㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+<h1> 
 	TIME STAY  
 </h1>
 <h3>카페소개</h3>
