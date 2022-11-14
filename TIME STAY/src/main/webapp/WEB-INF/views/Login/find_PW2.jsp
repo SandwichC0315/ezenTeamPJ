@@ -24,7 +24,7 @@
         <nav class="navbar">
             <div class="navbar_menu">
                 <div id="title"> 
-                    <h4><a href="#">TIME STAY</a></h4>
+                    <h4><a href="../">TIME STAY</a></h4>
                 </div>
                 <ul>
                     <li><a href="../About/About_us.do">카페소개</a>
