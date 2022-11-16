@@ -19,15 +19,15 @@
         <nav class="navbar">
             <div class="navbar_menu">
                 <div id="title"> 
-                    <h4><a href="../">TIME STAY</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/">TIME STAY</a></h4>
                 </div>
                 <ul>
-                    <li><a href="About_us.do">카페소개</a>
+                    <li><a href="<%= request.getContextPath() %>/About/About_us.do">카페소개</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="About_us.do">Time stay</a></li>
-                                <li><a href="Location.do">오시는 길</a></li>
-                                <li><a href="Gallery.do">갤러리</a></li>
+                                <li><a href="<%= request.getContextPath() %>/About/About_us.do">Time stay</a></li>
+                                <li><a href="<%= request.getContextPath() %>/About/Location.do">오시는 길</a></li>
+                                <li><a href="<%= request.getContextPath() %>/About/Gallery.do">갤러리</a></li>
                             </ul>
                         </div>
                     </li>
@@ -149,9 +149,9 @@
             <input name="password" class="loginPw" type="password" placeholder="비밀번호"/>
             <button class="login_btn">로그인</button>
             <div class="login_bottom">
-                <a href="#">회원가입</a> 
-                <a href="../Login/find_ID.do">아이디 찾기</a> 
-                <a href="../Login/find_PW.do">비밀번호 찾기</a>
+                <a href="<%= request.getContextPath() %>/SignUp/signup1.do">회원가입</a> 
+                <a href="<%= request.getContextPath() %>/Login/find_ID.do">아이디 찾기</a> 
+                <a href="<%= request.getContextPath() %>/Login/find_PW.do">비밀번호 찾기</a>
             </div>            
         </div>
     </div>    

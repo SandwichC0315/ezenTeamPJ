@@ -18,15 +18,15 @@
         <nav class="navbar">
             <div class="navbar_menu">
                 <div id="title">
-                    <h4><a href="#">TIME STAY</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/">TIME STAY</a></h4>
                 </div>
                 <ul>
-                    <li><a href="#">카페소개</a>
+                    <li><a href="<%= request.getContextPath() %>/About/About_us.do">카페소개</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="<%=request.getContextPath()%>/About/About_us.do">Time stay</a></li>
-                                <li><a href="<%=request.getContextPath()%>/About/Location.do">오시는 길</a></li>
-                                <li><a href="<%=request.getContextPath()%>/About/Gallery.do">갤러리</a></li>
+                                <li><a href="<%= request.getContextPath() %>/About/About_us.do">Time stay</a></li>
+                                <li><a href="<%= request.getContextPath() %>/About/Location.do">오시는 길</a></li>
+                                <li><a href="<%= request.getContextPath() %>/About/Gallery.do">갤러리</a></li>
                             </ul>
                         </div>
                     </li>

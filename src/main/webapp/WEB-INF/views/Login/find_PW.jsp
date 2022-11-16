@@ -24,15 +24,15 @@
         <nav class="navbar">
             <div class="navbar_menu">
                 <div id="title"> 
-                    <h4><a href="../">TIME STAY</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/">TIME STAY</a></h4>
                 </div>
                 <ul>
-                    <li><a href="../About/About_us.do">카페소개</a>
+                    <li><a href="<%= request.getContextPath() %>/About/About_us.do">카페소개</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="../About/About_us.do">Time stay</a></li>
-                                <li><a href="../About/Location.do">오시는 길</a></li>
-                                <li><a href="../About/Gallery.do">갤러리</a></li>
+                                <li><a href="<%= request.getContextPath() %>/About/About_us.do">Time stay</a></li>
+                                <li><a href="<%= request.getContextPath() %>/About/Location.do">오시는 길</a></li>
+                                <li><a href="<%= request.getContextPath() %>/About/Gallery.do">갤러리</a></li>
                             </ul>
                         </div>
                     </li>
@@ -66,7 +66,7 @@
                         </div>
                     </li>
                 </ul>
-            </ul>            
+            </div>            
         </nav>    
         <ul class="navbar_links">
             <li><a href="#" id="modal_btn" onclick="">로그인</a></li>
@@ -105,9 +105,9 @@
                     </tr>
                 </table> 
                 <div class="find_bottom">
-                    <a href="Login.do">로그인</a> 
-                    <a href="signup1.do">회원가입</a> 
-                    <a href="find_ID.do">아이디 찾기</a>
+                    <a href="<%= request.getContextPath() %>/Login/Login.do">로그인</a> 
+                    <a href="<%= request.getContextPath() %>/SignUp/signup1.do">회원가입</a> 
+                    <a href="<%= request.getContextPath() %>/Login/find_ID.do">아이디 찾기</a>
                 </div> 
             </div> 
         </div>        
@@ -143,12 +143,12 @@
             <input name="password" class="loginPw" type="password" placeholder="비밀번호"/>
             <button class="login_btn">로그인</button>
             <div class="login_bottom">
-                <a href="#">회원가입</a> 
-                <a href="find_ID.do">아이디 찾기</a> 
-                <a href="find_PW.do">비밀번호 찾기</a>
+                <a href="<%= request.getContextPath() %>/SignUp/signup1.do">회원가입</a> 
+                <a href="<%= request.getContextPath() %>/Login/find_ID.do">아이디 찾기</a> 
+                <a href="<%= request.getContextPath() %>/Login/find_PW.do">비밀번호 찾기</a>
             </div>            
         </div>
-    <div>  
+    </div>  
     <script>  
 
         // 스크롤 시 header 색변화 fade-in

@@ -9,8 +9,13 @@
 <title>Cafe Stay</title>
 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login_pop.css" type="text/css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cafestay_Home.css" type="text/css"/>
-
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+	
+	<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
 </head>
 <body>
@@ -18,10 +23,10 @@
         <nav class="navbar">
             <div class="navbar_menu">
                 <div id="title"> 
-                    <h4><a href="#">TIME STAY</a></h4>
+                    <h4><a href="<%= request.getContextPath() %>/">TIME STAY</a></h4>
                 </div>
                 <ul>
-                    <li><a href="#">카페소개</a>
+                    <li><a href="<%= request.getContextPath() %>/About/About_us.do">카페소개</a>
                         <div class="sub">
                             <ul>
                                 <li><a href="<%= request.getContextPath() %>/About/About_us.do">Time stay</a></li>
@@ -65,7 +70,7 @@
         </nav>
     
         <ul class="navbar_links">
-            <li><a href="<%= request.getContextPath() %>/Login/Login.do">로그인</a></li>
+            <li><a href="#" id="modal_btn" onclick="">로그인</a></li>
             <li><a href="#">장바구니</a></li>
             <li><a href="#">고객센터</a></li>
         </ul>
@@ -293,9 +298,23 @@
           </div>
           <!--//container-->
       </footer>
-       
-    </main>
-    <script>
+	    <div class="black_bg"></div>
+	    <div class="modal_wrap">
+	        <div class="modal_close"><a href="#">close</a></div>
+	        <div class="modalContents">
+	            <h2>로그인</h2>
+	            <input name="id" class="loginId" type="text" placeholder="아이디"/>
+	            <input name="password" class="loginPw" type="password" placeholder="비밀번호"/>
+	            <button class="login_btn">로그인</button>
+	            <div class="login_bottom">
+	                <a href="<%= request.getContextPath() %>/SignUp/signup1.do">회원가입</a> 
+	                <a href="<%= request.getContextPath() %>/Login/find_ID.do">아이디 찾기</a> 
+	                <a href="<%= request.getContextPath() %>/Login/find_PW.do">비밀번호 찾기</a>
+	            </div>            
+	        </div>
+	    </div>  
+	    </main>
+	    <script>
          function click1() {
             const text1 = document.getElementById("text1");
             const text2 = document.getElementById("text2");
@@ -393,6 +412,22 @@
             $('#button3').css('display','block')
       
     }
+            
+            
+            //로그인 팝업창
+            window.onload = function() {     
+                function onClick() {
+                    document.querySelector('.modal_wrap').style.display ='block';
+                    document.querySelector('.black_bg').style.display ='block';
+                }   
+                function offClick() {
+                    document.querySelector('.modal_wrap').style.display ='none';
+                    document.querySelector('.black_bg').style.display ='none';
+                }
+            
+                document.getElementById('modal_btn').addEventListener('click', onClick);
+                document.querySelector('.modal_close').addEventListener('click', offClick);     
+            };
     </script>
 </body>
 </html>
