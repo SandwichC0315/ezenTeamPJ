@@ -98,25 +98,52 @@
             </section><!--.inside-->        
             <section class="outside">            
                 <h4>카페전경</h4>
-                <div class="view view1">
+                <div class="view view8">
                     <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/카페사진2.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/카페사진2.jpg" alt=""/></a>
                 </div>
-                <div class="view view2">
+                <div class="view view9">
                     <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/카페사진3.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/카페사진3.jpg" alt="" /></a>
                 </div>
-                <div class="view view3">
+                <div class="view view10">
                     <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/카페사진4.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/카페사진4.jpg" alt="" /></a>
                 </div>
-                <div class="view view3">
+                <div class="view view11">
                     <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/카페사진5.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/카페사진5.jpg" alt="" /></a>
                 </div>
-                <div class="view view3">
+                <div class="view view12">
                     <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/카페사진6.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/카페사진6.jpg" alt="" /></a>
                 </div>
-                <div class="view view4">
+                <div class="view view13">
                     <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/카페사진7.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/카페사진7.jpg" alt="" /></a>
                 </div>
-            </section><!--.inside-->
+            </section><!--.outside-->
+            <section class="food">            
+                <h4>메뉴사진</h4>
+                <div class="view view14">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/제과사진5.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/제과사진5.jpg" alt=""/></a>
+                </div>
+                <div class="view view15">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/제과사진4.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/제과사진4.jpg" alt="" /></a>
+                </div>
+                <div class="view view16">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/제과사진3.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/제과사진3.jpg" alt="" /></a>
+                </div>
+                <div class="view view17">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/제과사진2.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/제과사진2.jpg" alt="" /></a>
+                </div>
+                <div class="view view18">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/제과사진1.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/제과사진1.jpg" alt="" /></a>
+                </div>
+                <div class="view view19">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/브런치사진1.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/브런치사진1.jpg" alt="" /></a>
+                </div>
+                <div class="view view19">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/브런치사진2.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/브런치사진2.jpg" alt="" /></a>
+                </div>
+                <div class="view view19">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/브런치사진3.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/브런치사진3.jpg" alt="" /></a>
+                </div>
+            </section><!--.food-->
         </div><!--.gallery-->     
         
     </main>
