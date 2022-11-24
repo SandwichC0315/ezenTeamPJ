@@ -6,25 +6,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TIME STAY</title>
+    <title>비밀번호 찾기</title>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login_pop.css" type="text/css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/About_us.css" type="text/css"/>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css"/>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login_pop.css"/>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/find_PW.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script> <!--생년월일 select 박스-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
 
-    <style>   
- 	
+    <style>
+    
     </style>
 </head>
 <body>
-    <header id="header" class="deactive">
-        
+    <header id="header" class="deactive">        
         <nav class="navbar">
             <div class="navbar_menu">
                 <div id="title"> 
@@ -53,7 +49,7 @@
                     <li><a href="#">EVENT</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="#">진행중 이벤트</a></li>
+                                <li><a href="#">진행중인 이벤트</a></li>
                                 <li><a href="#">종료된 이벤트</a></li>
                                 <li><a href="#"></a></li>
                             </ul>
@@ -70,58 +66,52 @@
                         </div>
                     </li>
                 </ul>
-            </div>
-        </nav>
-    
+            </div>            
+        </nav>    
         <ul class="navbar_links">
             <li><a href="#" onclick="return false;" id="modal_btn" >로그인</a></li>
             <li><a href="#">장바구니</a></li>
             <li><a href="#">고객센터</a></li>
         </ul>
     </header>
-    <main> 
-        <div class="info">
-            <h4>TIME STAY</h4>
-            <section id="main_view">
-                <div class="slider"><!--article.view.vew$*6-->                
-                    <article class="view view1">
-                        <div class="text">
-                            <h3>TIME STAY는...</h3>
-                            <p>TIME STAY는 베이커리 전문 카페로서<br>
-                                이렇고 저런 저런 카페입니다
-                            </p>
-                            <a href="#">READ MORE<i class="xi-angle-right"></i></a>
-                        </div><!--//.text-->
-                    </article>
-                    <article class="view view2">
-                        <div class="text">
-                            <h3>베이커리 전문 카페</h3>
-                            <p>TIME STAY에서는 매일 아침 ?시<br>
-                                신선한 빵을~ 설명 설명 설명 제공하고 있습니다</p>
-                            <a href="#">READ MORE<i class="xi-angle-right"></i></a>
-                        </div><!--//.text-->
-                    </article>
-                    <article class="view view3">
-                        <div class="text">
-                            <h3>아름다운 VIEW</h3>
-                            <p>TIME STAY는 어디어디 위치한 카페로<br>
-                                고급스러운 가구들로 이루어진 인테리어, 어디어디의 아름다운 전경을 자랑합니다</p>
-                            <a href="#">READ MORE<i class="xi-angle-right"></i></a>
-                        </div><!--//.text-->
-                    </article>
-                    <article class="view view4">
-                        <div class="text">
-                            <h3>카페 설명4</h3>
-                            <p>XXX는 OO와 OOO가 특징인 TIME STAY는<br> 
-                                00시 부터 00시 까지 영업합니다 (?째주 ?요일 휴무)</p>
-                            <a href="#">주문하기<i class="xi-angle-right"></i></a>
-                        </div><!--//.text-->
-                    </article>                
-                </div><!--//.slider-->
-                <div class="swiper-button-next" style="color:#fff; margin:180px 350px;"></div>
-                <div class="swiper-button-prev" style="color:#fff; margin:180px 0 0 350px;"></div>
-            </section>
-        </div>
+    <main>
+        <div class="find">         
+            <div class="find_PW">  
+                <h4>비밀번호 찾기</h4>
+                <table>
+                    <tr>
+                        <td><input class="member_ID" type="text" placeholder="아이디"></td>   
+                    </tr>
+                    <tr>
+                        <td><input class="member_email" type="text" placeholder="이메일">
+                            <select name="email_domain">
+                                <option value="self">직접입력</option>
+                                <option value="naver">@naver.com</option>
+                                <option value="daum">@daum.net</option>
+                                <option value="gmail">@gmail.com</option>
+                                <option value="kakao">@kakao.com</option>
+                                <option value="yahoo">@yahoo.com</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input class="member_name" type="text" placeholder="이름"></td>   
+                    </tr>
+                    <tr>
+                        <td>
+                            <button id="submmit">비밀번호 확인</button>
+                            <button id="cancel"> 취 소</button>
+                        </td>
+                    </tr>
+                </table> 
+                <div class="find_bottom">
+                    <a href="<%= request.getContextPath() %>/Member/Login.do">로그인</a> 
+                    <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
+                    <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a>
+                </div> 
+            </div> 
+        </div>        
+        
     </main>
     <footer>
         <div id="container">
@@ -159,8 +149,8 @@
             </div>            
         </div>
     </div>  
-        
-    <script>
+    <script>  
+
         // 스크롤 시 header 색변화 fade-in
         $(function(){
             $(document).on('scroll', function(){
@@ -172,31 +162,8 @@
                     $("#header").addClass("deactive");
                 }
             })
-
-        });
-
-        //메인뷰 슬라이더
-        var main_view = new Swiper("#main_view",{
-                wrapperClass:"slider", //슬라이드요소를 감싸는 요소의 클래스
-                slideClass:"view", //슬라이드요소들의 공통 클래스
-                spaceBetween:10, //슬라이드 사이간격
-                speed:800, //슬라이드가 전환되는 시간
-                autoplay:{ //자동으로 슬라이드됨
-                    delay: 10000, //현재슬라이드가 보여지는 시간(1000ms = 1초)
-                    disableOnInteraction:false, //상호작용후 다시 자동재생                
-                },
-                navigation: { //슬라이드 네비게이션 버튼
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                }
-            });
-
-        var swiper = new Swiper(".pager", {
-                pagination: {
-                    el: ".swiper-pagination",
-                },
-            });   
-            
+        });   
+        
         //로그인 팝업창
         window.onload = function() {     
             function onClick() {
@@ -211,6 +178,9 @@
             document.getElementById('modal_btn').addEventListener('click', onClick);
             document.querySelector('.modal_close').addEventListener('click', offClick);     
         };
+
+   
     </script>
 </body>
 </html>
+        

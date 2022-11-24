@@ -54,12 +54,12 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a href="#">공지사항</a>
+                    <li><a href="<%= request.getContextPath() %>/Board/BoardNotice.do">공지사항</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="#">공지사항</a></li>
-                                <li><a href="#">자주 묻는 질문</a></li>
-                                <li><a href="#">1:1 문의 게시판</a></li>
+                                <li><a href="<%= request.getContextPath() %>/Board/BoardNotice.do">공지사항</a></li>
+                                <li><a href="<%= request.getContextPath() %>/Board/BoardFaq.do">자주 묻는 질문</a></li>
+                                <li><a href="<%= request.getContextPath() %>/Board/BoardQna.do">1:1 문의 게시판</a></li>
                                 <li><a href="#">카카오톡 문의</a></li>
                             </ul>
                         </div>
@@ -224,7 +224,33 @@
           </div>
         </section>
         <section id="main_view3">
-            
+       		<div class="slider view3_slider">
+       			<article class="mv3 mv3_view1">
+       				<div class="mv3_text">
+       					<h3>이 달의 신메뉴</h3>
+       					<p>레몬크림까눌레<br/>신선한 레몬으로 만든 크림을 가득 담았습니다.</p>
+       					<a href="#">주문하기<i class="xi-angle-right"></i></a>
+       				</div>
+       			</article>
+       			
+       			<article class="mv3 mv3_view2">
+       				<div class="mv3_text">
+       					<h3>이 달의 신메뉴</h3>
+       					<p>고구마크림치즈호밀빵<br/>달콤한 고구마를 크림치즈와 함께 호밀빵에 쏙</p>
+       					<a href="#">주문하기<i class="xi-angle-right"></i></a>
+       				</div>
+       			</article>
+       			
+       			<article class="mv3 mv3_view2">
+       				<div class="mv3_text">
+       					<h3>이 달의 신메뉴</h3>
+       					<p>딸기생크림라떼<br/>생딸기를 바로 갈아 만들어 상큼하고 달콤한 맛</p>
+       					<a href="#">주문하기<i class="xi-angle-right"></i></a>
+       				</div>
+       			</article>
+       		</div><!-- //view3_slider -->
+       		<div class="swiper-button-next" style="color:#fff; margin-right:50px;"></div>
+       		<div class="swiper-button-prev" style="color:#fff; margin-left:50px;"></div>
         </section>
         <!--#main_view3-->
         <section id="main_view4" class="clearfix">
@@ -307,9 +333,9 @@
 	            <input name="password" class="loginPw" type="password" placeholder="비밀번호"/>
 	            <button class="login_btn">로그인</button>
 	            <div class="login_bottom">
-	                <a href="<%= request.getContextPath() %>/SignUp/signup1.do">회원가입</a> 
-	                <a href="<%= request.getContextPath() %>/Login/find_ID.do">아이디 찾기</a> 
-	                <a href="<%= request.getContextPath() %>/Login/find_PW.do">비밀번호 찾기</a>
+	                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
 	            </div>            
 	        </div>
 	    </div>  
@@ -367,7 +393,9 @@
                 navigation: { //슬라이드 네비게이션 버튼
                     nextEl: ".swiper-button-next",
                     prevEl: ".swiper-button-prev",
-                }
+                },
+                observer: true,
+                observeParents: true,
             });
             
 
@@ -391,6 +419,25 @@
                 prevEl: ".swiper-button-prev",
             },
             });
+            
+            var main_view3 = new Swiper("#main_view3",{
+                wrapperClass:"view3_slider", //슬라이드요소를 감싸는 요소의 클래스
+                slideClass:"mv3", //슬라이드요소들의 공통 클래스
+                spaceBetween:10, //슬라이드 사이간격
+                speed:800, //슬라이드가 전환되는 시간
+                autoplay:{ //자동으로 슬라이드됨
+                    delay: 10000, //현재슬라이드가 보여지는 시간(1000ms = 1초)
+                    disableOnInteraction:false, //상호작용후 다시 자동재생                
+                },
+                navigation: { //슬라이드 네비게이션 버튼
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                observer: true,
+                observeParents: true,
+            });
+
+            
             function clickFn1(obj){
             $("#page1").css('display','block')
             $("#page2").css('display','none')

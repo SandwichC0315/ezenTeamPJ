@@ -15,9 +15,7 @@
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=lbz0uwc6bg"></script><!--네이버맵 api-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
 
-    <style>
-    
-    </style>
+
 </head>
 <body>
     <header id="header" class="deactive">        
@@ -55,12 +53,12 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a href="#">공지사항</a>
+                    <li><a href="<%=request.getContextPath()%>/Board/BoardNotice.do">공지사항</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="#">공지사항</a></li>
-                                <li><a href="#">자주 묻는 질문</a></li>
-                                <li><a href="#">1:1 문의 게시판</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Board/BoardNotice.do">공지사항</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Board/BoardFaq.do">자주 묻는 질문</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Board/BoardQna.do">1:1 문의 게시판</a></li>
                                 <li><a href="#">카카오톡 문의</a></li>
                             </ul>
                         </div>
@@ -114,9 +112,9 @@
             <input name="password" class="loginPw" type="password" placeholder="비밀번호"/>
             <button class="login_btn">로그인</button>
             <div class="login_bottom">
-                <a href="<%= request.getContextPath() %>/SignUp/signup1.do">회원가입</a> 
-                <a href="<%= request.getContextPath() %>/Login/find_ID.do">아이디 찾기</a> 
-                <a href="<%= request.getContextPath() %>/Login/find_PW.do">비밀번호 찾기</a>
+                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
+                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
+                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
             </div>            
         </div>
     </div>  
