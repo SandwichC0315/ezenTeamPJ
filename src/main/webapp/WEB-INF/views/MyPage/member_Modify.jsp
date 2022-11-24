@@ -66,7 +66,7 @@
                         </div>
                     </li>
                 </ul>
-            </ul>            
+            </div>>            
         </nav>    
         <ul class="navbar_links">
             <li><a href="member_Modify.do">내정보</a></li>

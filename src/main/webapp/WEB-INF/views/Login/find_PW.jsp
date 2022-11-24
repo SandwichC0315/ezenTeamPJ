@@ -69,7 +69,7 @@
             </div>            
         </nav>    
         <ul class="navbar_links">
-            <li><a href="#" id="modal_btn" onclick="">로그인</a></li>
+            <li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>
             <li><a href="#">장바구니</a></li>
             <li><a href="#">고객센터</a></li>
         </ul>
@@ -136,7 +136,7 @@
     </footer>
     <div class="black_bg"></div>
     <div class="modal_wrap">
-        <div class="modal_close"><a href="#">close</a></div>
+        <div class="modal_close"><a href="#" onclick="return false;">close</a></div>
         <div class="modalContents">
             <h2>로그인</h2>
             <input name="id" class="loginId" type="text" placeholder="아이디"/>
