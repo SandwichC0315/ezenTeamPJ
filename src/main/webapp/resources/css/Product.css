@@ -1,0 +1,323 @@
+@charset "utf-8";
+
+    body{margin:0; padding:0;width:100%; } 
+    
+      a {text-decoration:none; color:inherit; position: inherit;}
+    header{height:100px; top:0; z-index: 100; width:100%; position:fixed; }
+    
+    /*스크롤시 변경되는 header 스타일*/
+	.active{background:rgba(0,0,0, 0.6 ); /*스크롤 후*/
+	transition-duration: 0.5s; transition-timing-function: ease;    
+	-webkit-transition-duration:0.3s;-webkit-transition-timing-function:ease;}
+	.deactive{background: #000; /*스크롤 전*/
+	transition-duration: 0.5s; transition-timing-function: ease;    
+	-webkit-transition-duration:0.3s; -webkit-transition-timing-function:ease;}    
+
+    .navbar {display: flex; justify-content: space-between; height:100px; padding:0;  width:100%; position:absolute;}
+    #title{ font-size:24px; font-weight:500; color:#fff;  margin:5px 115px 0 120px;}  
+    #title h4{margin:32px 0;}      
+    
+    .navbar_menu {display: flex; list-style: none; padding-left: 0; margin:0; width:100%; }        
+    .navbar_menu li {padding: 8px 12px;}
+
+    .navbar_links {list-style: none; padding-left: 0; width:250px; float:right; position:relative; margin:16px 0; }
+    .navbar_links li{display: inline-block; position:relative;}
+    .navbar_links li a{color: #fff;  padding:0 9px; display: inline-block;} 
+    .navbar_links li::after{content:"|"; font-size:10px;display:inline-block; width:2px; height:19px; color:#888; font-size:10px; vertical-align:middle;} 
+    .navbar_links li:last-child::after{display:none;}
+
+    .navbar_toggleBtn {display: none; position: absolute; right: 32px; font-size: 24px;}
+
+    .navbar_menu>ul{display:inline-block;  margin:0; padding:0; width:1200px;}
+    .navbar_menu>ul>li>a{text-align: left;}
+    .navbar_menu>ul>li{text-align:left;}
+    .navbar_menu li{width:100px;font-size:20px; float:left; padding:37px 30px 37px; margin:0 60px 0; display:block;}
+    .navbar_menu li:nth-child(3) .sub ul li{margin-left: -3px;} 
+    .navbar_menu a{font-weight:bold; color:#fff; width:70px; padding:15px;}
+    .navbar_menu a::after{content:'';  background:#000; height:2px; width:0; transition:all .2s ease-in-out;}
+
+    header:hover{ background:#fff; height:260px;  transition: 0.3s ease-in-out;  color:#000; border-bottom: 1px solid #666;} 
+    header:hover main{position:absolute; bottom:260px;}
+    header:hover .navbar{padding:0; margin:0;}
+    header:hover .navbar__menu{padding:0; margin:0;} 
+    header:hover .navbar__menu>li>a{text-align: center;} 
+    header:hover a{color:#000;} 
+    header:hover #lnb>ul>li::after{color:#000;}
+    header:hover .sub{display:block; transition:inherit; }    
+
+    header a:hover{color:#666; }
+    header a:hover::after{width:inherit; }
+    header .sub{display:none; width:inherit;}
+
+    .navbar .sub li{float:none; margin:0; padding:0; padding-top: 20px; height:20px; width:inherit;  }
+    .navbar .sub ul{padding:0; margin-left:20px; display: inline-block; width:inherit;}
+    .navbar .sub a{font-size:15px; padding:0; white-space:nowrap; }
+    .navbar .sub a::after{display:none;}
+    .navbar .sub a:hover{text-decoration:underline;}    
+
+/* 제빵 */
+.content{ 
+  width: 70%;  margin: 100px auto 0; /*header height 100px 이라서*/
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.content > h1{
+  
+  font-size: 2.5em;
+  margin: 20px 0;
+  color: #000;
+}
+
+.product_kind_wrap{
+  width: 100%;
+  border: 1px solid #000;
+  display: block;
+  color: #000;
+}
+.product_menu_top{
+  width: 100%;
+  height: 80px;
+  justify-content: space-between;
+  display: inline-flex;
+  align-items: center;
+}
+
+.product_menu_top > h2{
+  margin: 20px 0;
+  padding-left: 40px;
+  font-size: 1.5em;
+  font-weight: bold;
+
+  
+}
+
+.product_menu_button{
+  padding-right: 50px;
+  display: inline-flex;
+  justify-content:center;  
+  align-items: center;
+  cursor: pointer;
+}
+
+.proudct_toggle_wrap{
+  flex-wrap: wrap;
+  display: none;
+  font-size: 1.1em;
+}
+.proudct_toggle_wrap > ul{
+  height: 100%;
+  margin: 25px 0;  
+  display: flex;    /*매번 부모영역에 flex 걸어줘야는건가*/
+  align-items: center;
+  padding-left: 45px;
+}
+
+.proudct_toggle_wrap > ul > li{
+  width: 90px;
+  display:inline-flex;
+  list-style:none;
+}
+
+/* .proudct_toggle_wrap input{
+  padding-right: 10px ;
+} */
+
+.hr{
+  max-width: 1385px;
+}
+
+.proudct_toggle_wrap{
+  display: block;
+}
+
+.product{
+  width: 100%;
+  display: block; 
+}
+
+.product  p{ /*p태그만 감싸는 영역 없어서 line-height가 맞을듯 ?*/
+  height:70px ;
+  padding-left: 30px;
+  background-color: #000;
+  line-height: 65px;
+  margin: 30px 0;
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.product  ul{
+  display: flex;
+  margin-top: 0;
+  padding-left: 0;
+  justify-content: flex-start !important;
+ 
+}
+.product li{
+  list-style:none;
+  display: flex;
+  margin-right: 78px;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+}
+
+.product img{ 
+  list-style:none;
+  width: 315px;
+  height: 315px; 
+  transition: transform 0.5s; /*-webkit-transition: -webkit-transform 0.5s; */
+  border-radius: 10%;
+}
+.product img:hover{
+transform: scale(1.1, 1.1);/* -webkit-transform: scale(1.1, 1.1); */
+}
+
+.product_s{
+  display: none;
+}   
+/* .product_b li{
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+.product_s li{
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+} */
+ .product dt{
+  margin: 10px 0;
+} 
+/* 퀵메뉴 */
+.quickmenu{
+  position: absolute;
+  outline: 2px solid #000;
+  width: 70px;
+  height: 300px;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5%;
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between;
+  transition: all ease 2s 0.2s;
+}
+.quickmenu div{
+  width: 60%;
+  height: 15%;
+  display: flex;
+  outline: 1px solid #000;
+  margin: 0 auto;
+  justify-content: center;
+}
+.quickmenu > div:last-child{
+  width: 100%;
+  text-align: center;
+  height: 53%;
+  outline: 1px solid #000;
+  flex-direction: column;
+  font-size: 0.7em;
+}
+
+.quickmenu div:last-child div{
+  height: 100%;
+  outline: 1px solid #000;
+  width: 100%;
+  margin: 0;
+  
+}
+.quickmenu div img{
+  width: 100%;
+}
+
+.quickmenu > div:nth-child(4){
+  width: 100%;
+  height: 7%;
+  font-size: 0.7em;
+  display: flex;
+  align-items: center;
+}
+
+.recent_product{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+.recent_product>ul{
+  width: 60%;
+  height: 100%;
+  padding: 0;
+  list-style: none;
+}
+/* 퀵메뉴 */
+.quickmenu{
+  position: absolute;
+  outline: 2px solid #000;
+  width: 70px;
+  height: 300px;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5%;
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between;
+  transition: all ease 2s 0.2s;
+}
+.quickmenu div{
+  width: 60%;
+  height: 15%;
+  display: flex;
+  outline: 1px solid #000;
+  margin: 0 auto;
+  justify-content: center;
+}
+.quickmenu > div:last-child{
+  width: 100%;
+  text-align: center;
+  height: 53%;
+  outline: 1px solid #000;
+  flex-direction: column;
+  font-size: 0.7em;
+}
+
+.quickmenu div:last-child div{
+  height: 100%;
+  outline: 1px solid #000;
+  width: 100%;
+  margin: 0;
+  
+}
+.quickmenu div img{
+  width: 100%;
+}
+
+.quickmenu > div:nth-child(4){
+  width: 100%;
+  height: 7%;
+  font-size: 0.7em;
+  display: flex;
+  align-items: center;
+}
+
+.recent_product{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+.recent_product>ul{
+  width: 60%;
+  height: 100%;
+  padding: 0;
+  list-style: none;
+}
+footer{ width: 100%; height: 300px; margin: 0 auto; background: rgb(93, 80, 82);}
+footer #container{ margin: auto; padding-left: 10vw; padding-top: 6vh; margin-top: 100px;} 
+footer #footer1, #footer2{display: inline-block; color:white; line-height: 2em;}
+footer h2{font-size: 25px; font-weight: bold;}
+footer #footer1 {padding-right: 10vw;}

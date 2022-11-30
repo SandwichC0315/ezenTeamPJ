@@ -161,15 +161,17 @@
       /* 실험끝       체크박스실험 */
       .tabs li{
         margin:2vh 0;
-        text-decoration: underline;
+        text-decoration: none;
       }
+      
+      .tabs li:hover{text-decoration: underline; transform:translateX(+10%);}
       
       .tabs a{
         cursor: pointer;
       }
       .tabpanelbody{
         position: relative;
-        width: 100%;
+        width: 85%;
         height: 100%;
       }
       .tabpanel{
@@ -222,10 +224,17 @@
         background: none !important; /*작은 사진 배경 없애기*/
 
       }
+      .swiper-slide p{
+  		 position: absolute;
+	 	 bottom: -5%;
+	  }
+	   #page2,#page3 .swiper-slide > p{
+		display: none;
+		} 
        .swiper-slide img {
         display: block;
-        width: 40%;
-        height: 25%;
+        width: 50%;
+        height: 179px;
         object-fit: cover;
         position: absolute;
         bottom: 0% !important;
@@ -233,8 +242,8 @@
       } 
       
        #main_view2 .swiper-slide-active > img{
-        width: 80% !important;
-        height: 50% !important;
+        width: 330px !important;
+        height: 330px !important;
        }
       
        #main_view2 .swiper-button-next {
@@ -296,6 +305,38 @@
       
       */
     /*main_view3*/
+  	#main_view3 {overflow:hidden; background:#666;}
+ 
+    #main_view3 .slider{display:flex;}
+    #main_view3 article{width:100%; height:100vh; flex-shrink:0;
+        background:center center / cover no-repeat; /*백그라운드 이미지 설정*/
+        position:relative; min-height:800px;} 
+    #main_view3 article::before{content:""; display:block; 
+        width:100%; height:100%; background:#000; opacity:0.5;}  
+    
+    #main_view3 .mv3_view1{background-image:url("../images/제과사진1.jpg"); width:100%; }
+    #main_view3 .mv3_view2{background-image:url("../images/제과사진3.jpg"); width:100%;}
+    #main_view3 .mv3_view3{background-image:url("../images/음료사진1.jpg"); width:100%;}    
+    
+    #main_view3 .mv3_text{width:500px; color:#fff; opacity:0;transition:all .5s ease-in-out;
+    				}
+    					
+  		
+    #main_view3 .mv3_text {position:absolute; top:200px; left:200px; transform:translateX(100px);}
+    
+    
+    #main_view3 .swiper-slide-active .mv3_text{opacity:1;transform:translateY(0);transition-delay:.4s;}
+    #main_view3 .mv3_text h3{font-size:50px;line-height:1.1;}
+    #main_view3 .mv3_text p{font-size:18px;padding:20px 0;margin-bottom:10px;}
+    #main_view3 .mv3_text a{display:block; width:110px;line-height:40px;text-align:center;font-size:14px;border:1px solid #000; float:right;
+    						background:#000; color:fff;}
+    #main_view3 .mv3_text a:hover{background:#fff;color:#000; }
+    #main_view3 .mv3_text i{padding-left:6px;}
+    #main_view3 .pager{position:absolute;bottom:16px;z-index:10;left:50%;transform:translateX(-50%);}
+    #main_view3 .pager span{display:block;float:left;width:6px;height:6px;border-radius:50%;border:1px solid #fff; margin:0 5px;}
+    #main_view3 .pager span.swiper-pagination-bullet-active{background:#fff;}
+    
+    
     
     /*main_view4*/
     #main_view4{ margin:auto; width:100vw; height: 100vh;}

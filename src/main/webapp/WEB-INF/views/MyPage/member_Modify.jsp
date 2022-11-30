@@ -39,10 +39,10 @@
                     <li><a href="#">메  뉴</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="#">제과</a></li>
-                                <li><a href="#">음료</a></li>
-                                <li><a href="#">음식</a></li>
-                                <li><a href="#">원두</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Product/ProductDessert.do">제과</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Product/ProductDrink.do">음료</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Product/ProductFood.do">음식</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Product/ProductCoffeeBean.do">원두</a></li>
                             </ul>
                         </div>
                     </li>
@@ -66,8 +66,10 @@
                         </div>
                     </li>
                 </ul>
-            </div>            
-        </nav>    
+            </div>          
+            <a href="#" class="navbar_toggleBtn"><i class="fas fa-bars"></i></a>
+        </nav>
+    
         <ul class="navbar_links">
             <li><a href="member_Modify.do">내정보</a></li>
             <li><a href="#">장바구니</a></li>

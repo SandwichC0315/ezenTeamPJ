@@ -38,10 +38,10 @@
                     <li><a href="#">메  뉴</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="#">제과</a></li>
-                                <li><a href="#">음료</a></li>
-                                <li><a href="#">음식</a></li>
-                                <li><a href="#">원두</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Product/ProductDessert.do">제과</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Product/ProductDrink.do">음료</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Product/ProductFood.do">음식</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Product/ProductCoffeeBean.do">원두</a></li>
                             </ul>
                         </div>
                     </li>
@@ -128,8 +128,6 @@
         
     <section id="main_view2">   
             
-    
-        <!--#main_view2-->
         <div class="cc">
             <div class="container1">
               <div class="block"></div>
@@ -150,18 +148,23 @@
                     <div class="swiper-wrapper" >
                       <div class="swiper-slide" >
                         <img id="img1" src="${pageContext.request.contextPath}/resources/images/브런치사진1.jpg">
+                        <p>브런치1</p>
                       </div>
                       <div class="swiper-slide">
                         <img id="img2" src="${pageContext.request.contextPath}/resources/images/브런치사진2.jpg">
+                        <p>브런치2</p>
                       </div>
                       <div class="swiper-slide">
                         <img id="img3" src="${pageContext.request.contextPath}/resources/images/브런치사진3.jpg">
+                        <p>브런치3</p>
                       </div>
                       <div class="swiper-slide">
                         <img id="img4" src="${pageContext.request.contextPath}/resources/images/브런치사진4.jpg">
+                        <p>브런치4</p>
                       </div>
                       <div class="swiper-slide">
                         <img id="img5" src="${pageContext.request.contextPath}/resources/images/브런치사진5.jpg">
+                        <p>브런치5</p>
                       </div> 
                     </div>
                     <div id="button1">
@@ -175,18 +178,23 @@
                     <div class="swiper-wrapper" >
                       <div class="swiper-slide" >
                         <img id="img1" src="${pageContext.request.contextPath}/resources/images/제과사진1.jpg">
+                        <p>제과사진1</p>
                       </div>
                       <div class="swiper-slide">
                         <img id="img2" src="${pageContext.request.contextPath}/resources/images/제과사진2.jpg">
+                        <p>제과사진2</p>
                       </div>
                       <div class="swiper-slide">
                         <img id="img3" src="${pageContext.request.contextPath}/resources/images/제과사진3.jpg">
+                        <p>제과사진3</p>
                       </div>
                       <div class="swiper-slide">
                         <img id="img4" src="${pageContext.request.contextPath}/resources/images/제과사진4.jpg">
+                        <p>제과사진4</p>
                       </div>
                       <div class="swiper-slide">
                         <img id="img5" src="${pageContext.request.contextPath}/resources/images/제과사진5.jpg">
+                        <p>제과사진5</p>
                       </div> 
                     </div><!--swiper-wrapper-->
                     <div id="button2">
@@ -199,18 +207,23 @@
                     <div class="swiper-wrapper" >
                       <div class="swiper-slide" >
                         <img id="img1" src="${pageContext.request.contextPath}/resources/images/카페내부1.jpg">
+                        <p>카페내부1</p>
                       </div>
                       <div class="swiper-slide">
                         <img id="img2" src="${pageContext.request.contextPath}/resources/images/카페내부2.jpg">
+                        <p>카페내부2</p>
                       </div>
                       <div class="swiper-slide">
                         <img id="img3" src="${pageContext.request.contextPath}/resources/images/카페내부3.jpg">
+                        <p>카페내부3</p>
                       </div>
                       <div class="swiper-slide">
                         <img id="img4" src="${pageContext.request.contextPath}/resources/images/카페내부4.jpg">
+                        <p>카페내부4</p>
                       </div>
                       <div class="swiper-slide">
                         <img id="img5" src="${pageContext.request.contextPath}/resources/images/카페내부5.jpg">
+                        <p>카페내부5</p>
                       </div> 
                     </div><!--swiper-wrapper-->
                     <div id="button3">
@@ -223,7 +236,8 @@
               </section> 
           </div>
         </section>
-        <section id="main_view3">
+       
+       <section id="main_view3">
        		<div class="slider view3_slider">
        			<article class="mv3 mv3_view1">
        				<div class="mv3_text">
@@ -249,10 +263,11 @@
        				</div>
        			</article>
        		</div><!-- //view3_slider -->
-       		<div class="swiper-button-next" style="color:#fff; margin-right:50px;"></div>
-       		<div class="swiper-button-prev" style="color:#fff; margin-left:50px;"></div>
-        </section>
+       		<div class="swiper-button-next" style="color:#fff; margin-right:50px; top:250vh; "></div>
+       		<div class="swiper-button-prev" style="color:#fff; margin-left:50px; top:250vh;"></div>      
+       </section>
         <!--#main_view3-->
+        
         <section id="main_view4" class="clearfix">
           <div class="page4title">
               <h1>NOTICE<br />&EVENT</h1>
@@ -442,12 +457,14 @@
             $("#page1").css('display','block')
             $("#page2").css('display','none')
             $("#page3").css('display','none')
+            $('p').css('display','block')
             $('#button1').css('display','block')
     }
             function clickFn2(obj){
             $("#page1").css('display','none')
             $("#page2").css('display','block')
             $("#page3").css('display','none')
+            $('p').css('display','block')
             $('#button2').css('display','block')
     
     }
@@ -456,10 +473,11 @@
             $("#page1").css('display','none')
             $("#page2").css('display','none')
             $("#page3").css('display','block')
-            $('#button3').css('display','block')
-      
+            $('p').css('display','block')
+			$('#button3').css('display','block')      	
     }
             
+ 
             
             //로그인 팝업창
             window.onload = function() {     

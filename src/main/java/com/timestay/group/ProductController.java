@@ -21,25 +21,31 @@ public class ProductController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 
-	@RequestMapping(value = "/About_us.do", method = RequestMethod.GET)
-	public String About_us(Locale locale, Model model) {
-		
-		
-		return "About/About_us";
+	@RequestMapping(value = "/ProductDessert.do", method = RequestMethod.GET)
+	public String Dessert(Locale locale, Model model) {
+
+		 return "Product/ProductDessert";
 	}
 	
-	@RequestMapping(value = "/Location.do", method = RequestMethod.GET)
-	public String Location(Locale locale, Model model) {
-		
-		
-		return "About/Location";
-	}
+	@RequestMapping(value = "/ProductDrink.do", method = RequestMethod.GET)
+	public String Drink(Locale locale, Model model) {
+
+		 return "Product/ProductDrink";
+}
 	
-	@RequestMapping(value = "/Gallery.do", method = RequestMethod.GET)
-	public String Gallery(Locale locale, Model model) {
-		
-		
-		return "About/Gallery";
+	@RequestMapping(value = "/ProductFood.do", method = RequestMethod.GET)
+	public String Food(Locale locale, Model model) {
+
+		 return "Product/ProductFood";
 	}
-	
+	@RequestMapping(value = "/ProductInfo.do", method = RequestMethod.GET)
+	public String ProductInfo(Locale locale, Model model) {
+
+		 return "Product/ProductInfo";
+	}
+	@RequestMapping(value = "/ProductCoffeeBean.do", method = RequestMethod.GET)
+	public String ProductCoffeeBean(Locale locale, Model model) {
+
+		 return "Product/ProductCoffeeBean";
+	}
 }

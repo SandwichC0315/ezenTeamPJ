@@ -14,17 +14,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Handles requests for the application home page.
  */
-@RequestMapping(value="/Shopping")
+@RequestMapping(value="/Order")
 @Controller
-public class ShoppingController {
+public class OrderController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
 	
 
 	@RequestMapping(value = "/Order.do", method = RequestMethod.GET)
 	public String Dessert(Locale locale, Model model) {
 
-		 return "Shopping/ShoppingOrder";
+		 return "Order/Order";
 	}
+	
+
 }

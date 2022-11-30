@@ -39,17 +39,17 @@
                     <li><a href="#">메  뉴</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="#">제과</a></li>
-                                <li><a href="#">음료</a></li>
-                                <li><a href="#">음식</a></li>
-                                <li><a href="#">원두</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Product/ProductDessert.do">제과</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Product/ProductDrink.do">음료</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Product/ProductFood.do">음식</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Product/ProductCoffeeBean.do">원두</a></li>                    
                             </ul>
                         </div>
                     </li>
                     <li><a href="#">EVENT</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="#">진행중인 이벤트</a></li>
+                                <li><a href="#">진행중 이벤트</a></li>
                                 <li><a href="#">종료된 이벤트</a></li>
                                 <li><a href="#"></a></li>
                             </ul>
