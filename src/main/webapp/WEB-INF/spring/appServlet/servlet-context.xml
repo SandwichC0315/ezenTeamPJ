@@ -22,7 +22,9 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.timestay.group" />
-	
+	<context:component-scan base-package="com.timestay.service" />
+	<context:component-scan base-package="com.timestay.dao" />
+	<context:component-scan base-package="com.timestay.vo" />
 	
 	
 </beans:beans>

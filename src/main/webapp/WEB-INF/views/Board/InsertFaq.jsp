@@ -1,21 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.timestay.vo.BoardNoticeVO" %>
-<%@	page import="java.util.List" %>
-
-<% List<BoardNoticeVO> list = (List<BoardNoticeVO>)request.getAttribute("list"); %>
+    
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>공지사항</title>
-
+<title>자주 묻는 질문</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/notice.css"/>	
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login_pop.css" type="text/css"/>
+ 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/faq.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
+	
+	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script>
+
+</script>
+
+
+
 </head>
 <body>
 	<header id="header" class="deactive">
@@ -64,8 +67,7 @@
                         </div>
                     </li>
                 </ul>
-                </div>
-                <a href="#" class="navbar_toggleBtn"><i class="fas fa-bars"></i></a>
+            </div>
         </nav>
 
         <ul class="navbar_links">
@@ -76,40 +78,36 @@
     </header>
     
     
+    
     <main>
-    	<h2>공지사항</h2>
-    	<button id="write">등록</button>
-    	<input type="text" id="searchbar">
-    	<button id="search">검색</button>
-    	
-    	<h3>등록된 게시글이 없습니다.</h3>
-    	
-    	<table border="1">
-    		<thead>
-    			<tr>
-	    			<th>글번호</th>
-	    			<th>제목</th>
-	    			<th>등록일</th>
-    			</tr>
-    		</thead>
-    		
-    		<tbody>
-    			<%for (BoardNoticeVO vo : list) {%>
-    			<tr>
-    				<td><%=vo.getBNidx() %></td>
-    				<td><%=vo.getBNtitle() %></td>
-    				<td><%=vo.getBNwdate() %></td>
-    			</tr>
-    			<%} %>
-    		</tbody>
-    	</table>
-   
+    	<div class="InsertFaq">
+    		<h2>자주 묻는 질문</h2>     		
+  			
+  			<form action="InsertFaq.do" method="post">
+				<table border="1">
+					<tr>
+						<th align="right">제목</th>
+						<td><input type="text" name="BFtitle"></td>
+					</tr>
+					<tr>
+						<th align="right">내용</th>
+						<td><textarea name="BFcontent" rows="10" cols="50"></textarea></td>
+					</tr>
+				</table>
+				<button onclick="location.href='BoardFaq.do'">등록</button>
+				<button type="button" onclick="location.href='BoardFaq.do'">취소</button>
+			</form>
+	   			
+
+
+    	</div>
+    	   	
+	    	
     </main>
     
     
     
-    
-    <footer>
+     <footer>
         <div id="container">
             <div id="footer1">
                 <h2>Cafe Time Stay</h2>

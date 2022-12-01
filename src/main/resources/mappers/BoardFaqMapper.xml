@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0/EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.timestay.mapper.boardFaqMapper">
+
+	<select id="test" resultType="boardfaqVO">
+		select *
+			from TB_BoardFaq
+	</select>
+	
+	<insert id="insertFaq" parameterType="boardfaqVO">	
+	<![CDATA[
+		INSERT INTO TB_BOARDFAQ (
+					 BFidx
+				   , midx
+				   , BFtitle
+				   , BFcontent
+				   , BFwdate
+				   ) VALUES(
+				     bfidx_seq.nextval
+				   , 1
+				   , #{BFtitle}
+				   , #{BFcontent}
+				   , sysdate
+				   )
+	]]>
+	<selectKey order="AFTER" resultType="integer" keyProperty="BFidx">
+		SELECT MAX(BFidx) from TB_BOARDFAQ	
+	</selectKey>
+	</insert>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

@@ -53,7 +53,7 @@
     .navbar .sub ul{padding:0; margin-left:20px; display: inline-block; width:inherit;}
     .navbar .sub a{font-size:15px; padding:0; white-space:nowrap; }
     .navbar .sub a::after{display:none;}
-    .navbar .sub a:hover{text-decoration:underline;}    
+    .navbar .sub a:hover{text-decoration:underline;}   
 
 /* 제빵 */
 .content{ 

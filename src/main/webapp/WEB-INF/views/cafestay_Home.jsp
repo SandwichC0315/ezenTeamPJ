@@ -18,8 +18,10 @@
 	<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
 </head>
+
+
 <body>
-	    <header id="header" class="deactive">        
+	<header id="header" class="deactive">        
         <nav class="navbar">
             <div class="navbar_menu">
                 <div id="title"> 
@@ -75,6 +77,8 @@
             <li><a href="#">고객센터</a></li>
         </ul>
     </header>
+    
+    
     <main> 
         <section id="main_view1">
             <div class="slider"><!--article.view.vew$*6-->                
@@ -131,14 +135,14 @@
         <div class="cc">
             <div class="container1">
               <div class="block"></div>
-              <h1>menu story</h1>
+              <h1>Menu Story</h1>
               <div class="tabs">
                 <ul>
                   <!-- <li><label><input type="checkbox" class="pb" name="product_b" onclick="clickFn1(this)" checked>제빵</label></li>
                   <li><label><input type="checkbox" class="pb" name="product_s" onclick="clickFn2(this)">제과</label></li> -->
-                  <li><a onclick="clickFn1(this)">coffee</a></li>
-                  <li><a onclick="clickFn2(this)">dessert</a></li>
-                  <li><a onclick="clickFn3(this)">food</a></li>
+                  <li><a onclick="clickFn1(this)">Coffee</a></li>
+                  <li><a onclick="clickFn2(this)">Dessert</a></li>
+                  <li><a onclick="clickFn3(this)">Food</a></li>
                 </ul>
               </div>
             </div>  
@@ -267,6 +271,7 @@
        		<div class="swiper-button-prev" style="color:#fff; margin-left:50px; top:250vh;"></div>      
        </section>
         <!--#main_view3-->
+        
         
         <section id="main_view4" class="clearfix">
           <div class="page4title">

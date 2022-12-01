@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.timestay.vo.BoardFaqVO" %>
+<%@	page import="java.util.List" %>
+    
+<% List<BoardFaqVO> list = (List<BoardFaqVO>)request.getAttribute("list"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +12,50 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>자주 묻는 질문</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css"/>
- 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/faq.css"/> 	
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login_pop.css" type="text/css"/>
+ 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/faq.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
+	
+	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/TweenMax.js"></script>
+<script>
+var qnaNum = -1;
+$(document).ready(function(){
+    $('.qa_li .question').click(function(){
+        q = $(".qa_li .question").index(this);
+        if(q!=qnaNum){
+            $('.qa_li .answer').stop(true, true).slideUp(300);
+            $('.qa_li').removeClass('open');
+            TweenMax.to($('.qa_li .question').eq(qnaNum).find('.iconDiv'), 0.4, {rotation:0});
+            qnaNum = q;
+            $('.qa_li').eq(qnaNum).addClass('open');
+            $('.qa_li .answer').eq(qnaNum).stop(true, true).slideDown(300);
+            //TweenMax.to($('.qa_li .question').eq(qnaNum).find('.iconDiv'), 0.4, {rotation:180});
+            TweenMax.to($('.qa_li .question').eq(qnaNum).find('.iconDiv'), 0.4, {rotation:0});
+        }else{
+            $('.qa_li .answer').eq(qnaNum).stop(true, true).slideUp(300);
+            $('.qa_li').eq(qnaNum).removeClass('open');
+            TweenMax.to($('.qa_li').eq(qnaNum).find('.question p'), 0.4, {rotation:0});
+            qnaNum = -1;
+        }
+    });
+});    
+</script>
+<style>
+@import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');
+ul, li, p { list-style:none; padding:0; margin:0; }
+.listWrap { font-family:'Noto Sans KR', sans-serif; margin-bottom:20px; width:1200px; margin-top:20px;}
+.listWrap .qa_li { position:relative; display:block; padding:0; border-bottom:1px solid #ededed; cursor:pointer; }
+.listWrap .qa_li:first-child { border-top:1px solid #a6a6a6; }
+.listWrap .qa_li .ca_name { margin-bottom:14px; font-weight:400; color:#999; font-size:18px; }
+.listWrap .qa_li .tit { color:#222; font-size:24px; transition:color 0.3s ease-out; }
+.listWrap .qa_li:hover .tit { color:#0a7ac8; }
+.qa_li .question { position:relative; display:block; padding:25px 100px 25px 120px; background:url('https://happyjung.diskn.com/data/lecture/icon_jquery_faq2_icon_q.png') 40px center no-repeat; }
+.qa_li .question .iconDiv { position:absolute; right:40px; top:50%; -webkit-transform:translateY(-50%); -moz-transform:translateY(-50%); -o-transform:translateY(-50%); -ms-transform:translateY(-50%); transform:translateY(-50%); }
+.qa_li .answer { position:relative; display:none; padding:40px 120px; font-size:16px; color:#222; line-height:28px; background:#f6f6f6 url('https://happyjung.diskn.com/data/lecture/icon_jquery_faq2_icon_a.png') 40px 40px no-repeat; border-top:1px solid #e4e4e4; }
+.modA { position:absolute; right:30px; bottom:30px; color:#e82b2b; }
+</style>
+
+
 </head>
 <body>
 	<header id="header" class="deactive">
@@ -73,12 +118,31 @@
     
     
     <main>
-    	<h2>자주 묻는 질문</h2>
-    	<button id="write">등록</button>
-    	<input type="text" id="searchbar">
-    	<button id="search">검색</button>
-    	
-    	<h3>등록된 게시글이 없습니다.</h3>
+    	<div class="faq">
+    		<h2>자주 묻는 질문</h2>     		
+  			<ul class="listWrap">
+  			
+	   	    	<%for (BoardFaqVO vo : list) { %>
+	   	    	
+				    <li class="qa_li">
+				        <div class="question">
+				            <p class="tit"><%=vo.getBFtitle() %></p>
+				            <p class="iconDiv"><img src="https://happyjung.diskn.com/data/lecture/icon_jquery_faq2_icon_arrow.png"></p>
+				        </div>
+				        <div class="answer"><%=vo.getBFcontent() %></div>
+				    </li>	
+				    			
+	   			<% }%>
+	   			
+			</ul>	
+   		<button id="write" onclick="location.href='InsertFaq.do'">등록</button>
+    	<div>
+	    	<input type="text" id="searchbar">
+    		<button id="search">검색</button>    	   	
+    	</div>
+    	</div>
+    	   	
+	    	
     </main>
     
     

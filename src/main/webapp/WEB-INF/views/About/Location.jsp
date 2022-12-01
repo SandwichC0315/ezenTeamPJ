@@ -47,7 +47,7 @@
                     <li><a href="#">EVENT</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="#">진행중인 이벤트</a></li>
+                                <li><a href="#">진행중 이벤트</a></li>
                                 <li><a href="#">종료된 이벤트</a></li>
                                 <li><a href="#"></a></li>
                             </ul>

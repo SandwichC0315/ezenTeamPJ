@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-    <header id="header" class="deactive">        
+	<header id="header" class="deactive">        
         <nav class="navbar">
             <div class="navbar_menu">
                 <div id="title"> 
