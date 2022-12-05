@@ -12,6 +12,8 @@ import com.timestay.vo.BoardFaqVO;
 
 
 
+
+
 //IOC 컨테이너에 BoardDAO를 객체로 생성
 @Repository //시스템 외부로 연결해서 데이터 요청, 응답 관리 역할을 하는 객체 어노테이션
 public class BoardFaqDAO {
@@ -28,6 +30,21 @@ public class BoardFaqDAO {
 	public int insertFaq(BoardFaqVO vo) {
 		return sqlSession.insert("com.timestay.mapper.boardFaqMapper.insertFaq", vo);
 	}
+	
+	public int deleteFaq(int bfidx) {
+		return sqlSession.delete("com.timestay.mapper.boardFaqMapper.deleteFaq", bfidx);
+	}
+	
+	public BoardFaqVO selectOne(int BFidx) {
+		return sqlSession.selectOne("com.timestay.mapper.boardFaqMapper.selectOne" , BFidx );
+	}
+	
+	public int modifyFaq(BoardFaqVO vo) {
+		return sqlSession.update("com.timestay.mapper.boardFaqMapper.modifyFaq", vo);
+		
+	}
+	
+	
 	
 
 }

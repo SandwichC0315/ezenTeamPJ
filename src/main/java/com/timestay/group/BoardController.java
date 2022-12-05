@@ -2,10 +2,13 @@ package com.timestay.group;
 
 import java.util.Date;
 import java.util.List;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -23,6 +26,7 @@ import com.timestay.vo.BoardFaqVO;
 import com.timestay.vo.BoardNoticeVO;
 
 
+
 /**
  * Handles requests for the application home page.
  */
@@ -32,6 +36,9 @@ public class BoardController {
 	
 	@Autowired(required=false)
 	private BoardNoticeService boardnoticeService;
+	
+	@Autowired(required=false)
+	private BoardFaqService boardfaqService;
 
 	@RequestMapping(value = "/BoardNotice.do", method = RequestMethod.GET)
 	public String notice(Locale locale, Model model) {
@@ -49,8 +56,7 @@ public class BoardController {
 		return "Board/BoardNotice";
 	}
 	
-	@Autowired(required=false)
-	private BoardFaqService boardfaqService;
+
 	
 	@RequestMapping(value = "/BoardFaq.do", method = RequestMethod.GET)
 	public String faq(Locale locale, Model model) {
@@ -70,19 +76,64 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "InsertFaq.do", method = RequestMethod.GET)
-	public String insert() {		
+	public String insertFaq() {		
 		
 		return "Board/InsertFaq";
 	}
 	
 	@RequestMapping(value = "InsertFaq.do", method = RequestMethod.POST)
-	public String insertFaq(BoardFaqVO vo, HttpServletRequest req) {
+	public String insertFaq(BoardFaqVO vo) {
 		
 		
 		int result = boardfaqService.insertFaq(vo);
 		
 		return "redirect:BoardFaq.do";
 	}
+	
+	@RequestMapping(value = "deleteFaq.do", method = RequestMethod.POST)
+	public String deleteFaq(int bfidx) {
+		
+		int result = boardfaqService.deleteFaq(bfidx);
+		
+		return "redirect:BoardFaq.do";
+	}
+	
+//	@RequestMapping(value = "ModifyFaq.do", method = RequestMethod.GET)
+//	public String modifyFaq() {
+//		
+//		return "Board/ModifyFaq";
+//	}
+//	
+//
+//	@RequestMapping(value = "ModifyFaq.do", method = RequestMethod.POST)
+//	public String modifyFaq(BoardFaqVO vo) {
+//		
+//		
+//		int result = boardfaqService.modifyFaq(vo);
+//		
+//		return "redirect:BoardFaq.do";
+//	}
+	
+	@RequestMapping(value = "ModifyFaq.do", method = RequestMethod.GET)
+	public String modifyFaq(int BFidx, Model model) {
+		
+		BoardFaqVO vo = boardfaqService.selectOneByBfidx(BFidx);
+		
+		model.addAttribute("vo", vo);
+		
+		return "Board/ModifyFaq";
+	}
+	
+	
+	@RequestMapping(value = "ModifyFaq.do", method = RequestMethod.POST)
+	public String modifyFaq(BoardFaqVO vo, HttpServletResponse res) {
+		
+		//db 수정처리
+		int result = boardfaqService.modifyFaq(vo);		
+		
+		return "redirect:BoardFaq.do";
+	}
+	
 	
 	@RequestMapping(value = "/BoardQna.do", method = RequestMethod.GET)
 	public String qna() {

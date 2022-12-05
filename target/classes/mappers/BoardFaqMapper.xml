@@ -5,7 +5,8 @@
 
 	<select id="test" resultType="boardfaqVO">
 		select *
-			from TB_BoardFaq
+			from TB_BoardFaq			
+		  	ORDER BY bfidx desc
 	</select>
 	
 	<insert id="insertFaq" parameterType="boardfaqVO">	
@@ -28,6 +29,27 @@
 		SELECT MAX(BFidx) from TB_BOARDFAQ	
 	</selectKey>
 	</insert>
+	
+	<delete id="deleteFaq" parameterType="int" >
+		DELETE 
+		  FROM TB_BOARDFAQ
+		 WHERE BFidx = #{BFidx}		
+	</delete>
+	
+	<select id="selectOne" resultType="boardfaqVO" parameterType="int">
+		SELECT BFidx
+		     , BFtitle
+		     , BFcontent
+		  FROM TB_BOARDFAQ
+		 WHERE BFidx = #{BFidx} 
+	</select>
+	
+	<update id="modifyFaq" parameterType="boardfaqVO"> 
+		UPDATE TB_BOARDFAQ
+		   SET BFtitle = #{BFtitle}
+		   	 , BFcontent = #{BFcontent}
+		 WHERE BFidx = #{BFidx}	
+	</update>
 
 </mapper>
 

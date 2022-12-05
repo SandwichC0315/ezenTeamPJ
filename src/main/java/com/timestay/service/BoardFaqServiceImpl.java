@@ -28,4 +28,19 @@ public class BoardFaqServiceImpl implements BoardFaqService{
 		return boardfaqDAO.insertFaq(vo);
 	}
 
+	@Override
+	public int deleteFaq(int bfidx) {
+		return boardfaqDAO.deleteFaq(bfidx);
+	}
+
+	@Override
+	public int modifyFaq(BoardFaqVO vo) {
+		return boardfaqDAO.modifyFaq(vo);
+	}
+
+	@Override
+	public BoardFaqVO selectOneByBfidx(int BFidx) {
+		return boardfaqDAO.selectOne(BFidx);
+	}
+
 }

@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.timestay.vo.BoardFaqVO" %>
-<%@	page import="java.util.List" %>
-    
-<% List<BoardFaqVO> list = (List<BoardFaqVO>)request.getAttribute("list"); %>
 
 <!DOCTYPE html>
 <html>
@@ -14,10 +10,13 @@
 <title>자주 묻는 질문</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css"/>
  	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/faq.css"/>
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/TweenMax.js"></script>
 	
+	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script>
+
+</script>
+
 
 
 </head>
@@ -69,7 +68,6 @@
                     </li>
                 </ul>
             </div>
-                <a href="#" class="navbar_toggleBtn"><i class="fas fa-bars"></i></a>
         </nav>
 
         <ul class="navbar_links">
@@ -82,40 +80,27 @@
     
     
     <main>
-    	<div class="faq">
+    	<div class="InsertFaq">
     		<h2>자주 묻는 질문</h2>     		
-  			<ul class="listWrap">
   			
-	   	    	<%for (BoardFaqVO vo : list) { %>
-	   	    	
-				    <li class="qa_li">
-				        <div class="question">
-				            <p class="tit"><%=vo.getBFtitle() %></p>
-				            <p class="iconDiv"><img src="https://happyjung.diskn.com/data/lecture/icon_jquery_faq2_icon_arrow.png"></p>
-					    
-				        
-				        </div>
-				        <div class="answer"><%=vo.getBFcontent() %></div>
-					    
-					    <div style="top:0; position:absolute; z-index:10;">
-						    <!-- 질문 삭제 버튼 -->
-						    <form name="delfrm" action="deleteFaq.do" method="post">	
-							    <button onclick="return confirm('질문을 삭제하시겠습니까?')">삭제</button>
-							    <input type="hidden" name="bfidx" value="<%=vo.getBFidx()%>">	
-						    </form>
-						    <button id="modify" onclick="location.href='ModifyFaq.do?BFidx=<%=vo.getBFidx()%>'">수정</button>
-					    </div>
-				    </li>
-				    
-				    
-	   			<% }%>
+  			<form action="ModifyFaq.do" method="post">
+				<input type="text" name="BFidx" value="${vo.BFidx}">
+				<table border="1">
+					<tr>
+						<th align="right">제목</th>
+						<td><input type="text" name="BFtitle" value="${vo.BFtitle}"></td>
+					</tr>
+					<tr>
+						<th align="right">내용</th>
+						<td><textarea name="BFcontent" rows="10" cols="50">${vo.BFcontent}</textarea></td>
+					</tr>
+				</table>
+				<button>수정</button>
+				<button type="button" onclick="location.href='BoardFaq.do'">취소</button>
+			</form>
 	   			
-			</ul>	
-   		<button id="write" onclick="location.href='InsertFaq.do'">등록</button>
-    	<div>
-	    	<input type="text" id="searchbar">
-    		<button id="search">검색</button>    	   	
-    	</div>
+
+
     	</div>
     	   	
 	    	
@@ -145,21 +130,7 @@
         <!--//container-->
     </footer>
     
-    <div class="black_bg"></div>
-    <div class="modal_wrap">
-        <div class="modal_close"><a href="#" onclick="return false;">close</a></div>
-        <div class="modalContents">
-            <h2>로그인</h2>
-            <input name="id" class="loginId" type="text" placeholder="아이디"/>
-            <input name="password" class="loginPw" type="password" placeholder="비밀번호"/>
-            <button class="login_btn">로그인</button>
-            <div class="login_bottom">
-                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
-                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
-                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
-            </div>            
-        </div>
-    </div>  
+ 
     <script>  
 
         // 스크롤 시 header 색변화 fade-in
@@ -175,49 +146,8 @@
             })
         });   
         
-        //로그인 팝업창
-        window.onload = function() {     
-            function onClick() {
-                document.querySelector('.modal_wrap').style.display ='block';
-                document.querySelector('.black_bg').style.display ='block';
-            }   
-            function offClick() {
-                document.querySelector('.modal_wrap').style.display ='none';
-                document.querySelector('.black_bg').style.display ='none';
-            }
-        
-            document.getElementById('modal_btn').addEventListener('click', onClick);
-            document.querySelector('.modal_close').addEventListener('click', offClick);     
-        };
 
-      	
-        //질문 삭제버튼 확인창
-        //function delYn(){
-        //	if(!confirm('질문을 삭제하시겠습니까?')){return false;};
-        //}
-		
-        //답변 슬라이드
-        var qnaNum = -1;
-        $(document).ready(function(){
-            $('.qa_li .question').click(function(){
-                q = $(".qa_li .question").index(this);
-                if(q!=qnaNum){
-                    $('.qa_li .answer').stop(true, true).slideUp(300);
-                    $('.qa_li').removeClass('open');
-                    TweenMax.to($('.qa_li .question').eq(qnaNum).find('.iconDiv'), 0.4, {rotation:0});
-                    qnaNum = q;
-                    $('.qa_li').eq(qnaNum).addClass('open');
-                    $('.qa_li .answer').eq(qnaNum).stop(true, true).slideDown(300);
-                    //TweenMax.to($('.qa_li .question').eq(qnaNum).find('.iconDiv'), 0.4, {rotation:180});
-                    TweenMax.to($('.qa_li .question').eq(qnaNum).find('.iconDiv'), 0.4, {rotation:0});
-                }else{
-                    $('.qa_li .answer').eq(qnaNum).stop(true, true).slideUp(300);
-                    $('.qa_li').eq(qnaNum).removeClass('open');
-                    TweenMax.to($('.qa_li').eq(qnaNum).find('.question p'), 0.4, {rotation:0});
-                    qnaNum = -1;
-                }
-            });
-        });  
+
    
     </script>
 </body>
