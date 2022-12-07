@@ -96,7 +96,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <button id="submmit">아이디 확인</button>
+                            <button id="submit">아이디 확인</button>
                             <button id="cancel"> 취 소</button>
                         </td>
                     </tr>

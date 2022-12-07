@@ -14,7 +14,8 @@
 <title>자주 묻는 질문</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css"/>
  	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/faq.css"/>
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login_pop.css" type="text/css"/>
+    
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/TweenMax.js"></script>
 	
@@ -91,19 +92,21 @@
 				    <li class="qa_li">
 				        <div class="question">
 				            <p class="tit"><%=vo.getBFtitle() %></p>
-				            <p class="iconDiv"><img src="https://happyjung.diskn.com/data/lecture/icon_jquery_faq2_icon_arrow.png"></p>
-					    
-				        
+				            <p class="iconDiv"><img src="https://happyjung.diskn.com/data/lecture/icon_jquery_faq2_icon_arrow.png"></p>					    				        
 				        </div>
+				        
 				        <div class="answer"><%=vo.getBFcontent() %></div>
 					    
-					    <div style="top:0; position:absolute; z-index:10;">
+					    <div class="faqBtn">
+						    
+						    <button id="modify" onclick="location.href='ModifyFaq.do?BFidx=<%=vo.getBFidx()%>'" style="">수정</button>
+						    
 						    <!-- 질문 삭제 버튼 -->
 						    <form name="delfrm" action="deleteFaq.do" method="post">	
-							    <button onclick="return confirm('질문을 삭제하시겠습니까?')">삭제</button>
+							    <button id="delete" onclick="return confirm('질문을 삭제하시겠습니까?')" style="">삭제</button>
 							    <input type="hidden" name="bfidx" value="<%=vo.getBFidx()%>">	
 						    </form>
-						    <button id="modify" onclick="location.href='ModifyFaq.do?BFidx=<%=vo.getBFidx()%>'">수정</button>
+						    
 					    </div>
 				    </li>
 				    

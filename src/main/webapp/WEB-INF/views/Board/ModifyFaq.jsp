@@ -80,23 +80,23 @@
     
     
     <main>
-    	<div class="InsertFaq">
-    		<h2>자주 묻는 질문</h2>     		
+    	<div class="ViewFaq">
+    		<h3>질문 수정하기</h3>     		
   			
   			<form action="ModifyFaq.do" method="post">
-				<input type="text" name="BFidx" value="${vo.BFidx}">
-				<table border="1">
-					<tr>
-						<th align="right">제목</th>
-						<td><input type="text" name="BFtitle" value="${vo.BFtitle}"></td>
-					</tr>
-					<tr>
-						<th align="right">내용</th>
-						<td><textarea name="BFcontent" rows="10" cols="50">${vo.BFcontent}</textarea></td>
-					</tr>
-				</table>
-				<button>수정</button>
-				<button type="button" onclick="location.href='BoardFaq.do'">취소</button>
+				<div class="outline">				
+					<input type="hidden" name="BFidx" value="${vo.BFidx}">
+					<table border="1">
+						<tr>
+							<td><input type="text" name="BFtitle" value="${vo.BFtitle}"></td>
+						</tr>
+						<tr>
+							<td><textarea name="BFcontent" rows="10" cols="50">${vo.BFcontent}</textarea></td>
+						</tr>
+					</table>
+					<button id="submit" onclick="if(!confirm('수정 하시겠습니까?')){return false;}">수정</button>
+					<button id="cancel"type="button" onclick="location.href='BoardFaq.do'">취소</button>
+				</div>
 			</form>
 	   			
 

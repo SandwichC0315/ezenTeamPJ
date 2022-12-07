@@ -145,7 +145,7 @@
                     </tr>
                 </table>
                 <div class="bottom_btn">
-                    <button id="submmit"> 수 정 </button>
+                    <button id="submit"> 수 정 </button>
                     <button id="cancel"> 취 소 </button>
                 </div>
 

@@ -87,7 +87,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <button id="submmit">로그인</button>
+                            <button id="submit">로그인</button>
                         </td>
                     </tr>
                 </table> 

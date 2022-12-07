@@ -87,7 +87,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <button id="submmit">확 인</button>
+                            <button id="submit">확 인</button>
                             <button id="cancel"> 취 소</button>
                         </td>
                     </tr>

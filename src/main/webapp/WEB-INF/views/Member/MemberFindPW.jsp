@@ -99,7 +99,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <button id="submmit">비밀번호 확인</button>
+                            <button id="submit">비밀번호 확인</button>
                             <button id="cancel"> 취 소</button>
                         </td>
                     </tr>

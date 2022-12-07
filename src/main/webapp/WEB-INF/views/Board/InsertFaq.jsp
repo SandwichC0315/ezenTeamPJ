@@ -80,22 +80,22 @@
     
     
     <main>
-    	<div class="InsertFaq">
-    		<h2>자주 묻는 질문</h2>     		
+    	<div class="ViewFaq">
+    		<h3>질문 등록하기</h3>     		
   			
   			<form action="InsertFaq.do" method="post">
-				<table border="1">
-					<tr>
-						<th align="right">제목</th>
-						<td><input type="text" name="BFtitle"></td>
-					</tr>
-					<tr>
-						<th align="right">내용</th>
-						<td><textarea name="BFcontent" rows="10" cols="50"></textarea></td>
-					</tr>
-				</table>
-				<button onclick="location.href='BoardFaq.do'">등록</button>
-				<button type="button" onclick="location.href='BoardFaq.do'">취소</button>
+				<div class="outline">
+					<table border="1">
+						<tr>
+							<td><input type="text" name="BFtitle" placeholder="질문을 입력해주세요."></td>
+						</tr>
+						<tr>
+							<td><textarea name="BFcontent" rows="10" cols="50"></textarea></td>
+						</tr>
+					</table>
+					<button id="submit" onclick="if(!confirm('등록 하시겠습니까?')){return false;}">등록</button>
+					<button id="cancel"type="button" onclick="location.href='BoardFaq.do'">취소</button>
+				</div>
 			</form>
 	   			
 

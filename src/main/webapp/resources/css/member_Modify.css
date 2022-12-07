@@ -71,10 +71,10 @@
     td{padding-left:20px; vertical-align: middle;}
     td input{height:20px;}
     .bottom_btn{width:auto; text-align: center;}
-    #submmit,#cancel{width:200px; height:40px; font-size: 20px; font-weight: bold; margin: 40px 5px; border: none; border-radius: 5px;}
-    #submmit{background-color: rgb(230, 179, 114);}
-    #submmit:hover{background-color: rgb(212, 155, 80); }
-    #submmit:active{background-color: rgb(230, 179, 114); }
+    #submit,#cancel{width:200px; height:40px; font-size: 20px; font-weight: bold; margin: 40px 5px; border: none; border-radius: 5px;}
+    #submit{background-color: rgb(230, 179, 114);}
+    #submit:hover{background-color: rgb(212, 155, 80); }
+    #submit:active{background-color: rgb(230, 179, 114); }
     #cancel{background-color: rgb(194, 190, 190);}
     #cancel:hover{background-color: rgb(179, 173, 173);}
     #cancel:active{background-color: rgb(194, 190, 190);}
