@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -68,29 +69,43 @@
                 </ul>
             </div>           
         </nav>    
-        <ul class="navbar_links">
-            <li><a href="#" onclick="return false;" id="modal_btn" >로그인</a></li>
-            <li><a href="#">장바구니</a></li>
-            <li><a href="#">고객센터</a></li>
-        </ul>
+     	<c:if test ="${login!=null}">
+	        <ul class="navbar_links" style="width:330px;">
+	            <li><a href="logout.do" style="padding:0 4px">로그아웃</a></li>
+	            <li><a href="#" style="padding:0 4px">마이페이지</a></li>
+	            <li><a href="#" style="padding:0 4px">장바구니</a></li>
+	            <li><a href="#" style="padding:0 4px">고객센터</a></li>
+	        </ul>
+  		</c:if>  
+  		<c:if test= "${login==null}">
+	  		<ul class="navbar_links">
+	 			<li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>  		    
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
+	            <li><a href="#">고객센터</a></li>
+	        </ul>
+        </c:if>
     </header>
     <main>
+      <c:if test="${login==null }">
         <div class="find">   
             <div class="Login">
                 <h4>로그인</h4>
-                <table>  
-                    <tr>
-                        <td><input class="login_ID" type="text" placeholder="아이디"></td>   
-                    </tr>
-                    <tr>
-                        <td><input class="login_PW" type="password" placeholder="비밀번호"></td>   
-                    </tr>
-                    <tr>
-                        <td>
-                            <button id="submit">로그인</button>
-                        </td>
-                    </tr>
-                </table> 
+		<form action= "login.do" method="post" id="frm">
+               		<table>  
+                	    <tr>
+                   		<td><input class="login_ID" type="text" placeholder="아이디"  name= "Mid"></td>   
+                    	    </tr>
+                    	    <tr>
+                   		 <td><input class="login_PW" type="password" placeholder="비밀번호"   name= "Mpwd"></td><!-- name값 필드값과 동일하게 하기!! -->
+                            </tr>
+                    	    <tr>
+                            	 <td>
+                           	 <button id="submit">로그인</button>
+                        	 </td>
+                    	    </tr>
+                	</table> 
+   		</form>
+	
                 <div class="login_bottom">
                     <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
                     <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
@@ -99,7 +114,8 @@
             </div>
             
         </div>        
-        
+      </c:if>                 
+ 
     </main>
     <footer>
         <div id="container">
@@ -127,16 +143,27 @@
         <div class="modal_close"><a href="#" onclick="return false;">close</a></div>
         <div class="modalContents">
             <h2>로그인</h2>
-            <input name="id" class="loginId" type="text" placeholder="아이디"/>
-            <input name="password" class="loginPw" type="password" placeholder="비밀번호"/>
-            <button class="login_btn">로그인</button>
-            <div class="login_bottom">
-                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
-                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
-                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
-            </div>            
+	        
+	        <c:if test="${login==null }">
+				
+				<form action= "login.do" method="post" id="frm">
+		            <input name= "Mid" class="loginId" type="text" placeholder="아이디"/>
+		            <input name= "Mpwd" class="loginPw" type="password" placeholder="비밀번호"/>
+		            <button class="login_btn">로그인</button>
+		        </form>
+		        
+	            <div class="login_bottom">
+	                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
+	            </div>	
+	                    
+	        </c:if>
+	                  
         </div>
-    </div>  
+    </div>
+    
+   
     <script>  
 
         // 스크롤 시 header 색변화 fade-in

@@ -4,12 +4,18 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import com.timestay.service.MemberService;
+import com.timestay.vo.MemberVO;
 
 /**
  * Handles requests for the application home page.
@@ -17,9 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value="/Member")
 @Controller
 public class MemberController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+	@Autowired
+	private MemberService MemberService;
+	//com.timestay.service.MemberService -->MemberService로 바꾸는거 음 ..
+
 
 	@RequestMapping(value = "/Login.do", method = RequestMethod.GET)
 	public String Login(Locale locale, Model model) {
@@ -27,7 +34,29 @@ public class MemberController {
 		
 		return "Member/MemberLogin";
 	}
+	@RequestMapping(value="/login.do", method = RequestMethod.POST)
+	public String login(MemberVO vo, HttpServletRequest req) {
+		System.out.println("vo:"+vo.getMid());
+		System.out.println("ser:" + MemberService);
+		HttpSession session = req.getSession();
+		
+		//login 처리
+		
+		MemberVO loginVO = MemberService.findMemberByIdPass(vo);
+		System.out.println("loginVO"+MemberService.findMemberByIdPass(vo));
+		
+		if(loginVO != null) {
+			session.setAttribute("login", loginVO);
+		}
+		return "redirect:/About/About_us.do";
+	}
 	
+	@RequestMapping(value = "/logout.do")
+	public String logout(HttpServletRequest req) {
+	HttpSession session =req.getSession();
+	session.invalidate();//세션정보 초기화 (세션이 담았던 통을 비워내는 것)
+	return "redirect:/About/About_us.do";
+}
 	@RequestMapping(value = "/find_ID.do", method = RequestMethod.GET)
 	public String find_ID(Locale locale, Model model) {
 		

@@ -41,7 +41,17 @@ public class MyPageController {
 		
 		return "MyPage/member_QA";
 	}
-	
 
-	
+	@RequestMapping(value = "/MyPageOrderView.do", method = RequestMethod.GET)
+	public String MyPageOrderView(Locale locale, Model model) {
+
+		return "MyPage/MyPageOrderView";
+	}
+
+	@RequestMapping(value = "/MyPageShoppingCart.do", method = RequestMethod.GET)
+	public String MyPageShoppingCart(Locale locale, Model model) {
+
+		return "MyPage/MyPageShoppingCart";
+	}
+
 }
