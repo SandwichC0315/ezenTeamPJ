@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -68,7 +68,8 @@
                     </li>
                 </ul>
             </div>           
-        </nav>    
+        </nav>   
+         
      	<c:if test ="${login!=null}">
 	        <ul class="navbar_links" style="width:330px;">
 	            <li><a href="logout.do" style="padding:0 4px">로그아웃</a></li>
@@ -84,13 +85,14 @@
 	            <li><a href="#">고객센터</a></li>
 	        </ul>
         </c:if>
+        
     </header>
     <main>
       <c:if test="${login==null }">
         <div class="find">   
             <div class="Login">
                 <h4>로그인</h4>
-		<form action= "login.do" method="post" id="frm">
+				<form action= "login.do" method="post" id="frm">
                		<table>  
                 	    <tr>
                    		<td><input class="login_ID" type="text" placeholder="아이디"  name= "Mid"></td>   
@@ -104,7 +106,7 @@
                         	 </td>
                     	    </tr>
                 	</table> 
-   		</form>
+   				</form>
 	
                 <div class="login_bottom">
                     <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 

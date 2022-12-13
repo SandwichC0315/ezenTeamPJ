@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -68,11 +69,23 @@
                 </ul>
             </div>            
         </nav>    
-        <ul class="navbar_links">
-            <li><a href="#" onclick="return false;" id="modal_btn" >로그인</a></li>
-            <li><a href="#">장바구니</a></li>
-            <li><a href="#">고객센터</a></li>
-        </ul>
+    
+  		<c:if test= "${login==null}">
+	  		<ul class="navbar_links">
+	 			<li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>  		    
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
+	            <li><a href="#">고객센터</a></li>
+	        </ul>
+        </c:if>
+     	<c:if test ="${login!=null}">
+	        <ul class="navbar_links" style="width:330px;">
+	            <li><a href="<%=request.getContextPath()%>/Member/logout.do" style="padding:0 4px">로그아웃</a></li>
+	            <li><a href="#" style="padding:0 4px">마이페이지</a></li>
+	            <li><a href="#" style="padding:0 4px">장바구니</a></li>
+	            <li><a href="#" style="padding:0 4px">고객센터</a></li>
+	        </ul>
+  		</c:if>  
+        
     </header>
     <main>
         <div class="find">         

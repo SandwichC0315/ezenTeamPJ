@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@ page import="com.timestay.vo.BoardFaqVO" %>
+<%@ page import="com.timestay.vo.MemberVO" %>
 <%@	page import="java.util.List" %>
-    
+
+<% MemberVO findMemberByIdPass = (MemberVO)request.getAttribute("mv"); %>
 <% List<BoardFaqVO> list = (List<BoardFaqVO>)request.getAttribute("list"); %>
+
 
 <!DOCTYPE html>
 <html>
@@ -72,12 +77,23 @@
             </div>
                 <a href="#" class="navbar_toggleBtn"><i class="fas fa-bars"></i></a>
         </nav>
-
-        <ul class="navbar_links">
-            <li><a href="#" onclick="return false;" id="modal_btn" >로그인</a></li>
-            <li><a href="#">장바구니</a></li>
-            <li><a href="#">고객센터</a></li>
-        </ul>
+    
+  		<c:if test= "${login==null}">
+	  		<ul class="navbar_links">
+	 			<li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>  		    
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
+	            <li><a href="#">고객센터</a></li>
+	        </ul>
+        </c:if>
+     	<c:if test ="${login!=null}">
+	        <ul class="navbar_links" style="width:330px;">
+	            <li><a href="<%=request.getContextPath()%>/Member/logout.do" style="padding:0 4px">로그아웃</a></li>
+	            <li><a href="#" style="padding:0 4px">마이페이지</a></li>
+	            <li><a href="#" style="padding:0 4px">장바구니</a></li>
+	            <li><a href="#" style="padding:0 4px">고객센터</a></li>
+	        </ul>
+  		</c:if>  
+        
     </header>
     
     
@@ -100,20 +116,19 @@
 					    <div class="faqBtn">
 						    
 						    <button id="modify" onclick="location.href='ModifyFaq.do?BFidx=<%=vo.getBFidx()%>'" style="">수정</button>
-						    
+
 						    <!-- 질문 삭제 버튼 -->
 						    <form name="delfrm" action="deleteFaq.do" method="post">	
 							    <button id="delete" onclick="return confirm('질문을 삭제하시겠습니까?')" style="">삭제</button>
 							    <input type="hidden" name="bfidx" value="<%=vo.getBFidx()%>">	
 						    </form>
-						    
 					    </div>
 				    </li>
-				    
 				    
 	   			<% }%>
 	   			
 			</ul>	
+
    		<button id="write" onclick="location.href='InsertFaq.do'">등록</button>
     	<div>
 	    	<input type="text" id="searchbar">
@@ -153,16 +168,26 @@
         <div class="modal_close"><a href="#" onclick="return false;">close</a></div>
         <div class="modalContents">
             <h2>로그인</h2>
-            <input name="id" class="loginId" type="text" placeholder="아이디"/>
-            <input name="password" class="loginPw" type="password" placeholder="비밀번호"/>
-            <button class="login_btn">로그인</button>
-            <div class="login_bottom">
-                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
-                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
-                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
-            </div>            
+	        
+	        <c:if test="${login==null }">
+				
+				<form action= "<%= request.getContextPath() %>/Member/login.do" method="post" id="frm">
+		            <input name= "Mid" class="loginId" type="text" placeholder="아이디"/>
+		            <input name= "Mpwd" class="loginPw" type="password" placeholder="비밀번호"/>
+		            <button class="login_btn">로그인</button>
+		        </form>
+		        
+	            <div class="login_bottom">
+	                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
+	            </div>	
+	                    
+	        </c:if>
+	                  
         </div>
     </div>  
+    
     <script>  
 
         // 스크롤 시 header 색변화 fade-in
