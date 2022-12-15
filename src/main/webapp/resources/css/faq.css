@@ -98,15 +98,16 @@
 	.modA { position:absolute; right:30px; bottom:30px; color:#e82b2b; } 
 	
 	.faqBtn{top:0; position:absolute; z-index:1; text-align:right; margin-left:1000px;}
-	#modify{margin: 40px 5px 0 0; right: 70px; position: absolute; 
-	background: royalblue; border: none; color: white}
+	
+	#write, #modify, #delete{width:70px; height:24px; border-radius: 3px; border: none; color: white;}
+	#write, #write:active{background: mediumseagreen;}
+	#write:hover{background: mediumaquamarine;}
+	
+	#modify, #modify:active{margin: 40px 5px 0 0; background: royalblue; right: 70px; position: absolute;}
 	#modify:hover{background: cornflowerblue;}
-	#modify:active{background: royalblue;}
-	#delete{margin: 40px 0 5px 0; background: indianred; border: none; color: white;}
+	
+	#delete, #delete:active{margin: 40px 0 5px 0; background: indianred;}
 	#delete:hover{background: lightcoral;}
-	#delete:active{background: indianred;}
-	#write, #modify, #delete{width:70px; height:24px; }
-	#modify, #delete{border-radius: 3px;}
     
     
     

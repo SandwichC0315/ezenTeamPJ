@@ -6,7 +6,6 @@
 <%@ page import="com.timestay.vo.MemberVO" %>
 <%@	page import="java.util.List" %>
 
-<% MemberVO findMemberByIdPass = (MemberVO)request.getAttribute("mv"); %>
 <% List<BoardFaqVO> list = (List<BoardFaqVO>)request.getAttribute("list"); %>
 
 
@@ -115,21 +114,27 @@
 					    
 					    <div class="faqBtn">
 						    
-						    <button id="modify" onclick="location.href='ModifyFaq.do?BFidx=<%=vo.getBFidx()%>'" style="">수정</button>
-
-						    <!-- 질문 삭제 버튼 -->
-						    <form name="delfrm" action="deleteFaq.do" method="post">	
-							    <button id="delete" onclick="return confirm('질문을 삭제하시겠습니까?')" style="">삭제</button>
-							    <input type="hidden" name="bfidx" value="<%=vo.getBFidx()%>">	
-						    </form>
+						    <c:if test="${Mid.equals('admin') }"> <!-- admin만 보이게 -->
+							    <!-- 질문 수정 -->
+							    <button id="modify" onclick="location.href='ModifyFaq.do?BFidx=<%=vo.getBFidx()%>'" style="">수정</button>
+	
+							    <!-- 질문 삭제 -->
+							    <form name="delfrm" action="deleteFaq.do" method="post">	
+								    <button id="delete" onclick="return confirm('질문을 삭제하시겠습니까?')" style="">삭제</button>
+								    <input type="hidden" name="bfidx" value="<%=vo.getBFidx()%>">	
+							    </form>
+						    
+						    </c:if>
+						    
 					    </div>
 				    </li>
 				    
 	   			<% }%>
 	   			
 			</ul>	
-
+	<c:if test="${Mid.equals('admin') }"> <!-- admin만 보이게 -->
    		<button id="write" onclick="location.href='InsertFaq.do'">등록</button>
+   	</c:if>
     	<div>
 	    	<input type="text" id="searchbar">
     		<button id="search">검색</button>    	   	
