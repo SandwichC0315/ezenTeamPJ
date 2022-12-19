@@ -5,12 +5,15 @@
 <configuration>
 	<settings>
 		<setting name="cacheEnabled" value="false"/>
-	<!--  	<setting name="jdbcTypeForNull" value="NULL"/>--><!-- null값 들어갈 수있도록 -->
+		<setting name="jdbcTypeForNull" value="NULL"/>	<!-- null값 들어갈 수있도록 -->
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.timestay.vo.BoardNoticeVO" alias="boardnoticeVO"/>
+		<typeAlias type="com.timestay.vo.BoardFaqVO" alias="boardfaqVO"/>
 		<typeAlias type="com.timestay.vo.BoardQnaVO" alias="boardQnaVO"/>
 		<typeAlias type="com.timestay.vo.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.timestay.vo.ProductVO" alias="ProductVO"/> 
+		<typeAlias type="com.timestay.vo.ProductReviewVO" alias="ProductReviewVO"/>
 	
 		<!--  <typeAlias type="edu.board.vo.BoardVO" alias="boardVO"/>
 		<typeAlias type="edu.board.vo.MemberVO" alias="memberVO"/>

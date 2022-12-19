@@ -350,7 +350,7 @@ width: 100%;
 
 [role="tabpanel"] table{
   width: 100%;
-  border-top: 1px solid #000;
+  border: 1px solid #000;
   padding-top: 20px;
 }
 #tabpanel-1 div{
@@ -376,8 +376,11 @@ width: 100%;
   background: #666;
   height: 40px;
 }
+[role="tabpanel"] th{
+  border: 1px solid #000;
+} 
 [role="tabpanel"] td{
-  border-top: 1px solid hsl(0 1% 72%);
+  border: 1px solid hsl(0 1% 72%);
 } 
 .product_review{
   display: flex;
@@ -485,17 +488,24 @@ width: 100%;
  }  
 
 /* 평점 */
-.star_rating {font-size:0; letter-spacing:-4px;}
-.star_rating a {
-    font-size:22px;
-    letter-spacing:0;
-    display:inline-block;
-    margin-left:5px;
-    color:#ccc;
-    text-decoration:none;
-}
-.star_rating a:first-child {margin-left:0;}
-.star_rating a.on {color:red;}
+.star-input>.input,
+.star-input>.input>label:hover,
+.star-input>.input>input:focus+label,
+.star-input>.input>input:checked+label{display: inline-block;vertical-align:middle;background:url('../images/grade_img.png');no-repeat;}
+.star-input{display:inline-block;margin-left: 30px; white-space:nowrap;width:225px;height:40px;padding:25px;line-height:30px;}
+.star-input>.input{display:inline-block;width:180px;background-size:180px;height:35px;white-space:nowrap;overflow:hidden;position: relative;}
+.star-input>.input>input{position:absolute;width:1px;height:1px;opacity:0;}
+.star-input>.input>label{ width:36px;height:0;padding:33px 0 0 0;overflow: hidden;float:left;cursor: pointer;position: absolute;top: 0;left: 0;}
+.star-input>.input>label:hover,
+.star-input>.input>input:focus+label,
+.star-input>.input>input:checked+label{background-size: 180px;background-position: 0 bottom;}
+.star-input>.input>label:hover~label{background-image: none;}
+.star-input>.input>label[for="p1"]{width:36px;z-index:5;}
+.star-input>.input>label[for="p2"]{width:72px;z-index:4;}
+.star-input>.input>label[for="p3"]{width:108px;z-index:3;}
+.star-input>.input>label[for="p4"]{width:144px;z-index:2;}
+.star-input>.input>label[for="p5"]{width:180px;z-index:1;}
+.star-input>output{display:inline-block;width:30px; font-size:18px;text-align:right; vertical-align:middle;}
 
 /* 퀵메뉴 */
 .quickmenu{

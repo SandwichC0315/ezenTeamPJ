@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@	page import="java.util.*" %>
+<%@	page import="java.net.*" %>
+<%@ page import="com.timestay.vo.ProductVO" %>
+<%@ page import="com.timestay.vo.ProductReviewVO" %>
+<%@ page import="com.timestay.vo.MemberVO" %>
+<%     List<ProductReviewVO> rvo = (List<ProductReviewVO>)request.getAttribute("rvo"); %>
+<%  ProductReviewVO svo = (ProductReviewVO)request.getAttribute("svo");//vo에 담아서 보냈으니까 bidx를 꺼내는 것이 아니라 vo를 꺼내야지	%> 
+<%  ProductVO vo = (ProductVO)request.getAttribute("vo");//vo에 담아서 보냈으니까 bidx를 꺼내는 것이 아니라 vo를 꺼내야지	%> 
+<%     List<MemberVO> mvo = (List<MemberVO>)request.getAttribute("mvo"); %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -92,13 +101,13 @@
 	      <div class="section1">
 	        <div class="product_info_container">
 	          <div class="product_img">
-	            <img src="${pageContext.request.contextPath}/resources/images/딸기쿠기.jpg" alt="딸기쿠키">
+	            <img src="${pageContext.request.contextPath}/resources/images/<%=vo.getPimage()%>" >
 	          </div>
 	          <div class="product_info">
 	            <div class="product_info1">
 	              <ul>
-	                <li><strong>빵</strong></li>
-	                <li style="border-bottom:1px solid #000; width:100%; padding-bottom: 10px;">~~~~~~~~~~~~~~~~~~ 특징을 가진 빵입니다.</li>
+	                <li><strong><%=vo.getPtitle() %></strong></li>
+	                <li style="border-bottom:1px solid #000; width:100%; padding-bottom: 10px;"><%=vo.getPcontent() %></li>
 	                <li><p>유통기한:</p>  구매일로부터 몇일</li>
 	                <li><p>보관방법:</p> 냉장or 냉동</li>
 	                <li><p>배송비:</p>  3000원</li>
@@ -109,7 +118,7 @@
 	            </div>
 	            <div class="selected_optionbox">
 	              <div class="selected_option1">
-	                <span>상품명:빵</span>
+	                <span>상품명:<%=vo.getPtitle() %></span>
 	                <div class="spinnerBox">
 	                  <!--<button type="button" id="btn_minus" value="-" onclick=minuss(this)>-</button>-->
 	                  <div class="selected_option2" >
@@ -119,11 +128,20 @@
 	                </div>  
 	              </div>
 	            </div>
-	            <div class="total1" ><p class="totalSum">총상품금액:</p></div>
+	            <div class="total1" ><p class="totalSum">총상품금액:<%=vo.getPprice() %></p></div>
 	            <div class="product_info2">
+	            <c:choose>
+	              <c:when test="${login==null }">	
+	              <a href="<%=request.getContextPath()%>/Member/Login.do"><div class="heart" onclick="alret(로그인)" ><img src="${pageContext.request.contextPath}/resources/images/heart.png" alt="찜하기"> 찜하기</div></a>
+	              <a href="<%=request.getContextPath()%>/Member/Login.do"><div><img src="${pageContext.request.contextPath}/resources/images/shopping-cart.png" alt="장바구니"> 장바구니</div></a>
+	              <a href="<%=request.getContextPath()%>/Member/Login.do"><div><img src="${pageContext.request.contextPath}/resources/images/credit-card.png" alt="구매하기"> 구매하기</div></a><!--button submit -->
+	              </c:when>
+	              <c:otherwise>
 	              <a><div class="heart" onclick="changeFn()" ><img src="${pageContext.request.contextPath}/resources/images/heart.png" alt="찜하기"> 찜하기</div></a>
 	              <a href=""><div><img src="${pageContext.request.contextPath}/resources/images/shopping-cart.png" alt="장바구니"> 장바구니</div></a>
-	              <a href="${pageContext.request.contextPath}/Shopping/Order.do"><div><img src="${pageContext.request.contextPath}/resources/images/credit-card.png" alt="구매하기"> 구매하기</div></a><!--button submit -->
+	              <a href="${pageContext.request.contextPath}/Shopping/Order.do"><div><img src="${pageContext.request.contextPath}/resources/images/credit-card.png" alt="구매하기"> 구매하기</div></a>	              
+	              </c:otherwise>
+	            </c:choose>  
 	            </div>          
 	          </div>
 	        </div>
@@ -149,40 +167,46 @@
 	              <div>
 	                <div class="product_review">
 	                  <h3>상품리뷰</h3>
+	        <!--          <h2 type="hidden"><%=vo.getPidx()%></h2> --> <!-- 평점을 내기 위해서 해당 pidx를 받아와야한다. 그러기위해서 svo.getPidx가 필요한데 어디에 숨기지 -->
+	        <!-- 내 생각엔 처음에 pidx가0인데도 오류가안난 이유는 controller에서 pidx를 넣어줬기 때문인듯.  -->
+	                  <h2>상품 평점:<%=svo.getAvgRscore() %></h2>
 	                  <div class="modal">
 	                    <div class="modal_body">
 	                      <div class="modal_close"><button class="modal_close_btn"><img src="${pageContext.request.contextPath}/resources/images/cancle.png" alt=""></button></div>
 	                      <h2>리뷰작성</h2>
-	                      <form action="post">
+	                      <form action= "<%=request.getContextPath() %>/Product/ProductInsertReview.do" method="post">
 	                        <!--별점 작성-->
 	                        <span class="star-input">
 	                          <span class="input">
-	                              <input type="radio" name="star-input" value="1" id="p1">
+	                              <input type="radio" name="Rscore" value="1" id="p1">
 	                              <label for="p1">1/5</label>
-	                              <input type="radio" name="star-input" value="2" id="p2">
+	                              <input type="radio" name="Rscore" value="2" id="p2">
 	                              <label for="p2">2/5</label>
-	                              <input type="radio" name="star-input" value="3" id="p3">
+	                              <input type="radio" name="Rscore" value="3" id="p3">
 	                              <label for="p3">3/5</label>
-	                              <input type="radio" name="star-input" value="4" id="p4">
+	                              <input type="radio" name="Rscore" value="4" id="p4">
 	                              <label for="p4">4/5</label>
-	                              <input type="radio" name="star-input" value="5" id="p5">
+	                              <input type="radio" name="Rscore" value="5" id="p5">
 	                              <label for="p5">5/5</label>
 	                            </span>
-	                            <output for="star-input"><b>0/5</b></output>						
+	                            <output for="Rscore"><b>0/5</b></output>						
 	                        </span>
 	                        <table>
 	                          <tr>
-	                            <td><textarea name="content"></textarea></td>
+	                            <td><input type="hidden" name="Pidx" value="<%=vo.getPidx()%>"></td>
+	                            <td><textarea name="Rtitle"></textarea></td>
 	                          </tr>
 	                        </table>       
 	                        <button>작성</button>                  
 	                      </form>
 	                    </div>           
-	                  </div>                     
+	                  </div> 
+					<c:if test="${login != null }">	                                      
 	                <button class="btn-open-popup">리뷰작성</button>
+	                </c:if>
 	                </div>
 	              </div>
-	              <table>
+	              <table class="pd_review">
 	                <tr>
 	                  <th style="width: 10%;">번호</th>
 	                  <th style="width: 45%;">내용</th>
@@ -190,13 +214,15 @@
 	                  <th style="width: 15%;">작성자</th>
 	                  <th style="width: 15%;">작성일</th>
 	                </tr>
+   			        <%for(ProductReviewVO VO : rvo){ %>
 	                <tr>
-	                  <td>1</td>
-	                  <td>2</td>
-	                  <td>3</td>
-	                  <td>4</td>
-	                  <td>5</td>
+	                  <td><%=VO.getRidx() %></td>
+	                  <td><%=VO.getRtitle() %></td>
+	                  <td><%=VO.getRscore() %></td>
+	                  <td><%=VO.getMidmasking() %></td>
+	                  <td><%=VO.getRwdate() %></td>
 	                </tr>
+		          		<%} %>		       
 	              </table>
 	            </div>
 	            <div id="tabpanel-3" role="tabpanel" tabindex="0" aria-labelledby="tab-3" class="is-hidden">

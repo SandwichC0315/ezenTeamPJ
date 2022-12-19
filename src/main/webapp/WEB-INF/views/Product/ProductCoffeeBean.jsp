@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ page import="com.timestay.vo.ProductVO" %>
+    <%@	page import="java.util.List" %>
+    <% List<ProductVO> ProductList7 = (List<ProductVO>)request.getAttribute("ProductList7"); %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -104,10 +107,13 @@
 		      <div class="product_b">
 		        <p>원두</p>
 		        <ul>
-		          <li>
-		            <dl><a href="${pageContext.request.contextPath}/Product/ProductInfo.do"><img src="${pageContext.request.contextPath}/resources/images/타임 블랜딩.jpg" alt=""></dl>
-		            <dt>타임블랜딩</dt>
+		        <%for(ProductVO vo : ProductList7){ %>
+   		          <li>
+     				<dl><a href="ProductInfo.do?Pidx=<%=vo.getPidx()%>"><img src="${pageContext.request.contextPath}/resources/images/<%=vo.getPimage() %>" alt=""></a></dl>
+ 					<dt><%=vo.getPtitle() %></dt>     				 
 		          </li>
+		          		<%} 
+		%>		          	          
 		        </ul>
 		      </div>
 		    </div>
@@ -124,6 +130,9 @@
 	            </ul>
 	          </div>
 	        </div>
+	        <c:if test ="${Mid.equals('admin')}">
+	        	<a>등록</a>
+	        </c:if>
 <footer>
   <div id="container">
       <div id="footer1">

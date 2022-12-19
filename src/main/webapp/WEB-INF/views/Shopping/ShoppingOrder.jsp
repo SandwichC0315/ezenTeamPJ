@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css"/>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/MyPageshoppingCart.css" type="text/css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ShoppingOrder.css" type="text/css"/>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />

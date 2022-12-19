@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0/EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.timestay.mapper.ProductMapper">
+
+	<select id="Review" resultType="ProductReviewVO" parameterType="int">
+		select  a.ridx, a.midx,a.rtitle,to_char (a.rwdate,'yyyy.mm.dd')as rwdate,a.rwip,a.rscore,a.rdelyn,(substr(mid,1,1)||LPAD('*',2,'*')||Substr(mid,-2)) as midmasking
+			From TB_Review a left outer  join tb_member b
+			on Pidx=#{Pidx} and a.midx=b.midx ORDER BY RIDX ASC
+	</select>
+	<select id= "AvgRscore" resultType="ProductReviewVO" parameterType="ProductReviewVO">
+	   select round(avg(Rscore),2) as AvgRscore from tb_review where Pidx=#{Pidx} and  Rdelyn ='N'
+	</select>
+	<select id="ProductList1" resultType="ProductVO">
+		select *
+			from TB_Product
+						WHERE Pcategoryidx=1 order by Pidx asc
+	</select>
+		<select id="ProductList2" resultType="ProductVO">
+		select *
+			from TB_Product
+						WHERE Pcategoryidx=2 order by Pidx asc
+	</select>
+		<select id="ProductList3" resultType="ProductVO">
+		select *
+			from TB_Product
+						WHERE Pcategoryidx=3 order by Pidx asc
+	</select>
+		<select id="ProductList4" resultType="ProductVO">
+		select *
+			from TB_Product
+						WHERE Pcategoryidx=4 order by Pidx asc
+	</select>
+		<select id="ProductList5" resultType="ProductVO">
+		select *
+			from TB_Product
+						WHERE Pcategoryidx=5 order by Pidx asc
+	</select>
+		<select id="ProductList6" resultType="ProductVO">
+		select *
+			from TB_Product
+						WHERE Pcategoryidx=6 order by Pidx asc
+	</select>
+	<select id="ProductList7" resultType="ProductVO">
+		select *
+			from TB_Product
+						WHERE Pcategoryidx=7 order by Pidx asc
+	</select>
+	<select id="selectOne"  resultType="ProductVO" parameterType="int" ><!--Vo와 필드명이 일치해야 마이바티스가 넣어줌 boardVO한줄한줄씩담을수 있는곳  // 변수 타입도 지정해 줘야한다.--> <!-- 결과값이 BoardVO에 담긴다. -->
+	<!-- 받을때 int로 받는다. -->
+	<!-- 여러건을 한번에 받아야하니까 vo로 받아야한다. --><!-- 쿼리의결과가있을때(select) resultType 사용-->
+			SELECT a.Pidx
+			,  a.Pcategoryidx
+			,  a.Ptitle
+			,  a.Pcontent
+			,  a.Pimage
+			,  a.Pprice
+			,  a.Phit
+			,  a.Psellyn
+			,  a.Pdelyn
+			,  a.Pvol
+			,  a.Pimageplus
+			From TB_product a 	
+			where a.Pidx= #{Pidx}
+
+	</select>
+	<select id="SelectPidx"  resultType="int" parameterType="int" ><!--Vo와 필드명이 일치해야 마이바티스가 넣어줌 boardVO한줄한줄씩담을수 있는곳  // 변수 타입도 지정해 줘야한다.--> <!-- 결과값이 BoardVO에 담긴다. -->
+	<!-- 받을때 int로 받는다. -->
+	<!-- 여러건을 한번에 받아야하니까 vo로 받아야한다. --><!-- 쿼리의결과가있을때(select) resultType 사용-->
+			SELECT Pidx
+			From TB_product  	
+			where Pidx= #{Pidx}
+
+	</select>
+
+	<insert id="InsertReview" parameterType="ProductReviewVO">
+	<!-- 무조건 쿼리만 들어간다는 뜻 -->
+	<![CDATA[                               
+	INSERT INTO tb_review VALUES(
+			 	tb_Ridx_seq.nextval,
+				#{Midx},
+				#{Pidx},
+				#{Rtitle},
+				sysdate,
+				#{Rimage},
+				#{Rwip},
+				#{Rdelip},
+				#{Rscore},
+				'N'
+				)
+	]]>
+	<selectKey order= "AFTER" resultType="integer" keyProperty="Ridx"><!-- 원하는 select 절을 한번 더 날릴 수 있다. After써서 위의 쿼리 실행후 한번더 실행되도록-->
+		SELECT MAX(Ridx) from tb_review 
+	</selectKey>
+	</insert>	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

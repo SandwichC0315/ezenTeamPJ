@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+    <%@ page import="com.timestay.vo.ProductVO" %>
+    <%@	page import="java.util.List" %>
+    <% List<ProductVO> ProductList1 = (List<ProductVO>)request.getAttribute("ProductList1"); %>   
+    <% List<ProductVO> ProductList2 = (List<ProductVO>)request.getAttribute("ProductList2"); %>       
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -106,40 +110,26 @@
 		      <div class="product_b">
 		        <p>빵</p>
 		        <ul>
+		        <%for(ProductVO vo : ProductList1){ %>
    		          <li>
-     				<dl><a href="${pageContext.request.contextPath}/Product/ProductInfo.do"><img src="${pageContext.request.contextPath}/resources/images/소금빵.jpg" alt=""></a></dl>
- 					<dt>소금빵</dt>     				 
+     				<dl><a href="ProductInfo.do?Pidx=<%=vo.getPidx()%>"><img src="${pageContext.request.contextPath}/resources/images/<%=vo.getPimage() %>" alt=""></a></dl>
+ 					<dt><%=vo.getPtitle() %></dt>     				 
 		          </li>
-   		          <li>
-     				<dl><a href="${pageContext.request.contextPath}/Product/ProductInfo.do"><img src="${pageContext.request.contextPath}/resources/images/단호박 크림치즈 치아바타.jpg" alt=""></a></dl>
- 					<dt>단호박 크림치즈 치아바타</dt>     				 
-		          </li>
-   		          <li>
-     				<dl><a href="${pageContext.request.contextPath}/Product/ProductInfo.do"><img src="${pageContext.request.contextPath}/resources/images/레몬케이크2.jpg" alt=""></a></dl>
- 					<dt>레몬케이크</dt>     				 
-		          </li>
-   		          <li>
-     				<dl><a href="${pageContext.request.contextPath}/Product/ProductInfo.do"><img src="${pageContext.request.contextPath}/resources/images/브라우니.jpg" alt=""></a></dl>
- 					<dt>브라우니</dt>     				 
-		          </li>
-   		          <li>
-     				<dl><a href="${pageContext.request.contextPath}/Product/ProductInfo.do"><img src="${pageContext.request.contextPath}/resources/images/바스크 치즈케이크.jpg" alt=""></a></dl>
- 					<dt>바스크 치즈케이크</dt>     				 
-		          </li>	          		          		          
-		        </ul>
+		          		<%} 
+		%>		          	          
+		        </ul>		        
 		      </div>
 		      <div class="product_s">
 		
 		        <p>디저트</p>
 		        <ul>
+		        <%for(ProductVO vo : ProductList2){ %>
    		          <li>
-     				<dl><a href="${pageContext.request.contextPath}/Product/ProductInfo.do"><img src="${pageContext.request.contextPath}/resources/images/피스타치오 마들렌.jpg" alt=""></a></dl>
- 					<dt>피스타치오 마들렌/dt>     				 
+     				<dl><a href="ProductInfo.do?Pidx=<%=vo.getPidx()%>"><img src="${pageContext.request.contextPath}/resources/images/<%=vo.getPimage() %>" alt=""></a></dl>
+ 					<dt><%=vo.getPtitle() %></dt>     				 
 		          </li>
-		          <li>
-     				<dl><a href="${pageContext.request.contextPath}/Product/ProductInfo.do"><img src="${pageContext.request.contextPath}/resources/images/코코넛 쿠키.jpg" alt=""></a></dl>
- 					<dt>코코넛 쿠키</dt>     				 
-		          </li>	
+		          		<%} 
+		%>		         
 		        </ul>
 		      </div>
 		    </div>

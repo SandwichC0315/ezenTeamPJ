@@ -1,5 +1,7 @@
 package com.timestay.group;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -16,7 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.timestay.service.MemberService;
 import com.timestay.vo.MemberVO;
-
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 /**
  * Handles requests for the application home page.
  */
@@ -35,11 +38,19 @@ public class MemberController {
 		return "Member/MemberLogin";
 	}
 	@RequestMapping(value="/login.do", method = RequestMethod.POST)
-	public String login(MemberVO vo, HttpServletRequest req) {
+	public String login( Model model, MemberVO vo, HttpServletRequest req) {
 		System.out.println("vo:"+vo.getMid());
 		System.out.println("ser:" + MemberService);
 		HttpSession session = req.getSession();
-		
+		String ip="";
+		try {
+			ip=InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+
+	
+
 		//login Ã³¸®
 		
 		MemberVO loginVO = MemberService.findMemberByIdPass(vo);
@@ -47,8 +58,14 @@ public class MemberController {
 		
 		if(loginVO != null) {
 			session.setAttribute("login", loginVO);
-		}
-		return "redirect:/About/About_us.do";
+			session.setAttribute("ip", ip);
+			session.setAttribute("Mid", vo.getMid());
+
+	}
+
+        
+        System.out.println("IP:"+ip);
+		return "redirect:/Product/ProductCoffeeBean.do";
 	}
 	@RequestMapping(value = "/logout.do")
 	public String logout(HttpServletRequest req) {
