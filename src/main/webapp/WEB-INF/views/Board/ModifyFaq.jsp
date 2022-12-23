@@ -111,9 +111,7 @@
 				</div>
 			</form>
 	   			
-			<form id="moveForm" method="get">
-				<input type="text" name="page" value="${pageMaker.cri.page }">
-			</form>
+
 
     	</div>
     	   	
