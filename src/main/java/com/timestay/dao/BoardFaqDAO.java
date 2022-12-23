@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.timestay.vo.BoardFaqVO;
-
-
-
-
+import com.timestay.vo.Criteria;
 
 
 //IOC 컨테이너에 BoardDAO를 객체로 생성
@@ -21,11 +18,16 @@ public class BoardFaqDAO {
 	@Autowired //타입을 기반으로 의존 주입
 	private SqlSession sqlSession;
 
-	public List<BoardFaqVO> list()
+	public List<BoardFaqVO> list(Criteria cri)
 	{
 		//mybatis를 사용하여 TB_BoardNotice 데이터 목록 조회하여 반환
-		return sqlSession.selectList("com.timestay.mapper.boardFaqMapper.test");
+		return sqlSession.selectList("com.timestay.mapper.boardFaqMapper.selectList", cri);
 	}
+	
+	public int countBoardList(){
+	    return sqlSession.selectOne("com.timestay.mapper.boardFaqMapper.countBoardList");
+	}
+
 	
 	public int insertFaq(BoardFaqVO vo) {
 		return sqlSession.insert("com.timestay.mapper.boardFaqMapper.insertFaq", vo);

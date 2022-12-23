@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.timestay.dao.BoardFaqDAO;
 import com.timestay.vo.BoardFaqVO;
+import com.timestay.vo.Criteria;
 
 //@Service - 구현하고 있는 인터페이스에 대한 구현 객체를 만드는 어노테이션
 @Service("boardFaqServiceImpl")
@@ -17,10 +18,15 @@ public class BoardFaqServiceImpl implements BoardFaqService{
 	private BoardFaqDAO boardfaqDAO;
 
 	@Override
-	public List<BoardFaqVO> list() {
+	public List<BoardFaqVO> list(Criteria cri) {
 		
 		System.out.println("boardnoticeDAO"+boardfaqDAO);
-		return boardfaqDAO.list();
+		return boardfaqDAO.list(cri);
+	}
+	
+	@Override
+	public int countBoardListTotal() {
+		return boardfaqDAO.countBoardList();
 	}
 
 	@Override
@@ -42,5 +48,6 @@ public class BoardFaqServiceImpl implements BoardFaqService{
 	public BoardFaqVO selectOneByBfidx(int BFidx) {
 		return boardfaqDAO.selectOne(BFidx);
 	}
+
 
 }

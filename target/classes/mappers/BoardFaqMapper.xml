@@ -3,11 +3,32 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.timestay.mapper.boardFaqMapper">
 
-	<select id="test" resultType="boardfaqVO">
-		select *
-			from TB_BoardFaq			
-		  	ORDER BY bfidx desc
+	<select id="selectList" resultType="boardfaqVO"> <!-- list + 페이징 -->
+	<![CDATA[
+	select B.*
+		from
+		    (select rownum as rnum, A.*
+		    from (
+		        select *
+		        from TB_BoardFaq
+		        order by bfidx desc ) A
+		    where rownum <= #{perPageNum}*#{page} ) B
+		where B.rnum > #{pageStart}
+	]]>
+		
 	</select>
+	
+	<select id="countBoardList" resultType="Integer">
+    <![CDATA[
+        SELECT
+            count(*)
+        FROM
+            TB_BoardFaq
+        WHERE
+            BFDELYN='N'
+    ]]>
+	</select>
+	
 	
 	<insert id="insertFaq" parameterType="boardfaqVO">	
 	<![CDATA[

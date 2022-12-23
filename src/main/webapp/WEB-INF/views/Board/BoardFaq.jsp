@@ -100,39 +100,54 @@
     <main>
     	<div class="faq">
     		<h2>자주 묻는 질문</h2>     		
-  			<ul class="listWrap">
-  			
-	   	    	<%for (BoardFaqVO vo : list) { %>
-	   	    	
-				    <li class="qa_li">
-				        <div class="question">
-				            <p class="tit"><%=vo.getBFtitle() %></p>
-				            <p class="iconDiv"><img src="https://happyjung.diskn.com/data/lecture/icon_jquery_faq2_icon_arrow.png"></p>					    				        
-				        </div>
-				        
-				        <div class="answer"><%=vo.getBFcontent() %></div>
-					    
-					    <div class="faqBtn">
-						    
-						    <c:if test="${Mid.equals('admin') }"> <!-- admin만 보이게 -->
-							    <!-- 질문 수정 -->
-							    <button id="modify" onclick="location.href='ModifyFaq.do?BFidx=<%=vo.getBFidx()%>'" style="">수정</button>
+			<ul class="listWrap">
+				<c:forEach items="${list}" var="vo">
+							<li class="qa_li">
+						        <div class="question">
+						            <p class="tit">${vo.BFtitle}</p>
+						            <p class="iconDiv"><img src="https://happyjung.diskn.com/data/lecture/icon_jquery_faq2_icon_arrow.png"></p>					    				        
+						        </div>
+						        
+						        <div class="answer">${vo.BFcontent}</div>
+							    
+							    <div class="faqBtn">
+								    
+								    <c:if test="${Mid.equals('admin')}"> <!-- admin만 보이게 -->
+									    <!-- 질문 수정 -->
+									    <button id="modify" onclick="location.href='ModifyFaq.do?BFidx=${vo.BFidx}'" style="">수정</button>
+			
+									    <!-- 질문 삭제 -->
+									    <form name="delfrm" action="deleteFaq.do" method="post">	
+										    <button id="delete" onclick="return confirm('질문을 삭제하시겠습니까?')" style="">삭제</button>
+										    <input type="hidden" name="bfidx" value="${vo.BFidx}">	
+									    </form>
+								    
+								    </c:if>
+								    
+							    </div>
+						    </li>
+				</c:forEach>
+			</ul>
 	
-							    <!-- 질문 삭제 -->
-							    <form name="delfrm" action="deleteFaq.do" method="post">	
-								    <button id="delete" onclick="return confirm('질문을 삭제하시겠습니까?')" style="">삭제</button>
-								    <input type="hidden" name="bfidx" value="<%=vo.getBFidx()%>">	
-							    </form>
-						    
-						    </c:if>
-						    
-					    </div>
-				    </li>
-				    
-	   			<% }%>
-	   			
-			</ul>	
-	<c:if test="${Mid.equals('admin') }"> <!-- admin만 보이게 -->
+			<ul class="btn-group pagination">
+			    <c:if test="${pageMaker.prev }">
+			    <li>
+			        <a href='<c:url value="/Board/BoardFaq.do?page=${pageMaker.startPage-1 }"/>'>◀<i class="fa fa-chevron-left"></i></a>
+			    </li>
+			    </c:if>
+			    <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">
+			    <li>
+			        <a href='<c:url value="/Board/BoardFaq.do?page=${pageNum }"/>'><i class="fa">${pageNum }</i></a>
+			    </li>
+			    </c:forEach>
+			    <c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+			    <li>
+			        <a href='<c:url value="/Board/BoardFaq.do?page=${pageMaker.endPage+1 }"/>'>▶<i class="fa fa-chevron-right"></i></a>
+			    </li>
+			    </c:if>
+			</ul>
+			
+	<c:if test="${Mid.equals('admin')}"> <!-- admin만 보이게 -->
    		<button id="write" onclick="location.href='InsertFaq.do'">등록</button>
    	</c:if>
     	<div>
@@ -251,7 +266,6 @@
                 }
             });
         });  
-   
     </script>
 </body>
 </html>

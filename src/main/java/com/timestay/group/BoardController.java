@@ -24,6 +24,8 @@ import com.timestay.service.BoardNoticeService;
 import com.timestay.service.BoardNoticeServiceImpl;
 import com.timestay.vo.BoardFaqVO;
 import com.timestay.vo.BoardNoticeVO;
+import com.timestay.vo.Criteria;
+import com.timestay.vo.PageMaker;
 
 
 
@@ -59,17 +61,23 @@ public class BoardController {
 
 	
 	@RequestMapping(value = "/BoardFaq.do", method = RequestMethod.GET)
-	public String faq(Locale locale, Model model) {
+	public String faq(Locale locale, Model model, Criteria cri)  {
 		
 		System.out.println("boardfaqService"+boardfaqService);
 	
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(boardfaqService.countBoardListTotal());
 		
 		//db�뿉�꽌 TB_BoardFaq �뜲�씠�꽣 紐⑸줉 媛��졇�샂
-		List<BoardFaqVO> list = boardfaqService.list();
+		List<BoardFaqVO> list = boardfaqService.list(cri);
 		
 		System.out.println("list"+list);
 		
 		model.addAttribute("list", list);
+	    model.addAttribute("pageMaker", pageMaker);
+	    //model.addAttribute("pageStart", cri.getPageStart());
+	    //model.addAttribute("perPageNum", cri.getPerPageNum());
 		
 		
 		return "Board/BoardFaq";
