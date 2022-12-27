@@ -22,4 +22,6 @@ public interface ProductService {
 	int InsertReview(ProductReviewVO vo);
 	int SelectPidx(int Pidx);
 	ProductReviewVO AvgRscore(int Pidx);
+	int ProductReviewModify(ProductReviewVO rvo);
+	ProductReviewVO SelectRidx(int Ridx);
 }

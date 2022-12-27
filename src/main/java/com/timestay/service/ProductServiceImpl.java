@@ -96,5 +96,24 @@ public class ProductServiceImpl implements ProductService{
 		return ProductReviewDAO.AvgRscore(Pidx);
 	}
 
+	@Override
+	public int ProductReviewModify(ProductReviewVO rvo) {
+		// TODO Auto-generated method stub
+		return ProductReviewDAO.ProductReviewModify(rvo);
+	}
+
+	@Override
+	public ProductReviewVO SelectRidx(int Ridx) {
+		// TODO Auto-generated method stub
+		return ProductReviewDAO.SelectRidx(Ridx);
+	}
+
+
+
+
+
+
+
+
 
 }

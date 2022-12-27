@@ -41,4 +41,16 @@ public class ProductReviewDAO {
 		//mybatis를 사용하여 TB_BoardNotice 데이터 목록 조회하여 반환
 		return sqlSession.selectOne("com.timestay.mapper.ProductMapper.AvgRscore",Pidx);
 	}
+	public int ProductReviewModify(ProductReviewVO rvo) {
+		
+		//return sqlSession.selectOne(statement, parameter)
+		//mybatis를 사용하여 TB_BoardNotice 데이터 목록 조회하여 반환
+		return sqlSession.update("com.timestay.mapper.ProductMapper.ProductReviewModify",rvo);
+	}
+	public ProductReviewVO SelectRidx(int Ridx) {
+		
+		//return sqlSession.selectOne(statement, parameter)
+		//mybatis를 사용하여 TB_BoardNotice 데이터 목록 조회하여 반환
+		return sqlSession.selectOne("com.timestay.mapper.ProductMapper.SelectRidx",Ridx);
+	}
 }

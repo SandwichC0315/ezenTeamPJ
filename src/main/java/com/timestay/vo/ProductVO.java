@@ -79,4 +79,11 @@ public class ProductVO {
 	public void setPimageplus(String pimageplus) {
 		Pimageplus = pimageplus;
 	}
+	@Override
+	public String toString() {
+		return "ProductVO [Pidx=" + Pidx + ", Pcategoryidx=" + Pcategoryidx + ", Ptitle=" + Ptitle + ", Pcontent="
+				+ Pcontent + ", Pimage=" + Pimage + ", Pprice=" + Pprice + ", Psellyn=" + Psellyn + ", Pdelyn=" + Pdelyn
+				+ ", Phit=" + Phit + ", Pvol=" + Pvol + ", Pimageplus=" + Pimageplus + "]";
+	}
+	
 }

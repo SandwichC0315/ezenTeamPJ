@@ -6,8 +6,8 @@
 <%@ page import="com.timestay.vo.ProductVO" %>
 <%@ page import="com.timestay.vo.ProductReviewVO" %>
 <%@ page import="com.timestay.vo.MemberVO" %>
-<%     List<ProductReviewVO> rvo = (List<ProductReviewVO>)request.getAttribute("rvo"); %>
-<%  ProductReviewVO svo = (ProductReviewVO)request.getAttribute("svo");//vo에 담아서 보냈으니까 bidx를 꺼내는 것이 아니라 vo를 꺼내야지	%> 
+<%     List<ProductReviewVO> lrvo = (List<ProductReviewVO>)request.getAttribute("lrvo"); %>
+<%  ProductReviewVO rvo = (ProductReviewVO)request.getAttribute("rvo");//vo에 담아서 보냈으니까 bidx를 꺼내는 것이 아니라 vo를 꺼내야지	%> 
 <%  ProductVO vo = (ProductVO)request.getAttribute("vo");//vo에 담아서 보냈으니까 bidx를 꺼내는 것이 아니라 vo를 꺼내야지	%> 
 <%     List<MemberVO> mvo = (List<MemberVO>)request.getAttribute("mvo"); %>
 <!DOCTYPE html>
@@ -26,10 +26,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
-
-    <style>   
- 	
-    </style>
 </head>
 <body>
 	<header id="header" class="deactive">        
@@ -167,9 +163,9 @@
 	              <div>
 	                <div class="product_review">
 	                  <h3>상품리뷰</h3>
-	        <!--          <h2 type="hidden"><%=vo.getPidx()%></h2> --> <!-- 평점을 내기 위해서 해당 pidx를 받아와야한다. 그러기위해서 svo.getPidx가 필요한데 어디에 숨기지 -->
+	        <!--          <h2 type="hidden"><%=vo.getPidx()%></h2> --> <!-- 평점을 내기 위해서 해당 pidx를 받아와야한다. 그러기위해서 rvo.getPidx가 필요한데 어디에 숨기지 -->
 	        <!-- 내 생각엔 처음에 pidx가0인데도 오류가안난 이유는 controller에서 pidx를 넣어줬기 때문인듯.  -->
-	                  <h2>상품 평점:<%=svo.getAvgRscore() %></h2>
+	                  <h2>상품 평점:<%=rvo.getAvgRscore() %></h2>
 	                  <div class="modal">
 	                    <div class="modal_body">
 	                      <div class="modal_close"><button class="modal_close_btn"><img src="${pageContext.request.contextPath}/resources/images/cancle.png" alt=""></button></div>
@@ -179,15 +175,15 @@
 	                        <span class="star-input">
 	                          <span class="input">
 	                              <input type="radio" name="Rscore" value="1" id="p1">
-	                              <label for="p1">1/5</label>
+	                              <label id="p1" for="p1">1/5</label>
 	                              <input type="radio" name="Rscore" value="2" id="p2">
-	                              <label for="p2">2/5</label>
+	                              <label id="p2" for="p2">2/5</label>
 	                              <input type="radio" name="Rscore" value="3" id="p3">
-	                              <label for="p3">3/5</label>
+	                              <label id="p3" for="p3">3/5</label>
 	                              <input type="radio" name="Rscore" value="4" id="p4">
-	                              <label for="p4">4/5</label>
+	                              <label id="p4" for="p4">4/5</label>
 	                              <input type="radio" name="Rscore" value="5" id="p5">
-	                              <label for="p5">5/5</label>
+	                              <label id="p5" for="p5">5/5</label>
 	                            </span>
 	                            <output for="Rscore"><b>0/5</b></output>						
 	                        </span>
@@ -201,6 +197,38 @@
 	                      </form>
 	                    </div>           
 	                  </div> 
+	 				  <div class="modal2">
+	                    <div class="modal_body2">
+	                      <div class="modal_close2"><button class="modal_close_btn2"><img src="${pageContext.request.contextPath}/resources/images/cancle.png" alt=""></button></div>
+	                      <h2>리뷰수정</h2>
+	                      <form action= "<%=request.getContextPath() %>/Product/ProductReviewModify.do" method="post">
+                  	        <span class="star-input">
+	                          <span class="input">
+	                              <input type="radio" name="Rscore" value="1" id="p1">
+	                              <label id="p1" for="p1">1/5</label>
+	                              <input type="radio" name="Rscore" value="2" id="p2">
+	                              <label id="p2" for="p2">2/5</label>
+	                              <input type="radio" name="Rscore" value="3" id="p3">
+	                              <label id="p3" for="p3">3/5</label>
+	                              <input type="radio" name="Rscore" value="4" id="p4">
+	                              <label  id="p4" for="p4">4/5</label>
+	                              <input type="radio" name="Rscore" value="5" id="p5">
+	                              <label id="p5" for="p5">5/5</label>
+	                            </span>
+	                            <output for="Rscore"><b>0/5</b></output>						
+	                        </span>
+	                        <table>
+	                          <tr>
+								<td><input type=hidden  name="Pidx" value="<%=vo.getPidx()%>"></td><!-- Pidx보내기 -->	                          
+	                            <td><input type=hidden name="Ridx" value="<%=rvo.getRidx()%>"></td>	  
+							 	<td><input type=hidden id=ModifyRscore  name="Rscore" value=""></td> 		                                                    
+	                            <td><textarea name="Rtitle"></textarea></td>
+	                          </tr>
+	                        </table>       
+	                        <button>수정</button>                  
+	                      </form>
+	                    </div>           
+	                  </div>                                     	                  
 					<c:if test="${login != null }">	                                      
 	                <button class="btn-open-popup">리뷰작성</button>
 	                </c:if>
@@ -214,10 +242,23 @@
 	                  <th style="width: 15%;">작성자</th>
 	                  <th style="width: 15%;">작성일</th>
 	                </tr>
-   			        <%for(ProductReviewVO VO : rvo){ %>
+   			        <%for(ProductReviewVO VO : lrvo){ %>
 	                <tr>
-	                  <td><%=VO.getRidx() %></td>
-	                  <td><%=VO.getRtitle() %></td>
+	                  <td><%=VO.getRidx()%></td>
+	                  
+	                  <!--<c:if test="세션에서 받아온 Midx == 리뷰의 Midx">
+	         
+	                  </c:if>-->
+                      <td><%=VO.getRtitle() %>
+                      <c:if test="${login != null }">	 
+                      <form>
+                      <input type="hidden" value="<%=VO.getPidx()%>">
+                      <input type="hidden" value="<%=VO.getRidx()%>">
+                      <button type="button" class="btn-open-popup2" data-value="<%=VO.getRidx()%>" data-score="<%=VO.getRscore()%>">리뷰수정</button>
+                     
+                      </form>
+                       </c:if>
+                      </td>
 	                  <td><%=VO.getRscore() %></td>
 	                  <td><%=VO.getMidmasking() %></td>
 	                  <td><%=VO.getRwdate() %></td>
@@ -415,31 +456,58 @@
 		                }
 		              });
 
-		                  //modal 
-		                  const body = document.querySelector('body');
-		                  const modal = document.querySelector('.modal');
-		                  const btnOpenPopup = document.querySelector('.btn-open-popup');
-		                  const modalClose = document.querySelector('.modal_close_btn');
-		                  btnOpenPopup.addEventListener('click', () => {
-		                    modal.classList.toggle('show');
+		              //modal
+		              $('.btn-open-popup').on("click",function(){
+		                    $('.modal').addClass('show')
+		                    $('body').css('overflow','hidden')
+		                  
+		                  })
 
-		                    if (modal.classList.contains('show')) {
-		                      body.style.overflow = 'hidden';
+		                    $('.modal_close_btn').on("click",function(){
+		                      $('.modal').removeClass('show')
+		                      $('body').css('overflow','auto')
+		                    })
+		                    $('body').on('click',function(){
+		                      if($('modal').hasClass('show')){
+		                        $('.modal').removeClass('show')
+		                        $('body').css('overflow','auto')
 		                    }
-		                  });
+		                    })
 
-		                  modal.addEventListener('click', (event) => {
-		                    if (event.target === modal) {
-		                      modal.classList.toggle('show');
+		                //modal2
 
-		                      	if (!modal.classList.contains('show')) {
-		                        body.style.overflow = 'auto';
-		                        }
-	                      	 }else if(event.target === modalClose){
-		                      modal.classList.toggle('show');
-		                      body.style.overflow = 'auto';
+		                 
+		                  $('.btn-open-popup2').on("click",function(){
+		                    $('.modal2').addClass('show')
+		                    $('body').css('overflow','hidden')
+		                  	 $(this).data('value')
+		                  	 console.log($(this).data('value'))
+		                  	 $('input[name=Ridx]').val($(this).data('value'))
+		                  	//$('input[name=Rscore]').val($(input[name=Rscore]).val()) 이거때문에 모든 value 가 0으로 바뀐거고 그래서 0이 계속 들어간거고
+	                  		
+		                  })
+	                  			
+                 	$('#p1').on('click',function(){
+						$('#ModifyRscore').val("1")})	//왜 계속 1만나오지?
+	                 	$('#p2').on('click',function(){
+							$('#ModifyRscore').val("2")})
+               			$('#p3').on('click',function(){
+							$('#ModifyRscore').val("3")})
+               			$('#p4').on('click',function(){
+							$('#ModifyRscore').val("4")})
+               			$('#p5').on('click',function(){
+							$('#ModifyRscore').val("5")})							
+//checked값 바뀌면 text를 바꿔야하나?
+		                    $('.modal_close_btn2').on("click",function(){
+		                      $('.modal2').removeClass('show')
+		                      $('body').css('overflow','auto')
+		                    })
+		                    $('body').on('click',function(){
+		                      if($('modal2').hasClass('show')){
+		                        $('.modal2').removeClass('show')
+		                        $('body').css('overflow','auto')
 		                    }
-		                  });
+		                    })
 		                  
 		                  //별점 
 						  $(function(){
@@ -476,6 +544,8 @@
 						      }
 						    });
 						  });
+		              
+
 		                  
 		                  //찜하기
 						function changeFn(){

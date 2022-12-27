@@ -353,6 +353,8 @@ width: 100%;
   border: 1px solid #000;
   padding-top: 20px;
 }
+
+
 #tabpanel-1 div{
   width: 100%;
   background: #666;
@@ -387,6 +389,13 @@ width: 100%;
   justify-content: space-between;
   height: 80px;
   margin-top: 20px;
+}
+.pd_review td{
+	text-align:center;
+}
+.pd_review td:nth-child(2){
+	display:flex;
+	justify-content: space-between;
 }
 .btn-open-popup{
   border: 0;
@@ -487,6 +496,92 @@ width: 100%;
    z-index:-1;
  }  
 
+
+/* modal2 */
+.modal2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal2.show {
+  display: block;
+  z-index: 100;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal_body2 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  height: 600px;
+
+  padding: 40px;
+
+  text-align: center;
+
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+  transform: translateX(-50%) translateY(-50%);
+}
+.modal2 table{
+  margin: 0 auto ;
+  width: 100%;
+  height: 100%;
+}
+.modal2 textarea{
+ width: 100%;
+ height: 200px;
+}
+
+.modal_close2{
+  position: absolute;
+  width:20px;
+  height:20px;
+  top: 0%;
+  right: 0%;
+  margin:0 !important;
+  display:flex;
+ }
+ .modal_close2>button{
+   border: 2px solid #000;
+   display:flex;
+   cursor: pointer;
+   border-radius: 3px;
+   width:100%;
+   background:none;
+   align-items: center;
+   justify-content: center;
+ }
+ 
+ .modal_close2>button>img{
+   width: 14px;
+  /* position: absolute;
+  top: 0%;
+  right: 0%; */
+ }  
+
+
+
+
+
 /* 평점 */
 .star-input>.input,
 .star-input>.input>label:hover,
@@ -506,6 +601,27 @@ width: 100%;
 .star-input>.input>label[for="p4"]{width:144px;z-index:2;}
 .star-input>.input>label[for="p5"]{width:180px;z-index:1;}
 .star-input>output{display:inline-block;width:30px; font-size:18px;text-align:right; vertical-align:middle;}
+
+/* 평점 */
+.star-input2>.input,
+.star-input2>.input>label:hover,
+.star-input2>.input>input:focus+label,
+.star-input2>.input>input:checked+label{display: inline-block;vertical-align:middle;background:url('../images/grade_img.png');no-repeat;}
+.star-input2{display:inline-block;margin-left: 30px; white-space:nowrap;width:225px;height:40px;padding:25px;line-height:30px;}
+.star-input2>.input{display:inline-block;width:180px;background-size:180px;height:35px;white-space:nowrap;overflow:hidden;position: relative;}
+.star-input2>.input>input{position:absolute;width:1px;height:1px;opacity:0;}
+.star-input2>.input>label{ width:36px;height:0;padding:33px 0 0 0;overflow: hidden;float:left;cursor: pointer;position: absolute;top: 0;left: 0;}
+.star-input2>.input>label:hover,
+.star-input2>.input>input:focus+label,
+.star-input2>.input>input:checked+label{background-size: 180px;background-position: 0 bottom;}
+.star-input2>.input>label:hover~label{background-image: none;}
+.star-input2>.input>label[for="p1"]{width:36px;z-index:5;}
+.star-input2>.input>label[for="p2"]{width:72px;z-index:4;}
+.star-input2>.input>label[for="p3"]{width:108px;z-index:3;}
+.star-input2>.input>label[for="p4"]{width:144px;z-index:2;}
+.star-input2>.input>label[for="p5"]{width:180px;z-index:1;}
+.star-input2>output{display:inline-block;width:30px; font-size:18px;text-align:right; vertical-align:middle;} 
+
 
 /* 퀵메뉴 */
 .quickmenu{
