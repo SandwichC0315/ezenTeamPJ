@@ -84,7 +84,7 @@
      	<c:if test ="${login!=null}">
 	        <ul class="navbar_links" style="width:330px;">
 	            <li><a href="<%=request.getContextPath()%>/Member/logout.do" style="padding:0 4px">로그아웃</a></li>
-	            <li><a href="#" style="padding:0 4px">마이페이지</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/member_Modify.do?Mid=${Mid}" style="padding:0 4px">마이페이지</a></li>
 	            <li><a href="#" style="padding:0 4px">장바구니</a></li>
 	            <li><a href="#" style="padding:0 4px">고객센터</a></li>
 	        </ul>

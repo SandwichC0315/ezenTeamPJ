@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -42,7 +43,7 @@
                                 <li><a href="${pageContext.request.contextPath}/Product/ProductDessert.do">제과</a></li>
                                 <li><a href="${pageContext.request.contextPath}/Product/ProductDrink.do">음료</a></li>
                                 <li><a href="${pageContext.request.contextPath}/Product/ProductFood.do">음식</a></li>
-                                <li><a href="${pageContext.request.contextPath}/Product/ProductCoffeeBean.do">원두</a></li>>
+                                <li><a href="${pageContext.request.contextPath}/Product/ProductCoffeeBean.do">원두</a></li>
                             </ul>
                         </div>
                     </li>
@@ -68,19 +69,31 @@
                 </ul>
             </div>            
         </nav>    
-        <ul class="navbar_links">
-            <li><a href="member_Modify.do">내정보</a></li>
-            <li><a href="#">장바구니</a></li>
-            <li><a href="#">고객센터</a></li>
-        </ul>
+         
+     	<c:if test ="${login!=null}">
+	        <ul class="navbar_links" style="width:330px;">
+	            <li><a href="<%=request.getContextPath()%>/Member/logout.do" style="padding:0 4px">로그아웃</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/member_Modify.do?Mid=${Mid}" style="padding:0 4px">마이페이지</a></li>
+	            <li><a href="#" style="padding:0 4px">장바구니</a></li>
+	            <li><a href="#" style="padding:0 4px">고객센터</a></li>
+	        </ul>
+  		</c:if>  
+  		<c:if test= "${login==null}">
+	  		<ul class="navbar_links">
+	 			<li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>  		    
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
+	            <li><a href="#">고객센터</a></li>
+	        </ul>
+        </c:if>
+        
     </header>
     <main>
         <div class="member_menu">
             <p>마이 페이지</p>
             <ul>
-                <li><a href="member_Modify.do">회원정보 수정</a></li>
-                <li><a href="member_Point.do" style="font-weight: bold;">나의 마일리지</a></li>
-                <li><a href="member_QA.do">나의 문의내역</a></li>
+                <li><a href="<%=request.getContextPath()%>/MyPage/member_Modify.do?Mid=${Mid}">회원정보 수정</a></li>
+                <li><a href="<%=request.getContextPath()%>/MyPage/member_Point.do" style="font-weight: bold;">나의 마일리지</a></li>
+                <li><a href="<%=request.getContextPath()%>/MyPage/member_QA.do">나의 문의내역</a></li>
                 <li><a href="#">장바구니</a></li>
                 <li><a href="#">주문/배송조회</a></li>
                 <li><a href="#">취소/반품내역</a></li>

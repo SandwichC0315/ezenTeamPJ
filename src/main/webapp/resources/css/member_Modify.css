@@ -60,24 +60,25 @@
     .member_menu li:nth-child(4){font-size:15px;margin-top:30px;}
     .member_menu li:hover{text-decoration:underline; color:#666;}
 
-    main h4{width:800px; font-size: 30px; font-weight: bold; padding-bottom:7px; margin:40px 0; border-bottom: #333 3px solid;}
+    main .member_modify h4{width:800px; font-size: 30px; font-weight: bold; padding-bottom:7px; margin:40px 0; border-bottom: #333 3px solid;}
     main{height: 100%;}
+    
     .member_modify{margin: 250px auto 350px; width:800px; }
-    #member_info{width: 800px; height: 600px; position: relative;  margin-bottom:20px;}
-    #member_info table{width:800px; height:500px; } 
-    tr{height:70px; border-bottom:1px solid gainsboro;}
-    td:first-child{ background-color: burlywood;} 
-    td:last-child{ background-color: aliceblue;} 
-    td{padding-left:20px; vertical-align: middle;}
-    td input{height:20px;}
-    .bottom_btn{width:auto; text-align: center;}
-    #submit,#cancel{width:200px; height:40px; font-size: 20px; font-weight: bold; margin: 40px 5px; border: none; border-radius: 5px;}
-    #submit{background-color: rgb(230, 179, 114);}
-    #submit:hover{background-color: rgb(212, 155, 80); }
-    #submit:active{background-color: rgb(230, 179, 114); }
-    #cancel{background-color: rgb(194, 190, 190);}
-    #cancel:hover{background-color: rgb(179, 173, 173);}
-    #cancel:active{background-color: rgb(194, 190, 190);}
+    .member_modify #member_info{width: 800px; height: 600px; position: relative;  margin-bottom:20px;}
+    .member_modify #member_info table{width:800px; height:500px; } 
+    .member_modify tr{height:70px; border-bottom:1px solid gainsboro;}
+    .member_modify td:first-child{ background-color: burlywood;} 
+    .member_modify td:last-child{ background-color: aliceblue;} 
+    .member_modify td{padding-left:20px; vertical-align: middle;}
+    .member_modify td input{height:20px;}
+    .member_modify .bottom_btn{width:auto; text-align: center;}
+    .member_modify #submit,#cancel{width:200px; height:40px; font-size: 20px; font-weight: bold; margin: 40px 5px; border: none; border-radius: 5px;}
+    .member_modify #submit{background-color: rgb(230, 179, 114);}
+    .member_modify #submit:hover{background-color: rgb(212, 155, 80); }
+    .member_modify #submit:active{background-color: rgb(230, 179, 114); }
+    .member_modify #cancel{background-color: rgb(194, 190, 190);}
+    .member_modify #cancel:hover{background-color: rgb(179, 173, 173);}
+    .member_modify #cancel:active{background-color: rgb(194, 190, 190);}
     
     
     footer{width: 100vw; height: 300px; margin: 0 auto; background: rgb(93, 80, 82); }

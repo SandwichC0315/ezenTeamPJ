@@ -49,6 +49,7 @@ public class MemberController {
 			session.setAttribute("login", loginVO);
 			session.setAttribute("Mid", vo.getMid());
 		}
+		
 		return "redirect:/About/About_us.do";
 	}
 	

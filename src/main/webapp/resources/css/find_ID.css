@@ -61,8 +61,7 @@ header .sub{display:none; width:inherit;}
 
 /*메인*/
 main h4{width:420px; font-size: 30px; font-weight: bold; padding-bottom:7px; margin:40px 0; border-bottom: #333 3px solid;}
-main{height: 80vh;}
-.find{margin: 350px auto 250px; width:420px; }
+.find{margin: 350px auto 250px; width:420px; height: 80vh;}
 tr{height:45px;}
 input{height:30px; font-size:15px; padding-left:7px; }
 tr:nth-child(1) input{width:250px;}
