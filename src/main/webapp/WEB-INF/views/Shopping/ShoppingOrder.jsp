@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<% String Pimage = (String)request.getAttribute("Pimage"); %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,6 +20,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 	<header id="header" class="deactive">        
@@ -111,23 +118,23 @@
 	          <tr class="pd_n_bottom">
 	            <td style="width: 50% ">
 	              <div>
-	                <img src="${pageContext.request.contextPath}/resources/images/초코머핀.jpg" alt="">
-	                <p>1</p>
+	                 <img src= "${pageContext.request.contextPath}/resources/images/${param.Pimage}" >
+	                <p>${param.ProductName }</p>
 	              </div>
 	            </td>
-	            <td class="td1" style="width: 10%;">2</td>
-	            <td style="width: 10%;">3</td>
-	            <td style="width: 10%;">4</td>
-	            <td style="width: 10%;">5</td>
-	            <td style="width: 10%;">6</td>
+	            <td class="td1" style="width: 10%;">${param.delivery}</td>
+	            <td style="width: 10%;">${param.count_product}</td>
+	            <td style="width: 10%;">${param.totalSum }원</td>
+	            <td style="width: 10%;">${param.totalSum }원</td>
+	            <td style="width: 10%;">${param.delivery_fee }원</td>
 	          </tr>
 	        </table>
 	        <table class="pd_c">
 	          <tr class="pd_c_top">
-	            <td><p>주문금액:</p></td>
-	            <td><p>할인금액:</p></td>
+	            <td><p>주문금액:${param.totalSum }</p></td>
+	            <td><p>할인금액:0</p></td>
 	            <td rowspan="2">
-	              <p>결제예정금액:</p>
+	              <p>결제예정금액:${param.totalSum}+${param.delivery_fee }</p>
 	              
 	              <p>적립:</p>
 	            </td>
@@ -153,7 +160,7 @@
 	            </tr>
 	            <tr>
 	              <td>휴대폰번호</td>
-	              <td><input type="text" name="" id="" placeholder="휴대폰번호(숫자만)"></td>
+	              <td><input type="text" name="" id="" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');" placeholder="휴대폰번호(숫자만)"></td>
 	            </tr>
 	          </table>
 	        </div>
@@ -168,13 +175,17 @@
 	            </tr>
 	            <tr>
 	              <td>휴대폰번호</td>
-	              <td><input type="text" name="" id=""></td>
+	             <td><input type="text" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');" name="" id="" placeholder="휴대폰번호(숫자만)"></td>
 	            </tr> 
-	            <tr>
-	              <td>주소</td>
-	              <td>
-	                <input type="text" name="" id="">
-	                <a href="">우편번호찾기</a>
+	            <tr style="height:200px">
+	              <td style="">주소</td>
+	              <td class="address" style="display:block">
+	              	<input style="height:22%; margin-top:5px;" type="text" id="sample6_postcode" placeholder="우편번호">
+					<input style="height:18%"type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br/>
+					<input style="height:22%; margin: 10px 0;" type="text" id="sample6_extraAddress" placeholder="참고항목">
+					<input style="height:22%"type="text" id="sample6_address" placeholder="주소"><br>
+					<input style="height:22%; margin-bottom:5px;"type="text" id="sample6_detailAddress" placeholder="상세주소">
+					
 	              </td>
 	            </tr> 
 	            <tr>
@@ -189,11 +200,7 @@
 	            </tr> 
 	            <tr>
 	              <td>배송희망일</td>
-	              <td><input type="text" name="" id=""></td>
-	            </tr> 
-	            <tr>
-	              <td>배송시간</td>
-	              <td><input type="text" name="" id=""></td>
+	              <td><input type="text" name="" id="Date"></td>
 	            </tr> 
 	          </table>
 	        </div>
@@ -203,7 +210,7 @@
 	          <table class="pd_p">
 	            <tr>
 	              <td>총 결제금액</td>
-	              <td><p>20000원</p></td>
+	              <td><p>${param.totalSum}+${param.delivery_fee }원</p></td>
 	            </tr>
 	            <tr>
 	              <td>결제방법</td>
@@ -263,6 +270,21 @@
 	  <!--//container-->
 	</footer>
 	<script>
+	$(function() {
+	    $( "#Date" ).datepicker({
+	    	buttonImage: "/application/db/jquery/images/calendar.gif",
+	    	 buttonImageOnly: true,
+	    		changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+	    		  changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+	    		  closeText: '닫기',  // 닫기 버튼 패널
+	    		  dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+	    		  showAnim: "slide",
+	    		  yearRange: 'c-0:c+1', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
+	    });
+	});
+	
+	
+	
 	    //퀵메뉴
 	    $(document).ready(function(){
 	    var currentPosition = parseInt($(".quickmenu").css("top"));
@@ -271,6 +293,56 @@
 	      $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},10);
 	     });
 	    });
+	    
+	//주소
+	    function sample6_execDaumPostcode() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+
+	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraAddr !== ''){
+	                        extraAddr = ' (' + extraAddr + ')';
+	                    }
+	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                    document.getElementById("sample6_extraAddress").value = extraAddr;
+
+	                } else {
+	                    document.getElementById("sample6_extraAddress").value = '';
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('sample6_postcode').value = data.zonecode;
+	                document.getElementById("sample6_address").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("sample6_detailAddress").focus();
+	            }
+	        }).open();
+	    }
+
 	</script>
 </body>
 </html>

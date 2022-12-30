@@ -112,7 +112,7 @@ public class ProductController {
 		ProductVO vo = ProductService.selectOne(Pidx);
 		vo.setPidx(Pidx);//Pidx를 view페이지에 넘기기 위해서 담는 과정
 		model.addAttribute("vo",vo);
-		
+		model.addAttribute("login", login);
 		ProductReviewVO rvo = ProductService.AvgRscore(Pidx);//요기서 pidx를 담았어
 		model.addAttribute("rvo", rvo);//view에 뿌리기 위해서 담는거 아닌가?  12/19일
 		System.out.println("AvgRscore:"+ ProductService.AvgRscore(Pidx));
@@ -175,4 +175,24 @@ public class ProductController {
 	 System.out.println("result:"+result);
 		 return "redirect:ProductInfo.do?Pidx="+Pidx;
 	}
+//	@RequestMapping(value = "/ProductReviewDelete.do", method = RequestMethod.POST)//board 지움 공통으로 묶으려고
+//	public String ProductReviewDelete() {
+//		
+//	
+//		//		model.addAttribute("result",result);
+//
+//
+//		return "redirect:ProductInfo.do?Pidx="+Pidx;
+//	}
+	@RequestMapping(value = "/ProductReviewDelete.do", method = RequestMethod.POST)//board 지움 공통으로 묶으려고
+	public String ProductReviewDelete( Model model, int Pidx, int Ridx) {
+		
+		int result= ProductService.ProductReviewDelete(Ridx);
+
+		//		model.addAttribute("result",result);
+
+
+		return "redirect:ProductInfo.do?Pidx="+Pidx;
+	}
+	
 }

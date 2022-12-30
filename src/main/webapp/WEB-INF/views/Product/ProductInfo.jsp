@@ -8,6 +8,7 @@
 <%@ page import="com.timestay.vo.MemberVO" %>
 <%     List<ProductReviewVO> lrvo = (List<ProductReviewVO>)request.getAttribute("lrvo"); %>
 <%  ProductReviewVO rvo = (ProductReviewVO)request.getAttribute("rvo");//vo에 담아서 보냈으니까 bidx를 꺼내는 것이 아니라 vo를 꺼내야지	%> 
+<%  MemberVO login = (MemberVO)request.getAttribute("login");//vo에 담아서 보냈으니까 bidx를 꺼내는 것이 아니라 vo를 꺼내야지	%>
 <%  ProductVO vo = (ProductVO)request.getAttribute("vo");//vo에 담아서 보냈으니까 bidx를 꺼내는 것이 아니라 vo를 꺼내야지	%> 
 <%     List<MemberVO> mvo = (List<MemberVO>)request.getAttribute("mvo"); %>
 <!DOCTYPE html>
@@ -96,8 +97,10 @@
 	    <div class="section">
 	      <div class="section1">
 	        <div class="product_info_container">
+  			 <form style="display: flex; width: 90%; height: 100%; align-items: center;" action= "<%=request.getContextPath() %>/Shopping/ShoppingOrder.do" method="get">  
 	          <div class="product_img">
 	            <img src="${pageContext.request.contextPath}/resources/images/<%=vo.getPimage()%>" >
+	            <input type="text" name="Pimage" value="<%=vo.getPimage()%>">
 	          </div>
 	          <div class="product_info">
 	            <div class="product_info1">
@@ -107,24 +110,27 @@
 	                <li><p>유통기한:</p>  구매일로부터 몇일</li>
 	                <li><p>보관방법:</p> 냉장or 냉동</li>
 	                <li><p>배송비:</p>  3000원</li>
-	                <li><p>수령방법:</p> <input type="radio" name="delivery" value="delivery" checked>택배 &nbsp; 
-	                  <input type="radio" name="receive" value="package">방문포장 &nbsp; 
-	                  <input type="radio" name="receive" value="reservation">예약</li>
+	                <input type="text" name="delivery_fee" value=3000>
+	                <li><p>수령방법:</p> <input type="radio" name="delivery" value="택배" checked>택배 &nbsp; 
+	                  <input type="radio" name="delivery" value="방문포장">방문포장 &nbsp; 
+	                  <input type="radio" name="delivery" value="예약">예약</li>
 	                </ul>
 	            </div>
 	            <div class="selected_optionbox">
 	              <div class="selected_option1">
 	                <span>상품명:<%=vo.getPtitle() %></span>
+	                <input type="text" name="ProductName" value="<%=vo.getPtitle()%>">
 	                <div class="spinnerBox">
 	                  <!--<button type="button" id="btn_minus" value="-" onclick=minuss(this)>-</button>-->
 	                  <div class="selected_option2" >
-	                    <input id="count_product" type="number" value=1 min="1">
+	                    <input id="count_product" name="count_product" type="number" value=1 min=1>
 	                  </div>
-	                  <!--<button type="button" id="btn_plus" value="+" onclick=pluss(this) >+</button>-->
+	                  <!--<button type="button" id="btn_plus" value="+" onclick=plus(this) >+</button>-->
 	                </div>  
 	              </div>
 	            </div>
-	            <div class="total1" ><p class="totalSum">총상품금액:<%=vo.getPprice() %></p></div>
+	            <div class="total1" >총상품금액:<p class="totalSum"><%=vo.getPprice() %></p></div>
+	            <input type="text" name="totalSum" value="<%=vo.getPprice() %>">
 	            <div class="product_info2">
 	            <c:choose>
 	              <c:when test="${login==null }">	
@@ -134,13 +140,15 @@
 	              </c:when>
 	              <c:otherwise>
 	              <a><div class="heart" onclick="changeFn()" ><img src="${pageContext.request.contextPath}/resources/images/heart.png" alt="찜하기"> 찜하기</div></a>
-	              <a href=""><div><img src="${pageContext.request.contextPath}/resources/images/shopping-cart.png" alt="장바구니"> 장바구니</div></a>
-	              <a href="${pageContext.request.contextPath}/Shopping/Order.do"><div><img src="${pageContext.request.contextPath}/resources/images/credit-card.png" alt="구매하기"> 구매하기</div></a>	              
+                  <button type="button"  onclick="location.href='${pageContext.request.contextPath}/MyPage/MyPageShoppingCart.do'">장바구니</button>
+	              <button onclick="location.href='${pageContext.request.contextPath}/Shopping/ShoppingOrder.do'">구매하기</button>
+	              <!--  a href="${pageContext.request.contextPath}/Shopping/Order.do"><div><img src="${pageContext.request.contextPath}/resources/images/credit-card.png" alt="구매하기"> 구매하기</div></a>-->	              
 	              </c:otherwise>
 	            </c:choose>  
 	            </div>          
 	          </div>
-	        </div>
+	      	</form>  
+           </div>
 	      </div>
 	      <div class="section2">
 	          <div class="tabs">
@@ -242,28 +250,39 @@
 	                  <th style="width: 15%;">작성자</th>
 	                  <th style="width: 15%;">작성일</th>
 	                </tr>
-   			        <%for(ProductReviewVO VO : lrvo){ %>
+   			       <!--  표현식을 jstl에서 인식을 하지 못하므로 표현식을 jstl 반복문으로 변경해주면 된다. -->
+        		   <c:forEach var='lrvo' items='${lrvo}'>
+   			        
 	                <tr>
-	                  <td><%=VO.getRidx()%></td>
+	                  <td>${lrvo.getRidx()}</td>
 	                  
-	                  <!--<c:if test="세션에서 받아온 Midx == 리뷰의 Midx">
 	         
-	                  </c:if>-->
-                      <td><%=VO.getRtitle() %>
-                      <c:if test="${login != null }">	 
-                      <form>
-                      <input type="hidden" value="<%=VO.getPidx()%>">
-                      <input type="hidden" value="<%=VO.getRidx()%>">
-                      <button type="button" class="btn-open-popup2" data-value="<%=VO.getRidx()%>" data-score="<%=VO.getRscore()%>">리뷰수정</button>
-                     
-                      </form>
-                       </c:if>
+                      <td>${lrvo.getRtitle()}
+                      	
+	                      <c:if test="${login != null }">	 
+		                      <form>
+		                      <input type="hidden" value="${lrvo.getPidx()}">
+		                      <input type="hidden" value="${lrvo.getRidx()}">
+			                  
+			                  <c:if test="${login.getMidx() eq lrvo.getMidx()}">
+		                      <button type="button" class="btn-open-popup2" data-value="${lrvo.getRidx()}" data-score="${lrvo.getRscore()}">리뷰수정</button>
+
+		                      <!-- 부모에 form태그 있어서 type지정 안하면 submit이 기본 -->
+			                  </c:if>
+		                      </form>
+                        	  <form name="delfrm" action="<%=request.getContextPath() %>/Product/ProductReviewDelete.do" method="post">
+							  <input type="hidden" name="Ridx" value="${lrvo.getRidx()}">
+							  <input type="hidden" name="Pidx" value="${lrvo.getPidx()}">
+	                      	  <button>리뷰삭제</button>
+							  </form>
+	                      </c:if>
+						
                       </td>
-	                  <td><%=VO.getRscore() %></td>
-	                  <td><%=VO.getMidmasking() %></td>
-	                  <td><%=VO.getRwdate() %></td>
+	                  <td>${lrvo.getRscore()} </td>
+	                  <td>${lrvo.getMidmasking()}</td>
+	                  <td>${lrvo.getRwdate()}</td>
 	                </tr>
-		          		<%} %>		       
+	          	  </c:forEach>			       
 	              </table>
 	            </div>
 	            <div id="tabpanel-3" role="tabpanel" tabindex="0" aria-labelledby="tab-3" class="is-hidden">
@@ -564,6 +583,25 @@
 		                    $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},10);
 		                   });
 		                  });
+	         
+		       //제품 가격변경           
+               $("#count_product").on ("propertychange change keyup paste",function(){     
+			        var ProductCount = $('#count_product').val();
+			        var ProductPrice = ${vo.getPprice()}* ProductCount;
+			        $(".totalSum").html(ProductPrice);
+			        $("input[name=totalSum]").val(ProductPrice);
+			        $('#count_product').val(ProductCount);
+		         })
+		         
+		         
+		       	 $("input[name=delivery]").change(function(){
+		       		var delivery =$("input[name=delivery]:checked").val();	//이거를 맨위에 설정하면 화면이 로드된 시점에서 checked된 값을 가져온다는 것 이다..!
+		        	 alert(delivery);
+			         if(delivery != "택배"){
+			        	 $("input[name=delivery_fee]").val("0");       
+			         }
+	      	 	});
+		         //  ?  }  가 빠진건가   12-29 일 내일확인해보기
     </script>
 </body>
 </html>

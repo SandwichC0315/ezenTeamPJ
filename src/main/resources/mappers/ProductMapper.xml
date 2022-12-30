@@ -12,10 +12,10 @@
                 as midmasking
 			From TB_Review a , tb_member b, tb_product z
 			where z.Pidx=a.pidx and a.midx=b.midx
-            and z.pidx=#{pidx}  ORDER BY RIDX ASC
+            and z.pidx=#{pidx} and rdelyn='N'  ORDER BY RIDX ASC
 	</select>
 	<select id= "AvgRscore" resultType="ProductReviewVO" parameterType="ProductReviewVO">
-	   select round(avg(Rscore),2) as AvgRscore from tb_review where Pidx=#{Pidx} and  Rdelyn ='N'
+	   select nvl(round(avg(Rscore),2),0) as AvgRscore from tb_review where Pidx=#{Pidx} and  Rdelyn ='N'
 	</select>
 	<select id="ProductList1" resultType="ProductVO">
 		select *
@@ -110,7 +110,13 @@
 		SELECT MAX(Ridx) from tb_review 
 	</selectKey>
 	</insert>	
-
+	<update id="ProductReviewDelete"  parameterType="int">
+		update tb_Review 
+			
+			SET rdelyn='Y'
+			
+			WHERE Ridx = #{Ridx}
+	</update>
 </mapper>
 
 

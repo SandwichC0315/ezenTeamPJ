@@ -53,4 +53,8 @@ public class ProductReviewDAO {
 		//mybatis를 사용하여 TB_BoardNotice 데이터 목록 조회하여 반환
 		return sqlSession.selectOne("com.timestay.mapper.ProductMapper.SelectRidx",Ridx);
 	}
+	public int ProductReviewDelete(int Ridx) {
+		
+		return sqlSession.update("com.timestay.mapper.ProductMapper.ProductReviewDelete", Ridx);
+	}
 }
