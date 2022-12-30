@@ -56,8 +56,8 @@
                     <li><a href="#">EVENT</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="#">진행중 이벤트</a></li>
-                                <li><a href="#">종료된 이벤트</a></li>
+                               	<li><a href="<%=request.getContextPath()%>/Event/EventNowEvent.do">진행중 이벤트</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Event/EventEndEvent.do">종료된 이벤트</a></li>
                                 <li><a href="#"></a></li>
                             </ul>
                         </div>
@@ -88,7 +88,7 @@
 	        <ul class="navbar_links" style="width:330px;">
 	            <li><a href="<%=request.getContextPath()%>/Member/logout.do" style="padding:0 4px">로그아웃</a></li>
 	            <li><a href="<%=request.getContextPath()%>/MyPage/member_Modify.do?Mid=${Mid}" style="padding:0 4px">마이페이지</a></li>
-	            <li><a href="#" style="padding:0 4px">장바구니</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do" style="padding:0 4px">장바구니</a></li>
 	            <li><a href="#" style="padding:0 4px">고객센터</a></li>
 	        </ul>
   		</c:if>  
@@ -148,7 +148,7 @@
 			</ul>
 			
 	<c:if test="${Mid.equals('admin')}"> <!-- admin만 보이게 -->
-   		<button id="write" onclick="location.href='InsertFaq.do'">등록</button>
+   		<button id="write" onclick="location.href='InsertFaq.do'">등록${Mgrade}</button>
    	</c:if>
     	<div>
 	    	<input type="text" id="searchbar">

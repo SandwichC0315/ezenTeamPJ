@@ -82,8 +82,8 @@
                     <li><a href="#">EVENT</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="#">진행중 이벤트</a></li>
-                                <li><a href="#">종료된 이벤트</a></li>
+                               	<li><a href="<%=request.getContextPath()%>/Event/EventNowEvent.do">진행중 이벤트</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Event/EventEndEvent.do">종료된 이벤트</a></li>
                                 <li><a href="#"></a></li>
                             </ul>
                         </div>
@@ -105,7 +105,7 @@
 
         <ul class="navbar_links">
             <li><a href="<%=request.getContextPath()%>/Member/Login.do">로그인</a></li>
-            <li><a href="#">장바구니</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do" style="padding:0 4px">장바구니</a></li>
             <li><a href="#">고객센터</a></li>
         </ul>
     </header>

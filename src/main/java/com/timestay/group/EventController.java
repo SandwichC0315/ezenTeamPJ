@@ -19,27 +19,53 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class EventController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
 
-	@RequestMapping(value = "/About_us.do", method = RequestMethod.GET)
-	public String About_us(Locale locale, Model model) {
-		
-		
-		return "About/About_us";
+	@RequestMapping(value = "/EventNowEvent.do", method = RequestMethod.GET)
+	public String EventNowEvent(Locale locale, Model model) {
+
+		return "Event/EventNowEvent";
 	}
-	
-	@RequestMapping(value = "/Location.do", method = RequestMethod.GET)
-	public String Location(Locale locale, Model model) {
-		
-		
-		return "About/Location";
+
+	@RequestMapping(value = "/EventNowDetalis1.do", method = RequestMethod.GET)
+	public String EventNowDetalis1(Locale locale, Model model) {
+
+		return "Event/EventNowDetalis1";
 	}
-	
-	@RequestMapping(value = "/Gallery.do", method = RequestMethod.GET)
-	public String Gallery(Locale locale, Model model) {
-		
-		
-		return "About/Gallery";
+
+	@RequestMapping(value = "/EventNowDetalis2.do", method = RequestMethod.GET)
+	public String EventNowDetalis2(Locale locale, Model model) {
+
+		return "Event/EventNowDetalis2";
+	}
+
+	@RequestMapping(value = "/EventNowDetalis3.do", method = RequestMethod.GET)
+	public String EventNowDetalis3(Locale locale, Model model) {
+
+		return "Event/EventNowDetalis3";
+	}
+
+	@RequestMapping(value = "/EventEndEvent.do", method = RequestMethod.GET)
+	public String EventEndEvent(Locale locale, Model model) {
+
+		return "Event/EventEndEvent";
+	}
+
+	@RequestMapping(value = "/EventEndDetalis1.do", method = RequestMethod.GET)
+	public String EventEndDetalis1(Locale locale, Model model) {
+
+		return "Event/EventEndDetalis1";
+	}
+
+	@RequestMapping(value = "/EventEndDetalis2.do", method = RequestMethod.GET)
+	public String EventEndDetalis2(Locale locale, Model model) {
+
+		return "Event/EventEndDetalis2";
+	}
+
+	@RequestMapping(value = "/EventEndDetalis3.do", method = RequestMethod.GET)
+	public String EventEndDetalis3(Locale locale, Model model) {
+
+		return "Event/EventEndDetalis3";
 	}
 	
 }
