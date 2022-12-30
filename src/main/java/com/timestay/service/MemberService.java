@@ -8,7 +8,7 @@ import com.timestay.vo.MemberVO;
 public interface MemberService {
 	MemberVO findMemberByIdPass(MemberVO vo);
 
-	MemberVO selectOneByMidx(MemberVO vo);
+	MemberVO selectOneByMid(MemberVO vo);
 	
 	int modify(MemberVO vo);
 }

@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberVO selectOneByMidx(MemberVO vo) {
+	public MemberVO selectOneByMid(MemberVO vo) {
 		
 		return MemberDAO.selectOne(vo);
 	}

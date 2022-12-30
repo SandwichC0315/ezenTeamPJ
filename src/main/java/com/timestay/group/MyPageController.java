@@ -34,7 +34,7 @@ public class MyPageController {
 	@RequestMapping(value = "/member_Modify.do", method = RequestMethod.GET)
 	public String member_Modify(MemberVO vo,Model model) {
 		
-		MemberVO mv = MemberService.selectOneByMidx(vo);
+		MemberVO mv = MemberService.selectOneByMid(vo);
 
 		model.addAttribute("mv", mv);
 		model.addAttribute("Mid", mv.getMid());
