@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@	page import="java.util.*" %>
+<%@	page import="java.net.*" %>
+<%@ page import="com.timestay.vo.ProductVO" %>
+<%@ page import="com.timestay.vo.ProductReviewVO" %>
+<%@ page import="com.timestay.vo.MemberVO" %>
+<%@ page import="com.timestay.vo.ShoppingCartVO" %>
+<%  List<ShoppingCartVO> Svo = (List<ShoppingCartVO>)request.getAttribute("Svo"); %>
+<%  List<ProductVO> vo = (List<ProductVO>)request.getAttribute("vo"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,35 +134,39 @@
                     <strong>장바구니</strong>
                 </div>
                 <div class="cart_box">
-                    <div class="table_list">
-                        <div class="titlebox">
-                            <div class="box_cell box_1">선택</div>
-                            <div class="box_cell box_2"></div>
-                            <div class="box_cell box_3 txt_left">상품정보</div>
-                            <div class="box_cell box_4 txt_right">적립금</div>
-                            <div class="box_cell box_5">판매가</div>
-                            <div class="box_cell box_6">구매수량</div>
-                            <div class="box_cell box_7">합계</div>
-                        </div>
+                      <table class="table_list">
+                        <tr class="titlebox">
 
-                        <!--list-->
-                        <ul>
-                            <li class="nolist">
-                                <p>장바구니가 비었습니다</p>
-                            </li>
-                        </ul>
-
-                        <!--//list-->
-                        <!--total-->
-                        <div class="totalbox">
-                            총 주문 금액
-                            <strong>0원</strong>
+                            <td class="box_cell box_1">선택</td>
+                            <td class="box_cell box_2"></td>
+                            <td class="box_cell box_3 txt_left">상품정보</td>
+                            <td class="box_cell box_4 txt_right">적립금</td>
+                            <td class="box_cell box_5">판매가</td>
+                            <td class="box_cell box_6">수량</td>
+                            <td class="box_cell box_7">합계</td>
+                        </tr>
+					    <c:forEach var='Svo' items='${Svo}'>
+                            <tr class="nolist">
+                                <td></td>
+					            <td style="width: 50% ">
+					              <div>
+					                 <img src= "${pageContext.request.contextPath}/resources/images/${Svo.getPimage()}" >
+					                <p>${Svo.getPcontent()}</p>
+					              </div>
+					            </td>
+                                <td></td>
+                                <td>${Svo.getPprice()}</td>
+                                <td>${Svo.getSvol()}</td>
+                                <td>${Svo.getTotalSum()}</td>
+                            </tr>
+                    	 </c:forEach>
+						   <strong>0원</strong>
                             <span class="plus">+</span>
-                            배송비
+
                             <strong>0원</strong>
-                        </div>
+ 
                         <!--//total-->
-                    </div>
+                    </table>
                 </div>
 
                 <div class="naver_paybox"></div>
@@ -198,4 +211,7 @@
         </div>
         <!--//container-->
     </footer>
+    <script>
+
+    </script>
 </html>
