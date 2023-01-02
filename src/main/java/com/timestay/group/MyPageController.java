@@ -2,6 +2,7 @@ package com.timestay.group;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,12 +11,18 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.timestay.vo.MemberVO;
+import com.timestay.vo.ProductVO;
+import com.timestay.vo.ShoppingCartVO;
+import com.timestay.service.MyPageService;
+
 
 /**
  * Handles requests for the application home page.
@@ -23,6 +30,9 @@ import com.timestay.vo.MemberVO;
 @RequestMapping(value="/MyPage")
 @Controller
 public class MyPageController {
+	
+	@Autowired
+	MyPageService MyPageService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -53,24 +63,33 @@ public class MyPageController {
 
 		return "MyPage/MyPageOrderView";
 	}
-
-
-
 	@RequestMapping(value = "/MyPageShoppingCart.do", method = RequestMethod.GET)
-	public String Order(Locale locale, Model model,String ProductName,HttpServletRequest req,HttpServletResponse response,
-			int totalSum, int count_product, String Pimage, String delivery) {
-		//파라메터로 받은것은 구지 모델로 안담아도 된다. 파라메터를 가지고 그와 같은 번호의 midx를 뽑는다 이럴 때만 담는거
-//		System.out.println("delivery_fee:"+delivery_fee);
-		System.out.println("Pimage:"+Pimage);
-		System.out.println("ProductName:"+ProductName);
-		System.out.println("totalSum:"+totalSum);
-		System.out.println("delivery:"+delivery);
-		 HttpSession session = req.getSession();
-	    MemberVO login = (MemberVO)session.getAttribute("login");
+	public String MyPageShoppingCart(Locale locale, Model model,HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		MemberVO login = (MemberVO)session.getAttribute("login");
+//		ShoppingCartVO Svo = new ShoppingCartVO();  
+		int Midx=login.getMidx();
+		List<ShoppingCartVO> Svo =MyPageService.ShoppingList(Midx);
+//		ProductVO vo =  new ProductVO();
+//		model.addAttribute("vo", vo);		
+		model.addAttribute("Svo", Svo);
+		return "MyPage/MyPageShoppingCart";
+	}
 
-		
 
-	    return "Mypage/MyPageShoppingCart";
+	@ResponseBody//ajax 사용시 리턴값을 응답데이터로 만드는 어노테이션
+	@RequestMapping(value="/ShoppingCart.do")
+	public int ShoppingCart(HttpServletRequest req,int Pidx, int Svol) {
+		//insert 구문 작성
+		HttpSession session = req.getSession();
+		MemberVO login = (MemberVO)session.getAttribute("login");
+		ShoppingCartVO Svo = new ShoppingCartVO();  
+		Svo.setMidx(login.getMidx());
+		Svo.setPidx(Pidx);
+		Svo.setSvol(Svol);
+		System.out.println("Svo:"+Svo.toString());
+		int result=MyPageService.ShoppingCart(Svo);//+ Midx 넘겨야함 vo에 다 담아서 넘기는건가
+		return result; //0,1인가?
 	}
 }	
 

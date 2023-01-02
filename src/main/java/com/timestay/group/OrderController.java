@@ -22,8 +22,9 @@ public class OrderController {
 	
 
 	@RequestMapping(value = "/Order.do", method = RequestMethod.GET)
-	public String Dessert(Locale locale, Model model) {
-
+	public String Dessert(Locale locale, Model model,String delivery_fee,String ProductName, String totalSum, int count_product, String Pimage) {
+		System.out.println("Pimage:"+Pimage);
+		model.addAttribute("Pimage", Pimage);
 		 return "Order/Order";
 	}
 	

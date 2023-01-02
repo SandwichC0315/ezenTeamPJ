@@ -1,0 +1,70 @@
+package com.timestay.vo;
+
+public class ShoppingCartVO {
+	
+	private int Sidx;
+	private int Midx;
+	private int Pidx;
+	private int Svol;
+	private int TotalSum;
+	private String Pcontent;
+	private String Pprice;
+	private String Pimage;
+	
+	public String getPimage() {
+		return Pimage;
+	}
+	public void setPimage(String pimage) {
+		Pimage = pimage;
+	}
+	public String getPprice() {
+		return Pprice;
+	}
+	public void setPprice(String pprice) {
+		Pprice = pprice;
+	}
+	public String getPcontent() {
+		return Pcontent;
+	}
+	public void setPcontent(String pcontent) {
+		Pcontent = pcontent;
+	}
+	public int getTotalSum() {
+		return TotalSum;
+	}
+	public void setTotalSum(int totalSum) {
+		TotalSum = totalSum;
+	}
+	public int getSidx() {
+		return Sidx;
+	}
+	public void setSidx(int sidx) {
+		Sidx = sidx;
+	}
+	public int getMidx() {
+		return Midx;
+	}
+	public void setMidx(int midx) {
+		Midx = midx;
+	}
+	public int getPidx() {
+		return Pidx;
+	}
+	public void setPidx(int pidx) {
+		Pidx = pidx;
+	}
+	public int getSvol() {
+		return Svol;
+	}
+	public void setSvol(int svol) {
+		Svol = svol;
+	}
+	@Override
+	public String toString() {
+		return "ShoppingCartVO [Sidx=" + Sidx + ", Midx=" + Midx + ", Pidx=" + Pidx + ", Svol=" + Svol + ", TotalSum="
+				+ TotalSum + "]";
+	}
+
+
+	
+}
