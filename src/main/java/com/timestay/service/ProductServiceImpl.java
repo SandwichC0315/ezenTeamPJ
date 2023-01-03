@@ -108,6 +108,11 @@ public class ProductServiceImpl implements ProductService{
 		return ProductReviewDAO.SelectRidx(Ridx);
 	}
 
+	@Override
+	public int ProductReviewDelete(int Ridx) {
+		// TODO Auto-generated method stub
+		return ProductReviewDAO.ProductReviewDelete(Ridx);
+	}
 
 
 

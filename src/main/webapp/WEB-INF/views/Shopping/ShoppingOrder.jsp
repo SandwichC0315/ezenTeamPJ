@@ -123,7 +123,7 @@
 	              </div>
 	            </td>
 	            <td class="td1" style="width: 10%;">${param.delivery}</td>
-	            <td style="width: 10%;">${param.count_product}</td>
+	            <td style="width: 10%;">${param.Svol}</td>
 	            <td style="width: 10%;">${param.totalSum }원</td>
 	            <td style="width: 10%;">${param.totalSum }원</td>
 	            <td style="width: 10%;">${param.delivery_fee }원</td>

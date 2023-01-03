@@ -19,7 +19,49 @@
 		 WHERE Mid = #{Mid}
 		   AND Mpwd = #{Mpwd} 
 	</select>
+	
+	
+	<select id="findMemberByMidx" resultType="MemberVO" parameterType="int" >
+		select Mid
+			,	Mpwd 
+			,	Mname
+			,	Mphone
+			,	Madd
+			,	Mgrade
+			, 	Menter
+			,	Mmdate
+			,	Mbreakdate
+			,	Mbreakyn
+			from TB_Member
+			where Midx = #{Midx}
+	</select>
 
+	<select id="selectOne" resultType="MemberVO">
+		SELECT MIDX  
+			 , Mid
+		     , Mpwd
+		     , Mname
+		     , Mphone
+		     , Madd
+		     , Mgrade
+		     , Menter
+		     , Mmdate
+		     , Mbreakdate
+		     , Mbreakyn
+		  FROM TB_MEMBER
+		 WHERE Mid = #{Mid}
+	</select>
+	
+	<update id="modify" parameterType="MemberVO"> 
+		UPDATE TB_MEMBER
+		   SET Mid = #{Mid}
+		   	 , Mpwd = #{NewMpwd}
+		   	 , Mname = #{Mname}
+		   	 , Mphone = #{Mphone}
+		   	 , Madd = #{Madd}
+		   	 , Mmdate = null
+		 WHERE Mid = #{Mid}	
+	</update>
 </mapper>
 
 

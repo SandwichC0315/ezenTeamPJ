@@ -19,8 +19,8 @@ transition-duration: 0.5s; transition-timing-function: ease;
 .navbar_menu li {padding: 8px 12px;}
 
 /*메뉴바 상단 로그인 메뉴*/
-    .navbar_links {list-style: none; padding-left: 0; width:380px; float:right; position:relative; margin: 16px 10px 0 0;}
-    .navbar_links{display:flex; justify-content: flex-end;}.navbar_links li{display: inline-block; position:relative;}
+.navbar_links {list-style: none; padding-left: 0; width:250px; float:right; position:relative; margin:16px 0;}
+.navbar_links li{display: inline-block; position:relative;}
 .navbar_links li a{color: #fff;  padding:0 9px; display: inline-block;} 
 .navbar_links li::after{content:"|"; font-size:10px;display:inline-block; width:2px; height:19px; color:#888; font-size:10px; vertical-align:middle;} 
 .navbar_links li:last-child::after{display:none;}

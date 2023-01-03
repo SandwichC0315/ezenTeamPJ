@@ -83,7 +83,7 @@
      		<c:if test ="${login!=null}">
             <li><a href="<%=request.getContextPath()%>/Member/logout.do">로그아웃</a></li>
             <li><a href="#">마이페이지</a></li>
-            <li><a href="#">장바구니</a></li>
+			<li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
             <li><a href="#">고객센터</a></li>
   		    </c:if>  
   		    <c:if test= "${login==null}">
@@ -100,7 +100,8 @@
   			 <form style="display: flex; width: 90%; height: 100%; align-items: center;" action= "<%=request.getContextPath() %>/Shopping/ShoppingOrder.do" method="get">  
 	          <div class="product_img">
 	            <img src="${pageContext.request.contextPath}/resources/images/<%=vo.getPimage()%>" >
-	            <input type="text" name="Pimage" value="<%=vo.getPimage()%>">
+	            <input type="hidden" name="Pimage" value="<%=vo.getPimage()%>">
+	             <input type="hidden" name="Pidx" value="<%=vo.getPidx()%>">
 	          </div>
 	          <div class="product_info">
 	            <div class="product_info1">
@@ -110,7 +111,7 @@
 	                <li><p>유통기한:</p>  구매일로부터 몇일</li>
 	                <li><p>보관방법:</p> 냉장or 냉동</li>
 	                <li><p>배송비:</p>  3000원</li>
-	                <input type="text" name="delivery_fee" value=3000>
+	                <input type="hidden" name="delivery_fee" value=3000>
 	                <li><p>수령방법:</p> <input type="radio" name="delivery" value="택배" checked>택배 &nbsp; 
 	                  <input type="radio" name="delivery" value="방문포장">방문포장 &nbsp; 
 	                  <input type="radio" name="delivery" value="예약">예약</li>
@@ -119,18 +120,18 @@
 	            <div class="selected_optionbox">
 	              <div class="selected_option1">
 	                <span>상품명:<%=vo.getPtitle() %></span>
-	                <input type="text" name="ProductName" value="<%=vo.getPtitle()%>">
+	                <input type="hidden" name="ProductName" value="<%=vo.getPtitle()%>">
 	                <div class="spinnerBox">
 	                  <!--<button type="button" id="btn_minus" value="-" onclick=minuss(this)>-</button>-->
 	                  <div class="selected_option2" >
-	                    <input id="count_product" name="count_product" type="number" value=1 min=1>
+	                    <input id="Svol" name="Svol" type="number" value=1 min=1>
 	                  </div>
 	                  <!--<button type="button" id="btn_plus" value="+" onclick=plus(this) >+</button>-->
 	                </div>  
 	              </div>
 	            </div>
 	            <div class="total1" >총상품금액:<p class="totalSum"><%=vo.getPprice() %></p></div>
-	            <input type="text" name="totalSum" value="<%=vo.getPprice() %>">
+	            <input type="hidden" name="totalSum" value="<%=vo.getPprice() %>">
 	            <div class="product_info2">
 	            <c:choose>
 	              <c:when test="${login==null }">	
@@ -140,7 +141,7 @@
 	              </c:when>
 	              <c:otherwise>
 	              <a><div class="heart" onclick="changeFn()" ><img src="${pageContext.request.contextPath}/resources/images/heart.png" alt="찜하기"> 찜하기</div></a>
-                  <button type="button"  onclick="location.href='${pageContext.request.contextPath}/MyPage/MyPageShoppingCart.do'">장바구니</button>
+                  <button type=button onclick="ShoppingCart()">장바구니</button>
 	              <button onclick="location.href='${pageContext.request.contextPath}/Shopping/ShoppingOrder.do'">구매하기</button>
 	              <!--  a href="${pageContext.request.contextPath}/Shopping/Order.do"><div><img src="${pageContext.request.contextPath}/resources/images/credit-card.png" alt="구매하기"> 구매하기</div></a>-->	              
 	              </c:otherwise>
@@ -506,7 +507,7 @@
 	                  		
 		                  })
 	                  			
-                 	$('#p1').on('click',function(){
+                 		$('#p1').on('click',function(){
 						$('#ModifyRscore').val("1")})	//왜 계속 1만나오지?
 	                 	$('#p2').on('click',function(){
 							$('#ModifyRscore').val("2")})
@@ -516,7 +517,7 @@
 							$('#ModifyRscore').val("4")})
                			$('#p5').on('click',function(){
 							$('#ModifyRscore').val("5")})							
-//checked값 바뀌면 text를 바꿔야하나?
+							//checked값 바뀌면 text를 바꿔야하나?
 		                    $('.modal_close_btn2').on("click",function(){
 		                      $('.modal2').removeClass('show')
 		                      $('body').css('overflow','auto')
@@ -584,24 +585,47 @@
 		                   });
 		                  });
 	         
-		       //제품 가격변경           
-               $("#count_product").on ("propertychange change keyup paste",function(){     
-			        var ProductCount = $('#count_product').val();
-			        var ProductPrice = ${vo.getPprice()}* ProductCount;
-			        $(".totalSum").html(ProductPrice);
-			        $("input[name=totalSum]").val(ProductPrice);
-			        $('#count_product').val(ProductCount);
-		         })
-		         
-		         
-		       	 $("input[name=delivery]").change(function(){
-		       		var delivery =$("input[name=delivery]:checked").val();	//이거를 맨위에 설정하면 화면이 로드된 시점에서 checked된 값을 가져온다는 것 이다..!
-		        	 alert(delivery);
-			         if(delivery != "택배"){
-			        	 $("input[name=delivery_fee]").val("0");       
-			         }
-	      	 	});
-		         //  ?  }  가 빠진건가   12-29 일 내일확인해보기
+				       //제품 가격변경           
+	              		 $("input[name=Svol]").on ("propertychange change keyup paste",function()
+		          		   {     
+					        var Svol = $("input[name=Svol]").val();
+					        var ProductPrice = ${vo.getPprice()}*(Svol);
+					        
+					        $(".totalSum").html(ProductPrice);
+					        $("input[name=totalSum]").val(ProductPrice);
+					        $('input[name=Svol]').val(Svol);
+				         	})
+				         
+				         
+				         //
+				       	 $("input[name=delivery]").change(function(){
+				       		var delivery =$("input[name=delivery]:checked").val();	//이거를 맨위에 설정하면 화면이 로드된 시점에서 checked된 값을 가져온다는 것 이다..!
+				        	 alert(delivery);
+					         if(delivery != "택배"){
+					        	 $("input[name=delivery_fee]").val("0");       
+					         }
+			      	 	});
+				       //
+		           		function ShoppingCart(){
+		        		var ShoppingCart ={ 
+		        		       		Pidx:  $("input[name=Pidx]").val() ,//태그에 bidx가 있는게 아니잖아 아이디가 bidx인곳을 찾는게 맞지
+			        	            Svol:  $("#Svol").val()
+		        				  }
+		        		if(ShoppingCart != ""){
+		        			$.ajax({
+		        				url:"${pageContext.request.contextPath}/MyPage/ShoppingCart.do",
+		        				type:"get",
+		        				data:ShoppingCart,//데이터에 옵션을 넣어야함
+		        				success:function(data){
+		        					alert("장바구니에 상품이 담겼습니다.");
+		        					console.log(data)
+		        				},
+		        				error:function(){
+		        					alert("상품이 담기지 않았습니다.");
+		        				}
+		        			});
+		        		}}
+			        	
     </script>
 </body>
 </html>

@@ -2,15 +2,10 @@ package com.timestay.vo;
 
 public class MemberVO {
 	
-	@Override
-	public String toString() {
-		return "MemberVO [Midx=" + Midx + ", Mid=" + Mid + ", Mpwd=" + Mpwd + ", Mname=" + Mname + ", Mphone=" + Mphone
-				+ ", Madd=" + Madd + ", Mgrade=" + Mgrade + ", Menter=" + Menter + ", Mmdate=" + Mmdate
-				+ ", Mbreakdate=" + Mbreakdate + ", Mbreakyn=" + Mbreakyn + "]";
-	}
 	private int Midx;
 	private String Mid;
 	private String Mpwd;
+	private String NewMpwd;
 	private String Mname;
 	private String Mphone;
 	private String Madd;
@@ -21,6 +16,12 @@ public class MemberVO {
 	private String Mbreakyn;
 	
 	
+	public String getNewMpwd() {
+		return NewMpwd;
+	}
+	public void setNewMpwd(String newMpwd) {
+		NewMpwd = newMpwd;
+	}
 	public int getMidx() {
 		return Midx;
 	}

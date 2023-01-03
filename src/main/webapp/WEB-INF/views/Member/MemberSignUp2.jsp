@@ -53,23 +53,23 @@
 	</script>
 </head>
 <body>
-	<header id="header" class="deactive">        
+	<header id="header" class="deactive">
         <nav class="navbar">
             <div class="navbar_menu">
-                <div id="title"> 
-                    <h4><a href="<%= request.getContextPath() %>/">TIME STAY</a></h4>
+                <div id="title">
+                    <h4><a href="<%=request.getContextPath()%>/">TIME STAY</a></h4>
                 </div>
                 <ul>
                     <li><a href="<%= request.getContextPath() %>/About/About_us.do">카페소개</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="<%= request.getContextPath() %>/About/About_us.do">Time stay</a></li>
-                                <li><a href="<%= request.getContextPath() %>/About/Location.do">오시는 길</a></li>
-                                <li><a href="<%= request.getContextPath() %>/About/Gallery.do">갤러리</a></li>
+                                <li><a href="<%=request.getContextPath()%>/About/About_us.do">Time stay</a></li>
+                                <li><a href="<%=request.getContextPath()%>/About/Location.do">오시는 길</a></li>
+                                <li><a href="<%=request.getContextPath()%>/About/Gallery.do">갤러리</a></li>
                             </ul>
                         </div>
                     </li>
-                    <li><a href="#">메  뉴</a>
+                    <li><a href="#">메 뉴</a>
                         <div class="sub">
                             <ul>
                                 <li><a href="${pageContext.request.contextPath}/Product/ProductDessert.do">제과</a></li>
@@ -82,30 +82,30 @@
                     <li><a href="#">EVENT</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="<%=request.getContextPath()%>/Event/EventNowEvent.do">진행중 이벤트</a></li>
+                               	<li><a href="<%=request.getContextPath()%>/Event/EventNowEvent.do">진행중 이벤트</a></li>
                                 <li><a href="<%=request.getContextPath()%>/Event/EventEndEvent.do">종료된 이벤트</a></li>
                                 <li><a href="#"></a></li>
                             </ul>
                         </div>
                     </li>
-                    <li><a href="#">공지사항</a>
+                    <li><a href="<%=request.getContextPath()%>/Board/BoardNotice.do">공지사항</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="<%= request.getContextPath() %>/Board/BoardNotice.do">공지사항</a></li>
-                                <li><a href="<%= request.getContextPath() %>/Board/BoardFaq.do">자주 묻는 질문</a></li>
-                                <li><a href="<%= request.getContextPath() %>/Board/BoardQna.do">1:1 문의 게시판</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Board/BoardNotice.do">공지사항</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Board/BoardFaq.do">자주 묻는 질문</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Board/BoardQna.do">1:1 문의 게시판</a></li>
                                 <li><a href="#">카카오톡 문의</a></li>
                             </ul>
                         </div>
                     </li>
                 </ul>
-            </div>          
-            <a href="#" class="navbar_toggleBtn"><i class="fas fa-bars"></i></a>
+                </div>
+                <a href="#" class="navbar_toggleBtn"><i class="fas fa-bars"></i></a>
         </nav>
-    
+
         <ul class="navbar_links">
             <li><a href="<%=request.getContextPath()%>/Member/Login.do">로그인</a></li>
-            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do" style="padding:0 4px">장바구니</a></li>
             <li><a href="#">고객센터</a></li>
         </ul>
     </header>
@@ -246,5 +246,23 @@
         </div>
         <!--//container-->
     </footer>
+    
+    <script>
+	 
+    // 스크롤 시 header 색변화 fade-in
+	    $(function(){
+	        $(document).on('scroll', function(){
+	            if($(window).scrollTop() > 100){
+	                $("#header").removeClass("deactive");
+	                $("#header").addClass("active");
+	            }else{
+	                $("#header").removeClass("active");
+	                $("#header").addClass("deactive");
+	            }
+	        })
+	    });  
+    
+    </script>
+    
 </body>
 </html>

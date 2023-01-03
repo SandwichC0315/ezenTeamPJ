@@ -21,7 +21,20 @@ public class MemberServiceImpl implements MemberService{
 		return MemberDAO.findMemberByIdPass(vo);
 	}
 
+	@Override
+	public MemberVO selectOneByMid(MemberVO vo) {
+		
+		return MemberDAO.selectOne(vo);
+	}
+	public MemberVO findMemberByMidx(int Midx) {
+		return MemberDAO.findMemberByMidx(Midx);
+	}
 
+	@Override
+	public int modify(MemberVO vo) {
+		
+		return MemberDAO.modify(vo);
+	}
 
 
 	}

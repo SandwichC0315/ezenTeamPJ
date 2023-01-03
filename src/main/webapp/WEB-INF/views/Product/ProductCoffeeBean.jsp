@@ -13,6 +13,7 @@
     <title>TIME STAY</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Product.css" type="text/css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login_pop.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
@@ -154,6 +155,30 @@
   </div>
   <!--//container-->
 </footer>
+<div class="black_bg"></div>
+    <div class="modal_wrap">
+        <div class="modal_close"><a href="#" onclick="return false;">close</a></div>
+        <div class="modalContents">
+            <h2>로그인</h2>
+	        
+	        <c:if test="${login==null }">
+				
+				<form action= "<%= request.getContextPath() %>/Member/login.do" method="post" id="frm">
+		            <input name= "Mid" class="loginId" type="text" placeholder="아이디"/>
+		            <input name= "Mpwd" class="loginPw" type="password" placeholder="비밀번호"/>
+		            <button class="login_btn">로그인</button>
+		        </form>
+		        
+	            <div class="login_bottom">
+	                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
+	            </div>	
+	                    
+	        </c:if>
+	                          
+        </div>
+    </div>  
 <script>
 //분류보기 
 		$(function (){
@@ -245,6 +270,20 @@
        });
       });
 
+      //로그인 팝업창
+      window.onload = function() {     
+          function onClick() {
+              document.querySelector('.modal_wrap').style.display ='block';
+              document.querySelector('.black_bg').style.display ='block';
+          }   
+          function offClick() {
+              document.querySelector('.modal_wrap').style.display ='none';
+              document.querySelector('.black_bg').style.display ='none';
+          }
+      
+          document.getElementById('modal_btn').addEventListener('click', onClick);
+          document.querySelector('.modal_close').addEventListener('click', offClick);     
+      };
 </script>
 </body>
 </html>

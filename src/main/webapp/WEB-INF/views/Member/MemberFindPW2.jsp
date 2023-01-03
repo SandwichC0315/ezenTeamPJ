@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,7 +21,7 @@
     </style>
 </head>
 <body>
-	<header id="header" class="deactive">        
+    <header id="header" class="deactive">        
         <nav class="navbar">
             <div class="navbar_menu">
                 <div id="title"> 
@@ -49,32 +50,42 @@
                     <li><a href="#">EVENT</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="<%=request.getContextPath()%>/Event/EventNowEvent.do">진행중 이벤트</a></li>
+                               	<li><a href="<%=request.getContextPath()%>/Event/EventNowEvent.do">진행중 이벤트</a></li>
                                 <li><a href="<%=request.getContextPath()%>/Event/EventEndEvent.do">종료된 이벤트</a></li>
                                 <li><a href="#"></a></li>
                             </ul>
                         </div>
                     </li>
-                    <li><a href="#">공지사항</a>
+                    <li><a href="<%=request.getContextPath()%>/Board/BoardNotice.do">공지사항</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="<%= request.getContextPath() %>/Board/BoardNotice.do">공지사항</a></li>
-                                <li><a href="<%= request.getContextPath() %>/Board/BoardFaq.do">자주 묻는 질문</a></li>
-                                <li><a href="<%= request.getContextPath() %>/Board/BoardQna.do">1:1 문의 게시판</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Board/BoardNotice.do">공지사항</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Board/BoardFaq.do">자주 묻는 질문</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Board/BoardQna.do">1:1 문의 게시판</a></li>
                                 <li><a href="#">카카오톡 문의</a></li>
                             </ul>
                         </div>
                     </li>
                 </ul>
-            </div>          
-            <a href="#" class="navbar_toggleBtn"><i class="fas fa-bars"></i></a>
-        </nav>
+            </div>            
+        </nav>    
     
-        <ul class="navbar_links">
-            <li><a href="<%=request.getContextPath()%>/Member/Login.do">로그인</a></li>
-            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
-            <li><a href="#">고객센터</a></li>
-        </ul>
+  		<c:if test= "${login==null}">
+	  		<ul class="navbar_links">
+	 			<li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>  		    
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
+	            <li><a href="#">고객센터</a></li>
+	        </ul>
+        </c:if>
+     	<c:if test ="${login!=null}">
+	        <ul class="navbar_links" style="width:330px;">
+	            <li><a href="<%=request.getContextPath()%>/Member/logout.do" style="padding:0 4px">로그아웃</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/member_Modify.do?Mid=${Mid}" style="padding:0 4px">마이페이지</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do" style="padding:0 4px">장바구니</a></li>
+	            <li><a href="#" style="padding:0 4px">고객센터</a></li>
+	        </ul>
+  		</c:if>  
+        
     </header>
     <main>
         <div class="find">         
@@ -89,7 +100,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <button id="submmit">확 인</button>
+                            <button id="submit">확 인</button>
                             <button id="cancel"> 취 소</button>
                         </td>
                     </tr>
@@ -121,7 +132,7 @@
     </footer>
     <div class="black_bg"></div>
     <div class="modal_wrap">
-        <div class="modal_close"><a href="#">close</a></div>
+        <div class="modal_close"><a href="#" onclick="return false;">close</a></div>
         <div class="modalContents">
             <h2>로그인</h2>
             <input name="id" class="loginId" type="text" placeholder="아이디"/>

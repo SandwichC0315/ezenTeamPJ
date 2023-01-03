@@ -19,8 +19,7 @@
     .navbar_menu li {padding: 8px 12px;}
     
     /*메뉴바 상단 로그인 메뉴*/
-    .navbar_links {list-style: none; padding-left: 0; width:380px; float:right; position:relative; margin: 16px 10px 0 0;}
-    .navbar_links{display:flex; justify-content: flex-end;}
+    .navbar_links {list-style: none; padding-left: 0; width:250px; float:right; position:relative; margin:16px 0;}
     .navbar_links li{display: inline-block; position:relative;}
     .navbar_links li a{color: #fff;  padding:0 9px; display: inline-block;} 
     .navbar_links li::after{content:"|"; font-size:10px;display:inline-block; width:2px; height:19px; color:#888; font-size:10px; vertical-align:middle;} 
@@ -61,24 +60,25 @@
     .member_menu li:nth-child(4){font-size:15px;margin-top:30px;}
     .member_menu li:hover{text-decoration:underline; color:#666;}
 
-    main h4{width:800px; font-size: 30px; font-weight: bold; padding-bottom:7px; margin:40px 0; border-bottom: #333 3px solid;}
+    main .member_modify h4{width:800px; font-size: 30px; font-weight: bold; padding-bottom:7px; margin:40px 0; border-bottom: #333 3px solid;}
     main{height: 100%;}
+    
     .member_modify{margin: 250px auto 350px; width:800px; }
-    #member_info{width: 800px; height: 600px; position: relative;  margin-bottom:20px;}
-    #member_info table{width:800px; height:500px; } 
-    tr{height:70px; border-bottom:1px solid gainsboro;}
-    td:first-child{ background-color: burlywood;} 
-    td:last-child{ background-color: aliceblue;} 
-    td{padding-left:20px; vertical-align: middle;}
-    td input{height:20px;}
-    .bottom_btn{width:auto; text-align: center;}
-    #submmit,#cancel{width:200px; height:40px; font-size: 20px; font-weight: bold; margin: 40px 5px; border: none; border-radius: 5px;}
-    #submmit{background-color: rgb(230, 179, 114);}
-    #submmit:hover{background-color: rgb(212, 155, 80); }
-    #submmit:active{background-color: rgb(230, 179, 114); }
-    #cancel{background-color: rgb(194, 190, 190);}
-    #cancel:hover{background-color: rgb(179, 173, 173);}
-    #cancel:active{background-color: rgb(194, 190, 190);}
+    .member_modify #member_info{width: 800px; height: 600px; position: relative;  margin-bottom:20px;}
+    .member_modify #member_info table{width:800px; height:500px; } 
+    .member_modify tr{height:70px; border-bottom:1px solid gainsboro;}
+    .member_modify td:first-child{ background-color: burlywood;} 
+    .member_modify td:last-child{ background-color: aliceblue;} 
+    .member_modify td{padding-left:20px; vertical-align: middle;}
+    .member_modify td input{height:20px;}
+    .member_modify .bottom_btn{width:auto; text-align: center;}
+    .member_modify #submit,#cancel{width:200px; height:40px; font-size: 20px; font-weight: bold; margin: 40px 5px; border: none; border-radius: 5px;}
+    .member_modify #submit{background-color: rgb(230, 179, 114);}
+    .member_modify #submit:hover{background-color: rgb(212, 155, 80); }
+    .member_modify #submit:active{background-color: rgb(230, 179, 114); }
+    .member_modify #cancel{background-color: rgb(194, 190, 190);}
+    .member_modify #cancel:hover{background-color: rgb(179, 173, 173);}
+    .member_modify #cancel:active{background-color: rgb(194, 190, 190);}
     
     
     footer{width: 100vw; height: 300px; margin: 0 auto; background: rgb(93, 80, 82); }

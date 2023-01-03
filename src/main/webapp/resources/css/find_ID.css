@@ -61,8 +61,7 @@ header .sub{display:none; width:inherit;}
 
 /*메인*/
 main h4{width:420px; font-size: 30px; font-weight: bold; padding-bottom:7px; margin:40px 0; border-bottom: #333 3px solid;}
-main{height: 80vh;}
-.find{margin: 350px auto 250px; width:420px; }
+.find{margin: 350px auto 250px; width:420px; height: 80vh;}
 tr{height:45px;}
 input{height:30px; font-size:15px; padding-left:7px; }
 tr:nth-child(1) input{width:250px;}
@@ -71,10 +70,10 @@ select{width:150px; height:36px; position:relative; bottom: 1px;}
 
 
 button{width:206.5px; height:40px;}
-#submmit,#cancel{font-size: 18px; font-weight: bold; border: none; border-radius: 5px; }
-    #submmit{background-color: rgb(230, 179, 114);}
-    #submmit:hover{background-color: rgb(212, 155, 80); }
-    #submmit:active{background-color: rgb(230, 179, 114);}
+	#submit,#cancel{font-size: 18px; font-weight: bold; border: none; border-radius: 5px; }
+    #submit{background-color: rgb(230, 179, 114);}
+    #submit:hover{background-color: rgb(212, 155, 80); }
+    #submit:active{background-color: rgb(230, 179, 114);}
     #cancel{background-color: rgb(194, 190, 190);}
     #cancel:hover{background-color: rgb(179, 173, 173);}
     #cancel:active{background-color: rgb(194, 190, 190);}

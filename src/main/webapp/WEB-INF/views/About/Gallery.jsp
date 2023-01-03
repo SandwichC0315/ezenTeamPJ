@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -45,13 +45,13 @@
                     <li><a href="#">EVENT</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="#">진행중 이벤트</a></li>
-                                <li><a href="#">종료된 이벤트</a></li>
+                               	<li><a href="<%=request.getContextPath()%>/Event/EventNowEvent.do">진행중 이벤트</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Event/EventEndEvent.do">종료된 이벤트</a></li>
                                 <li><a href="#"></a></li>
                             </ul>
                         </div>
                     </li>
-                    <li><a href="#">공지사항</a>
+                    <li><a href="<%=request.getContextPath()%>/Board/BoardNotice.do">공지사항</a>
                         <div class="sub">
                             <ul>
                                 <li><a href="<%=request.getContextPath()%>/Board/BoardNotice.do">공지사항</a></li>
@@ -62,23 +62,25 @@
                         </div>
                     </li>
                 </ul>
-            </div>          
-            <a href="#" class="navbar_toggleBtn"><i class="fas fa-bars"></i></a>
-        </nav>
+            </div>            
+        </nav>    
     
-        <ul class="navbar_links">
-     		<c:if test ="${login!=null}">
-            <li><a href="<%=request.getContextPath()%>/Member/logout.do">로그아웃</a></li>
-            <li><a href="#">마이페이지</a></li>
-            <li><a href="#">장바구니</a></li>
-            <li><a href="#">고객센터</a></li>
-  		    </c:if>  
-  		    <c:if test= "${login==null}">
- 			<li><a href="<%=request.getContextPath()%>/Member/Login.do">로그인</a></li>  		    
-            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
-            <li><a href="#">고객센터</a></li>
-            </c:if>
-        </ul>
+  		<c:if test= "${login==null}">
+	  		<ul class="navbar_links">
+	 			<li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>  		    
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
+	            <li><a href="#">고객센터</a></li>
+	        </ul>
+        </c:if>
+     	<c:if test ="${login!=null}">
+	        <ul class="navbar_links" style="width:330px;">
+	            <li><a href="<%=request.getContextPath()%>/Member/logout.do" style="padding:0 4px">로그아웃</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/member_Modify.do?Mid=${Mid}" style="padding:0 4px">마이페이지</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do" style="padding:0 4px">장바구니</a></li>
+	            <li><a href="#" style="padding:0 4px">고객센터</a></li>
+	        </ul>
+  		</c:if>  
+        
     </header>
     <main>       
         <div class="gallery">        
@@ -109,25 +111,52 @@
             </section><!--.inside-->        
             <section class="outside">            
                 <h4>카페전경</h4>
-                <div class="view view1">
+                <div class="view view8">
                     <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/카페사진2.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/카페사진2.jpg" alt=""/></a>
                 </div>
-                <div class="view view2">
+                <div class="view view9">
                     <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/카페사진3.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/카페사진3.jpg" alt="" /></a>
                 </div>
-                <div class="view view3">
+                <div class="view view10">
                     <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/카페사진4.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/카페사진4.jpg" alt="" /></a>
                 </div>
-                <div class="view view3">
+                <div class="view view11">
                     <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/카페사진5.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/카페사진5.jpg" alt="" /></a>
                 </div>
-                <div class="view view3">
+                <div class="view view12">
                     <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/카페사진6.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/카페사진6.jpg" alt="" /></a>
                 </div>
-                <div class="view view4">
+                <div class="view view13">
                     <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/카페사진7.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/카페사진7.jpg" alt="" /></a>
                 </div>
-            </section><!--.inside-->
+            </section><!--.outside-->
+            <section class="food">            
+                <h4>메뉴사진</h4>
+                <div class="view view14">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/제과사진5.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/제과사진5.jpg" alt=""/></a>
+                </div>
+                <div class="view view15">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/제과사진4.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/제과사진4.jpg" alt="" /></a>
+                </div>
+                <div class="view view16">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/제과사진3.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/제과사진3.jpg" alt="" /></a>
+                </div>
+                <div class="view view17">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/제과사진2.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/제과사진2.jpg" alt="" /></a>
+                </div>
+                <div class="view view18">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/제과사진1.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/제과사진1.jpg" alt="" /></a>
+                </div>
+                <div class="view view19">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/브런치사진1.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/브런치사진1.jpg" alt="" /></a>
+                </div>
+                <div class="view view19">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/브런치사진2.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/브런치사진2.jpg" alt="" /></a>
+                </div>
+                <div class="view view19">
+                    <a class="example-image-link" href="${pageContext.request.contextPath}/resources/images/브런치사진3.jpg" data-lightbox="example-set" data-title="이미지 좌우측의 화살표를 누르면 이미지가 넘어갑니다"><img class="example-image" src="${pageContext.request.contextPath}/resources/images/브런치사진3.jpg" alt="" /></a>
+                </div>
+            </section><!--.food-->
         </div><!--.gallery-->     
         
     </main>
@@ -153,21 +182,43 @@
     </footer>    
     <div class="black_bg"></div>
     <div class="modal_wrap">
-        <div class="modal_close"><a href="#">close</a></div>
+        <div class="modal_close"><a href="#" onclick="return false;">close</a></div>
         <div class="modalContents">
             <h2>로그인</h2>
-            <input name="id" class="loginId" type="text" placeholder="아이디"/>
-            <input name="password" class="loginPw" type="password" placeholder="비밀번호"/>
-            <button class="login_btn">로그인</button>
-            <div class="login_bottom">
-                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
-                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
-                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
-            </div>            
+	        
+	        <c:if test="${login==null }">
+				
+				<form action= "<%= request.getContextPath() %>/Member/login.do" method="post" id="frm">
+		            <input name= "Mid" class="loginId" type="text" placeholder="아이디"/>
+		            <input name= "Mpwd" class="loginPw" type="password" placeholder="비밀번호"/>
+		            <button class="login_btn">로그인</button>
+		        </form>
+		        
+	            <div class="login_bottom">
+	                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
+	            </div>	
+	                    
+	        </c:if>
+	                         
         </div>
     </div>    
     <script src="${pageContext.request.contextPath}/resources/js/lightbox-plus-jquery.js"></script>
     <script>
+    
+	    // 스크롤 시 header 색변화 fade-in
+	    $(function(){
+	        $(document).on('scroll', function(){
+	            if($(window).scrollTop() > 100){
+	                $("#header").removeClass("deactive");
+	                $("#header").addClass("active");
+	            }else{
+	                $("#header").removeClass("active");
+	                $("#header").addClass("deactive");
+	            }
+	        })
+	    }); 
 
         //로그인 팝업창
         window.onload = function() {     

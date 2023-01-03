@@ -20,8 +20,7 @@
     .navbar_menu li {padding: 8px 12px;}
     
     /*메뉴바 상단 로그인 메뉴*/
-    .navbar_links {list-style: none; padding-left: 0; width:380px; float:right; position:relative; margin: 16px 10px 0 0;}
-    .navbar_links{display:flex; justify-content: flex-end;}
+    .navbar_links {list-style: none; padding-left: 0; width:250px; float:right; position:relative; margin:16px 0;}
     .navbar_links li{display: inline-block; position:relative;}
     .navbar_links li a{color: #fff;  padding:0 9px; display: inline-block;} 
     .navbar_links li::after{content:"|"; font-size:10px;display:inline-block; width:2px; height:19px; color:#888; font-size:10px; vertical-align:middle;} 
@@ -58,11 +57,11 @@
     
     main h3{width:400px; font-size: 30px; font-weight: bold; padding-bottom:7px; margin:40px 0; border-bottom: #333 3px solid;}
     .gallery h4{width:inherit; font-size: 20px; font-weight: bold; padding:20px 0 7px 0; margin:10px 0 5px 0; border-bottom: #333 3px solid;}
-    .gallery{margin:250px 350px 350px; width:1200px; height:1000px;}
-    .inside, .outside{display: inline-block; }
+    .gallery{margin:250px 350px 350px; width:1200px; height:1600px;}
+    .inside, .outside, .food{display: inline-block; }
     .example-image-link img{width:295px;  vertical-align:middle;}
     .view{width:295px; height:200px; overflow: hidden; float:left; align-items: center; margin: 0 5px 8px 0;}
-    .outside{margin-top:50px;}       
+    .outside, .food{margin-top:50px;}       
     
     footer{ width: 100vw; height: 300px; margin: 0 auto; background: rgb(93, 80, 82);}
     footer #container{ margin: auto; padding-left: 10vw; padding-top: 6vh;} 

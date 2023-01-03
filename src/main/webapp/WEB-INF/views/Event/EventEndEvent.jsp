@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,17 +34,20 @@
 	
 	        location.href="? mode=cart_seldel&idx="+select_obj;
 	    }
+
 	</script>
 
 <title>진행중인 이벤트</title>
 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css"/>
+  	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login_pop.css"/>  
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/EventNowEvent.css" type="text/css"/>
+    
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
     <style>
     
     </style>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
 </head>
 <body>
 <header id="header" class="deactive">
@@ -97,11 +101,22 @@
             <a href="#" class="navbar_toggleBtn"><i class="fas fa-bars"></i></a>
         </nav>
     
-        <ul class="navbar_links">
-            <li><a href="<%=request.getContextPath()%>/Member/Login.do">로그인</a></li>
-            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
-            <li><a href="#">고객센터</a></li>
-        </ul>
+  		<c:if test= "${login==null}">
+	  		<ul class="navbar_links">
+	 			<li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>  		    
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
+	            <li><a href="#">고객센터</a></li>
+	        </ul>
+        </c:if>
+     	<c:if test ="${login!=null}">
+	        <ul class="navbar_links" style="width:330px;">
+	            <li><a href="<%=request.getContextPath()%>/Member/logout.do" style="padding:0 4px">로그아웃</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/member_Modify.do?Mid=${Mid}" style="padding:0 4px">마이페이지</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do" style="padding:0 4px">장바구니</a></li>
+	            <li><a href="#" style="padding:0 4px">고객센터</a></li>
+	        </ul>
+  		</c:if>  
+        
     </header>
     
     
@@ -162,6 +177,63 @@
         </div>
         <!--//container-->
     </footer>
-    
+
+    <div class="black_bg"></div>
+    <div class="modal_wrap">
+        <div class="modal_close"><a href="#" onclick="return false;">close</a></div>
+        <div class="modalContents">
+            <h2>로그인</h2>
+	        
+	        <c:if test="${login==null }">
+				
+				<form action= "<%= request.getContextPath() %>/Member/login.do" method="post" id="frm">
+		            <input name= "Mid" class="loginId" type="text" placeholder="아이디"/>
+		            <input name= "Mpwd" class="loginPw" type="password" placeholder="비밀번호"/>
+		            <button class="login_btn">로그인</button>
+		        </form>
+		        
+	            <div class="login_bottom">
+	                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
+	            </div>	
+	                    
+	        </c:if>
+	                  
+        </div>
+    </div>  
+            
 </body>
+
+<script>
+	
+	// 스크롤 시 header 색변화 fade-in
+	$(function(){
+	    $(document).on('scroll', function(){
+	        if($(window).scrollTop() > 100){
+	            $("#header").removeClass("deactive");
+	            $("#header").addClass("active");
+	        }else{
+	            $("#header").removeClass("active");
+	            $("#header").addClass("deactive");
+	        }
+	    })
+	});
+	
+	//로그인 팝업창
+	window.onload = function() {     
+	    function onClick() {
+	        document.querySelector('.modal_wrap').style.display ='block';
+	        document.querySelector('.black_bg').style.display ='block';
+	    }   
+	    function offClick() {
+	        document.querySelector('.modal_wrap').style.display ='none';
+	        document.querySelector('.black_bg').style.display ='none';
+	    }
+	
+	    document.getElementById('modal_btn').addEventListener('click', onClick);
+	    document.querySelector('.modal_close').addEventListener('click', offClick);     
+	};
+
+</script>
 </html>

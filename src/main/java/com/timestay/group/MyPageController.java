@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.timestay.service.MemberService;
+import com.timestay.vo.BoardFaqVO;
 import com.timestay.vo.MemberVO;
 import com.timestay.vo.ProductVO;
 import com.timestay.vo.ShoppingCartVO;
@@ -33,16 +35,36 @@ public class MyPageController {
 	
 	@Autowired
 	MyPageService MyPageService;
-	
+	@Autowired
+	private MemberService MemberService;
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 
 	@RequestMapping(value = "/member_Modify.do", method = RequestMethod.GET)
-	public String member_Modify(Locale locale, Model model) {
+	public String member_Modify(MemberVO vo,Model model) {
 		
+		MemberVO mv = MemberService.selectOneByMid(vo);
+
+		model.addAttribute("mv", mv);
+		model.addAttribute("Mid", mv.getMid());
+		model.addAttribute("Mpwd", mv.getMpwd());
+		model.addAttribute("Mname", mv.getMname());
+		model.addAttribute("Mphone", mv.getMphone());
+		model.addAttribute("Madd", mv.getMadd());
+		model.addAttribute("Mmdate", mv.getMmdate());
 		
 		return "MyPage/member_Modify";
 	}
+	
+	@RequestMapping(value = "/member_Modify.do", method = RequestMethod.POST)
+	public String modifyFaq(MemberVO vo, HttpServletResponse res) {
+		
+		//db ¡§uoA¡Ë¢¥A¨Ï©ª¡Ë¡þ¡Ëc
+		int result = MemberService.modify(vo);		
+		
+		return "redirect:../";
+	}
+	
 	
 	@RequestMapping(value = "/member_Point.do", method = RequestMethod.GET)
 	public String member_Point(Locale locale, Model model) {

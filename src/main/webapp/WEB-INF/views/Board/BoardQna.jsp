@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.timestay.vo.BoardQnaVO" %>
-<%@	page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<% List<BoardQnaVO> list = (List<BoardQnaVO>)request.getAttribute("list"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +10,7 @@
 <title>1:1 질문</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css"/>
  	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/qna.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login_pop.css" type="text/css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
 </head>
 <body>
@@ -45,13 +43,13 @@
                     <li><a href="#">EVENT</a>
                         <div class="sub">
                             <ul>
-                               <li><a href="<%=request.getContextPath()%>/Event/EventNowEvent.do">진행중 이벤트</a></li>
+                               	<li><a href="<%=request.getContextPath()%>/Event/EventNowEvent.do">진행중 이벤트</a></li>
                                 <li><a href="<%=request.getContextPath()%>/Event/EventEndEvent.do">종료된 이벤트</a></li>
                                 <li><a href="#"></a></li>
                             </ul>
                         </div>
                     </li>
-                    <li><a href="#">공지사항</a>
+                    <li><a href="<%=request.getContextPath()%>/Board/BoardNotice.do">공지사항</a>
                         <div class="sub">
                             <ul>
                                 <li><a href="<%=request.getContextPath()%>/Board/BoardNotice.do">공지사항</a></li>
@@ -65,52 +63,34 @@
                 </div>
                 <a href="#" class="navbar_toggleBtn"><i class="fas fa-bars"></i></a>
         </nav>
-
-        <ul class="navbar_links">
-     		<c:if test ="${login!=null}">
-            <li><a href="<%=request.getContextPath()%>/Member/logout.do">로그아웃</a></li>
-            <li><a href="#">마이페이지</a></li>
-            <li><a href="#">장바구니</a></li>
-            <li><a href="#">고객센터</a></li>
-  		    </c:if>  
-  		    <c:if test= "${login==null}">
- 			<li><a href="<%=request.getContextPath()%>/Member/Login.do">로그인</a></li>  		    
-             <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
-            <li><a href="#">고객센터</a></li>
-            </c:if>
-        </ul>
+    
+  		<c:if test= "${login==null}">
+	  		<ul class="navbar_links">
+	 			<li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>  		    
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
+	            <li><a href="#">고객센터</a></li>
+	        </ul>
+        </c:if>
+     	<c:if test ="${login!=null}">
+	        <ul class="navbar_links" style="width:330px;">
+	            <li><a href="<%=request.getContextPath()%>/Member/logout.do" style="padding:0 4px">로그아웃</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/member_Modify.do?Mid=${Mid}" style="padding:0 4px">마이페이지</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do" style="padding:0 4px">장바구니</a></li>
+	            <li><a href="#" style="padding:0 4px">고객센터</a></li>
+	        </ul>
+  		</c:if>  
+        
     </header>
     
     
     
     <main>
     	<h2>1:1 질문</h2>
-
+    	<button id="write">등록</button>
     	<input type="text" id="searchbar">
     	<button id="search">검색</button>
     	
-    	<h3>BoardQna</h3>
-    	
-    	<table border="1">
-    		<thead>
-    			<tr>
-	    			<th>글번호</th>
-	    			<th>제목</th>
-	    			<th>등록일</th>
-    			</tr>
-    		</thead>    		
-    		<tbody>
-    			<%for (BoardQnaVO vo : list) {%>
-    			<tr>
-    				<td><%=vo.getBQidx() %></td>
-    				<td><%=vo.getBQtitle() %></td>
-    				<td><%=vo.getBQwdate() %></td>
-    			</tr>
-    			<%} %>
-    		</tbody>
-    	</table>
-	<button onclick="location.href='BoardQnaInsert.do';">등록</button>
-   
+    	<h3>등록된 게시글이 없습니다.</h3>
     </main>
     
     
@@ -136,5 +116,62 @@
         </div>
         <!--//container-->
     </footer>
+    
+    <div class="black_bg"></div>
+    <div class="modal_wrap">
+        <div class="modal_close"><a href="#" onclick="return false;">close</a></div>
+        <div class="modalContents">
+            <h2>로그인</h2>
+	        
+	        <c:if test="${login==null }">
+				
+				<form action= "<%= request.getContextPath() %>/Member/login.do" method="post" id="frm">
+		            <input name= "Mid" class="loginId" type="text" placeholder="아이디"/>
+		            <input name= "Mpwd" class="loginPw" type="password" placeholder="비밀번호"/>
+		            <button class="login_btn">로그인</button>
+		        </form>
+		        
+	            <div class="login_bottom">
+	                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
+	            </div>	
+	                    
+	        </c:if>
+	                        
+        </div>
+    </div>  
+    <script>  
+
+        // 스크롤 시 header 색변화 fade-in
+        $(function(){
+            $(document).on('scroll', function(){
+                if($(window).scrollTop() > 100){
+                    $("#header").removeClass("deactive");
+                    $("#header").addClass("active");
+                }else{
+                    $("#header").removeClass("active");
+                    $("#header").addClass("deactive");
+                }
+            })
+        });   
+        
+        //로그인 팝업창
+        window.onload = function() {     
+            function onClick() {
+                document.querySelector('.modal_wrap').style.display ='block';
+                document.querySelector('.black_bg').style.display ='block';
+            }   
+            function offClick() {
+                document.querySelector('.modal_wrap').style.display ='none';
+                document.querySelector('.black_bg').style.display ='none';
+            }
+        
+            document.getElementById('modal_btn').addEventListener('click', onClick);
+            document.querySelector('.modal_close').addEventListener('click', offClick);     
+        };
+
+   
+    </script>
 </body>
 </html>

@@ -14,6 +14,7 @@
     <title>TIME STAY</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Product.css" type="text/css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login_pop.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
@@ -49,8 +50,8 @@
                     <li><a href="#">EVENT</a>
                         <div class="sub">
                             <ul>
-                                <li><a href="#">진행중 이벤트</a></li>
-                                <li><a href="#">종료된 이벤트</a></li>
+                               	<li><a href="<%=request.getContextPath()%>/Event/EventNowEvent.do">진행중 이벤트</a></li>
+                                <li><a href="<%=request.getContextPath()%>/Event/EventEndEvent.do">종료된 이벤트</a></li>
                                 <li><a href="#"></a></li>
                             </ul>
                         </div>
@@ -70,19 +71,22 @@
             <a href="#" class="navbar_toggleBtn"><i class="fas fa-bars"></i></a>
         </nav>
     
-        <ul class="navbar_links">
-     		<c:if test ="${login!=null}">
-            <li><a href="<%=request.getContextPath()%>/Member/logout.do">로그아웃</a></li>
-            <li><a href="#">마이페이지</a></li>
-            <li><a href="#">장바구니</a></li>
-            <li><a href="#">고객센터</a></li>
-  		    </c:if>  
-  		    <c:if test= "${login==null}">
- 			<li><a href="<%=request.getContextPath()%>/Member/Login.do">로그인</a></li>  		    
-            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
-            <li><a href="#">고객센터</a></li>
-            </c:if>
-        </ul>
+  		<c:if test= "${login==null}">
+	  		<ul class="navbar_links">
+	 			<li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>  		    
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
+	            <li><a href="#">고객센터</a></li>
+	        </ul>
+        </c:if>
+     	<c:if test ="${login!=null}">
+	        <ul class="navbar_links" style="width:330px;">
+	            <li><a href="<%=request.getContextPath()%>/Member/logout.do" style="padding:0 4px">로그아웃</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/member_Modify.do?Mid=${Mid}" style="padding:0 4px">마이페이지</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do" style="padding:0 4px">장바구니</a></li>
+	            <li><a href="#" style="padding:0 4px">고객센터</a></li>
+	        </ul>
+  		</c:if>  
+        
     </header>
     <main> 
 		 <div class="content">
@@ -168,6 +172,30 @@
         </div>
         <!--//container-->
     </footer>
+    <div class="black_bg"></div>
+    <div class="modal_wrap">
+        <div class="modal_close"><a href="#" onclick="return false;">close</a></div>
+        <div class="modalContents">
+            <h2>로그인</h2>
+	        
+	        <c:if test="${login==null }">
+				
+				<form action= "<%= request.getContextPath() %>/Member/login.do" method="post" id="frm">
+		            <input name= "Mid" class="loginId" type="text" placeholder="아이디"/>
+		            <input name= "Mpwd" class="loginPw" type="password" placeholder="비밀번호"/>
+		            <button class="login_btn">로그인</button>
+		        </form>
+		        
+	            <div class="login_bottom">
+	                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
+	                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
+	            </div>	
+	                    
+	        </c:if>
+	                        
+        </div>
+    </div>  
     <script>
     //분류보기 
 		    $(function (){
@@ -275,7 +303,22 @@
                   var position = $(window).scrollTop(); 
                   $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},10);
                  });
-                });				
+                });	
+                
+                //로그인 팝업창
+                window.onload = function() {     
+                    function onClick() {
+                        document.querySelector('.modal_wrap').style.display ='block';
+                        document.querySelector('.black_bg').style.display ='block';
+                    }   
+                    function offClick() {
+                        document.querySelector('.modal_wrap').style.display ='none';
+                        document.querySelector('.black_bg').style.display ='none';
+                    }
+                
+                    document.getElementById('modal_btn').addEventListener('click', onClick);
+                    document.querySelector('.modal_close').addEventListener('click', offClick);     
+                };
     </script>
 </body>
 </html>

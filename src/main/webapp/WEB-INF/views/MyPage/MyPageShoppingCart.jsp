@@ -147,7 +147,7 @@
                         </tr>
 					    <c:forEach var='Svo' items='${Svo}'>
                             <tr class="nolist">
-                                <td></td>
+                                <td><input type="checkbox" ></td>
 					            <td style="width: 50% ">
 					              <div>
 					                 <img src= "${pageContext.request.contextPath}/resources/images/${Svo.getPimage()}" >

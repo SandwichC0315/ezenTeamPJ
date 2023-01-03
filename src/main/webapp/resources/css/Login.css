@@ -61,21 +61,17 @@ header .sub{display:none; width:inherit;}
 
 /*메인*/
 main h4{text-align: center;width:320px; font-size:30px; font-weight:bold; padding-bottom:7px; margin:40px 0; border-bottom: #333 3px solid;}
-main{height: 80vh;}
-.find{margin: 350px auto 250px; width:320px; }
-tr{height:45px;}
-input{height:30px; font-size:15px; padding-left:7px; width:306px;}
-select{width:150px; height:36px; position:relative; bottom: 1px;}
+
+.find{margin: 350px auto 250px; width:320px; height: 80vh;}
+.find tr{height:45px;}
+.find input{height:30px; font-size:15px; padding-left:7px; width:306px;}
+.find select{width:150px; height:36px; position:relative; bottom: 1px;}
 
 
-button{width:320px; height:40px;}
-#submmit,#cancel{font-size: 18px; font-weight: bold; border: none; border-radius: 5px;}
-    #submmit{background-color: rgb(230, 179, 114);}
-    #submmit:hover{background-color: rgb(212, 155, 80); }
-    #submmit:active{background-color: rgb(230, 179, 114);}
-    #cancel{background-color: rgb(194, 190, 190);}
-    #cancel:hover{background-color: rgb(179, 173, 173);}
-    #cancel:active{background-color: rgb(194, 190, 190);}
+	#submit{width:320px; height:40px; font-size: 18px; font-weight: bold; border: none; border-radius: 5px;}
+    #submit{background-color: rgb(230, 179, 114);}
+    #submit:hover{background-color: rgb(212, 155, 80); }
+    #submit:active{background-color: rgb(230, 179, 114);}
 
 footer{width: 100vw; height: 300px; margin: 0 auto; background: rgb(93, 80, 82); }
 footer #container{ margin: auto; padding-left: 10vw; padding-top: 6vh;} 
