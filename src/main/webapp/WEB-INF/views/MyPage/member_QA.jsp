@@ -98,7 +98,7 @@
                 <li><a href="<%=request.getContextPath()%>/MyPage/member_QA.do" style="font-weight: bold;">나의 문의내역</a></li>
 	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
 	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageOrderView.do">주문/배송조회</a></li>
-                <li><a href="#">취소/반품내역</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/member_Delete.do?Mid=${Mid}">회원 탈퇴</a></li>
             </ul>
         </div>
         <div class="member_QA">         

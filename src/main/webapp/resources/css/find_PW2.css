@@ -55,22 +55,17 @@ header .sub{display:none; width:inherit;}
 .navbar .sub a:hover{text-decoration:underline;}
 
 /*메인*/
-main h4{width:420px; font-size: 30px; font-weight: bold; padding-bottom:7px; margin:40px 0; border-bottom: #333 3px solid;}
-.find{margin: 350px auto 250px; width:420px; height: 80vh;}
+main h4{width:320px; font-size: 30px; font-weight: bold; padding-bottom:7px; margin:40px 0; border-bottom: #333 3px solid; text-align:center;}
+.find{margin: 350px auto 250px; width:320px; height: 80vh;}
 #find_PW{text-align: center;}
-#find_pw table{width:600px; text-align: center;}
 tr{height:45px;}
-input{height:30px; font-size:15px; width:406px; padding-left:7px;}
 select{height:35px;}
 
-#submit,#cancel{width:206.5px; height:40px; font-size: 18px; font-weight: bold; border: none; 
+	#submit{width:320px; height:40px; font-size: 18px; font-weight: bold; border: none; 
         border-radius: 5px; }
     #submit{background-color: rgb(230, 179, 114);}
     #submit:hover{background-color: rgb(212, 155, 80); }
     #submit:active{background-color: rgb(230, 179, 114);}
-    #cancel{background-color: rgb(194, 190, 190);}
-    #cancel:hover{background-color: rgb(179, 173, 173);}
-    #cancel:active{background-color: rgb(194, 190, 190);}
 
 
 footer{width: 100vw; height: 300px; margin: 0 auto; background: rgb(93, 80, 82); }

@@ -67,7 +67,8 @@ input{height:30px; font-size:15px; padding-left:7px; }
 tr:nth-child(1) input{width:250px;}
 tr:nth-child(2) input{width:406px;}
 select{width:150px; height:36px; position:relative; bottom: 1px;}
-
+.result{color:red;}
+.result span{font-weight:bold; color:black;}
 
 button{width:206.5px; height:40px;}
 	#submit,#cancel{font-size: 18px; font-weight: bold; border: none; border-radius: 5px; }

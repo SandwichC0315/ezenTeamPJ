@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.timestay.service.MemberService;
 import com.timestay.vo.BoardFaqVO;
@@ -41,7 +43,10 @@ public class MyPageController {
 		model.addAttribute("Mpwd", mv.getMpwd());
 		model.addAttribute("Mname", mv.getMname());
 		model.addAttribute("Mphone", mv.getMphone());
+		model.addAttribute("Memail", mv.getMemail());
 		model.addAttribute("Madd", mv.getMadd());
+		model.addAttribute("Madd2", mv.getMadd2());
+		model.addAttribute("Madd3", mv.getMadd3());
 		model.addAttribute("Mmdate", mv.getMmdate());
 		
 		return "MyPage/member_Modify";
@@ -56,6 +61,29 @@ public class MyPageController {
 		return "redirect:../";
 	}
 	
+	// È¸¿ø Å»Åð get
+		@RequestMapping(value="/member_Delete.do", method = RequestMethod.GET)
+		public String memberDelete(MemberVO vo,Model model) throws Exception{
+			MemberVO mv = MemberService.selectOneByMid(vo);
+
+			model.addAttribute("mv", mv);
+			model.addAttribute("Mid", mv.getMid());
+			model.addAttribute("Mpwd", mv.getMpwd());
+			model.addAttribute("Mname", mv.getMname());
+			
+			return "/MyPage/member_Delete";
+		}
+		
+		// È¸¿ø Å»Åð post
+		@RequestMapping(value="/member_Delete.do", method = RequestMethod.POST)
+		public String memberDelete(MemberVO vo, HttpSession session, RedirectAttributes rttr,Model model) throws Exception{
+			
+			//db ¼öÁ¤Ã³¸®
+			int result = MemberService.memberDelete(vo);	
+			session.invalidate();
+			
+			return "redirect:/Member/Login.do";
+		}
 	
 	@RequestMapping(value = "/member_Point.do", method = RequestMethod.GET)
 	public String member_Point(Locale locale, Model model) {

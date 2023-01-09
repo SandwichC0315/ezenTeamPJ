@@ -7,6 +7,7 @@ import com.timestay.vo.BoardFaqVO;
 import com.timestay.vo.MemberVO;
 
 
+
 //IOC 컨테이너에 BoardDAO를 객체로 생성
 @Repository //시스템 외부로 연결해서 데이터 요청, 응답 관리 역할을 하는 객체 어노테이션
 public class MemberDAO {
@@ -28,7 +29,32 @@ public class MemberDAO {
 	}
 	
 	public int modify(MemberVO vo) {
-		return sqlSession.update("com.timestay.mapper.MemberMapper.modify", vo);
-		
+		return sqlSession.update("com.timestay.mapper.MemberMapper.modify", vo);		
 	}
+	
+	
+	public int signUp(MemberVO vo) {
+		return sqlSession.insert("com.timestay.mapper.MemberMapper.signUp", vo);
+	}
+	
+	public MemberVO idCheck(String Mid) throws Exception{
+		return sqlSession.selectOne("com.timestay.mapper.MemberMapper.idCheck", Mid);
+	}
+	
+	public int memberDelete(MemberVO vo) throws Exception{
+		return sqlSession.delete("com.timestay.mapper.MemberMapper.memberDelete", vo);
+	}
+	
+	public MemberVO findId(MemberVO vo) {
+		return sqlSession.selectOne("com.timestay.mapper.MemberMapper.findId", vo);
+	}
+	
+	public MemberVO findPw(MemberVO vo) {
+		return sqlSession.selectOne("com.timestay.mapper.MemberMapper.findPw", vo);
+	}
+	
+	public int updatePw(MemberVO vo) {
+		return sqlSession.update("com.timestay.mapper.MemberMapper.updatePw", vo);
+	}
+	
 }

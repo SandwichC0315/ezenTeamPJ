@@ -15,7 +15,8 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member_Modify.css">
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script> <!--생년월일 select 박스-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->    
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><!-- 주소검색 적용 -->
 
     <style>
     
@@ -130,7 +131,7 @@
 	            <li><a href="<%=request.getContextPath()%>/MyPage/member_QA.do">나의 문의내역</a></li>
 	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
 	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageOrderView.do">주문/배송조회</a></li>
-	            <li><a href="#">취소/반품내역</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/member_Delete.do?Mid=${Mid}">회원 탈퇴</a></li>
 	        </ul>
 	    </div>
         <div class="member_modify">
@@ -145,13 +146,13 @@
 	                    </tr>
 	                    <tr>
 	                        <td>현재 비밀번호</td>
-	                        <td><input name="Mpwd" id="Mpwd" type="password" placeholder="현재 비밀번호를 입력하세요"><span></span></td>
+	                        <td><input name="Mpwd" id="Mpwd" type="password" placeholder="현재 비밀번호를 입력하세요"><span class="result"></span></td>
 	                    </tr>
 	                    <tr>
 	                        <td>신규 비밀번호</td>
 	                        <td>
-	                            <input name="NewMpwd" id="NewMpwd" type="password" placeholder="신규 비밀번호" style="margin-bottom: 5px;"><span></span><br>
-	                            <input name="NewMPwd2" id="NewMpwd2" type="password" placeholder="비밀번호 확인"><span></span>
+	                            <input name="NewMpwd" id="NewMpwd" type="password" placeholder="신규 비밀번호"><span class="result"></span><br>
+	                            <input name="NewMPwd2" id="NewMpwd2" type="password" placeholder="비밀번호 확인"><span class="result"></span>
 	                        </td>
 	                    </tr>                   
 	                    <tr>
@@ -159,37 +160,31 @@
 	                        <td><input type="hidden" name="Mname" value="${Mname}">${Mname}</td>
 	                    </tr>
 	                    <tr>
+	                        <td>연락처</td>
+	                        <td><input id="Mphone" name="Mphone" type="text" value="${Mphone}" placeholder="연락처"><span class="result"></span>
+	                        </td>
+	                    </tr>	           	                    
+	                    <tr>
 	                        <td>이메일</td>
-	                        <td><input class="member_email" type="text" placeholder="현재이메일@naver.com"> 
+	                        <td><input id="Memail" name="Memail" type="text" value="${Memail}" placeholder="이메일 주소"> 
 	                            <select name="email_domain">
 	                                <option value="self">직접입력</option>
 	                                <option value="naver">@naver.com</option>
-	                                <option value="daum">@daum.net</option>
-	                                <option value="gmail">@gmail.com</option>
 	                                <option value="kakao">@kakao.com</option>
+	                                <option value="gmail">@gmail.com</option>
 	                                <option value="yahoo">@yahoo.com</option>
-	                            </select>
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td>연락처</td>
-	                        <td><input name="Mphone" type="text" value="${Mphone}">
-	                            <button class="phone_verify">인증하기</button>
+	                            </select><span class="result"></span>
 	                        </td>
 	                    </tr>
 	                    <tr>
 	                        <td>주소</td>
-	                        <td><input name="Madd" value="${Madd}" type="text" style="margin-bottom: 5px;"><button class="find_Addr">우편번호 찾기</button>
-	                        <br><input class="addr2" type="text" style="width:300px;"></td>                        
-	                    </tr>                    
-	                    <tr>
-	                        <td>생년월일</td>
-	                        <td>
-	                            <select name="yy" id="year"></select>년
-	                            <select name="mm" id="month"></select>월
-	                            <select name="dd" id="day"></select>일
-	                        </td>
-	                    </tr>
+	                        <td><input type="text" id="Madd" name="Madd" value="${Madd}" placeholder="우편번호">
+								<input type="button" class ="findAdd" onclick="Postcode()" value="우편번호 찾기"><span class="result"></span><br>
+		                        <input type="text" id="Madd2" name="Madd2" value="${Madd2}" placeholder="주소" style="width:300px;"><span class="result"></span><br>
+		                        <input type="text" id="Madd3" name="Madd3" value="${Madd3}" placeholder="상세주소" style="width:300px;"> <span class="result"></span>
+		                    </td>                    	
+						</tr>                    
+
 	                </table>
 	                <div class="bottom_btn">
 	                    <button id="submit" onclick="return fnSubmit();"> 수 정 </button>
@@ -279,73 +274,52 @@
             document.querySelector('.modal_close').addEventListener('click', offClick);     
         };
        
-        //생년월일 select 박스
-        $(document).ready(function(){            
-            var now = new Date();
-            var year = now.getFullYear();
-            var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
-            var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate());           
-            //년도 selectbox만들기               
-            for(var i = 1900 ; i <= year ; i++) {
-                $('#year').append('<option value="' + i + '">' + i + '년</option>');    
-            }
 
-            // 월별 selectbox 만들기            
-            for(var i=1; i <= 12; i++) {
-                var mm = i > 9 ? i : "0"+i ;            
-                $('#month').append('<option value="' + mm + '">' + mm + '월</option>');    
-            }
-            
-            // 일별 selectbox 만들기
-            for(var i=1; i <= 31; i++) {
-                var dd = i > 9 ? i : "0"+i ;            
-                $('#day').append('<option value="' + dd + '">' + dd+ '일</option>');    
-            }
-            $("#year  > option[value="+year+"]").attr("selected", "true");        
-            $("#month  > option[value="+mon+"]").attr("selected", "true");    
-            $("#day  > option[value="+day+"]").attr("selected", "true");       
-        
-        });
         
         //비밀번호 확인
         function fnSubmit() {
 			
         	//현재 비밀번호 확인
         	if ($("#Mpwd").val() == "" ) {
-				alert("현재 비밀번호를 입력해주세요.");
+				$(".result").empty();
 				$("#Mpwd").next().text(" 비밀번호를 입력하세요").css("color","red").css("font-size","12px");
+				alert("현재 비밀번호를 입력해주세요.");
 				$("#Mpwd").focus();
 	        	
-				$("#NewMpwd").next().empty();
-	        	$("#NewMpwd2").next().empty();
+				//$("#NewMpwd").next().empty();
+	        	//$("#NewMpwd2").next().empty();
 	        	
 				return false;
 			}
 	        
 	        if ($("#Mpwd").val() != "${Mpwd}") {
-	        	alert("현재 비밀번호가 일치하지 않습니다.");
+				$(".result").empty();
 	        	$("#Mpwd").next().text(" 불일치").css("color","red").css("font-size","12px");
+	        	alert("현재 비밀번호가 일치하지 않습니다.");
 	        	$("#Mpwd").focus();
 	        	
-				$("#NewMpwd").next().empty();
-	        	$("#NewMpwd2").next().empty();
+				//$("#NewMpwd").next().empty();
+	        	//$("#NewMpwd2").next().empty();
 	        	 
 	        	return false;
 	        }
 	        
 	        if ($("#Mpwd").val() == "${Mpwd}") {
-	        	$("#Mpwd").next().empty();	        	 
+				$(".result").empty();
+	        	//$("#Mpwd").next().empty();	        	 
 	        }
 	        
 	        if ($("#NewMpwd").val() == "" && $("#NewMpwd2").val() == ""){
-	        	$("#NewMpwd").val($("#Mpwd").val());
-	        	$("#NewMpwd2").val($("#Mpwd").val());
+				$(".result").empty();
+	        	//$("#NewMpwd").val($("#Mpwd").val());
+	        	//$("#NewMpwd2").val($("#Mpwd").val());
 	        }	
 	        
 	        //신규 비밀번호 확인	        
 	        if ($("#NewMpwd").val() != "" && $("#NewMpwd2").val() == "") {
+				$(".result").empty();
 	        	$("#NewMpwd2").next().text(" 입력해주세요").css("color","red").css("font-size","12px");
-	        	$("#NewMpwd").next().empty();
+	        	//$("#NewMpwd").next().empty();
 	        	alert("비밀번호 확인을 입력해주세요.");
 	        	$("#NewMpwd2").focus();
 	        	 
@@ -353,8 +327,9 @@
 	        }
 	        	 
 	        if ($("#NewMpwd2").val() != "" && $("#NewMpwd").val() == "") {
+				$(".result").empty();
 	        	$("#NewMpwd").next().text(" 입력해주세요").css("color","red").css("font-size","12px");
-	        	$("#NewMpwd2").next().empty();
+	        	//$("#NewMpwd2").next().empty();
 	        	alert("신규 비밀번호를 입력해주세요.");
 	        	$("#NewMpwd").focus();
 	        	 
@@ -362,8 +337,9 @@
 	        }
 	        	 
 	        if ($("#NewMpwd").val() != $("#NewMpwd2").val()) {
+				$(".result").empty();
 	        	$("#NewMpwd2").next().text(" 불일치").css("color","red").css("font-size","12px");
-	        	$("#NewMpwd").next().empty();
+	        	//$("#NewMpwd").next().empty();
 	        	alert("비밀번호 확인이 일치하지 않습니다.");
 	        	$("#NewMpwd2").focus();
 	        	 
@@ -371,15 +347,72 @@
 	        }
 	        
 	        if ($("#NewMpwd").val() == $("#NewMpwd2").val()) {
-	        	$("#NewMpwd").next().empty();
-	        	$("#NewMpwd2").next().empty();	        	
+				$(".result").empty();
+	        	//$("#NewMpwd").next().empty();
+	        	//$("#NewMpwd2").next().empty();	        	
 	        }
 	        
+        	if ($("#Mphone").val() == "" ) {
+				$(".result").empty();
+				$("#Mphone").next().text(" *필수").css("color","red").css("font-size","12px");
+				alert("연락처를 입력해주세요.");
+				$("#Mphone").focus();
+	        	
+				return false;
+			}
+	        
+        	if ($("#Memail").val() == "" ) {
+				$(".result").empty();
+				$("#Memail").next().text(" *필수").css("color","red").css("font-size","12px");
+				alert("이메일 주소를 입력해주세요.");
+				$("#Memail").focus();
+	        	
+				return false;
+			}
+	        
+        	if ($("#Madd").val() == "" || $("#Madd2").val() == "" || $("#Madd3").val() == "") {
+				$(".result").empty();
+				$(".findAdd").next().text(" *필수").css("color","red").css("font-size","12px");
+				alert("주소를 모두 입력해주세요.");
+				$("#Madd3").focus();
+	        	
+				return false;
+			}
+
+        	
 	        //최종 확인 
 	        if (!confirm('수정 하시겠습니까?')) {
 	        	return false;
 	        }        
         }
+        
+        //주소 검색
+	    function Postcode() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('Madd').value = data.zonecode;
+	                document.getElementById("Madd2").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("Madd3").focus();
+	            }
+	        }).open();
+	    }
     </script>
 </body>
 </html>

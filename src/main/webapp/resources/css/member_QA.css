@@ -58,6 +58,7 @@ header .sub{display:none; width:inherit;}
 .member_menu p{font-weight: bold; padding:5px 0;border-bottom: 1px solid gainsboro; text-align: center; } 
 .member_menu li{font-size:13px; padding-left:13px; margin-top:10px;}
 .member_menu li:nth-child(4){font-size:15px;margin-top:30px;}
+.member_menu li:nth-child(6){font-size:15px;margin-top:30px;}
 .member_menu li:hover{text-decoration:underline; color:#666;}
 
 main h4{width:800px; font-size: 30px; font-weight: bold; padding-bottom:7px; margin:40px 0; border-bottom: #333 3px solid;}

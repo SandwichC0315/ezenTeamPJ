@@ -8,11 +8,11 @@
     a {text-decoration:none; color:inherit; position: inherit;}
     header{height:100px; top:0; z-index: 100; width:100%; position:fixed; }
     
-    /*½ºÅ©·Ñ½Ã º¯°æµÇ´Â header ½ºÅ¸ÀÏ*/
-	.active{background:rgba(0,0,0, 0.6 ); /*½ºÅ©·Ñ ÈÄ*/
+    /*ï¿½ï¿½Å©ï¿½Ñ½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ header ï¿½ï¿½Å¸ï¿½ï¿½*/
+	.active{background:rgba(0,0,0, 0.6 ); /*ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½*/
 	transition-duration: 0.5s; transition-timing-function: ease;    
 	-webkit-transition-duration:0.3s;-webkit-transition-timing-function:ease;}
-	.deactive{background: #000; /*½ºÅ©·Ñ Àü*/
+	.deactive{background: #000; /*ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½*/
 	transition-duration: 0.5s; transition-timing-function: ease;    
 	-webkit-transition-duration:0.3s; -webkit-transition-timing-function:ease;}    
 
@@ -76,7 +76,13 @@
 
     main #info table{margin: 0 auto; height: 50vh;}
 
-    main #info #inputInfo{width: 20vw; height: 4vh; margin-left: 2.5vw;}
+    main #info input[type=text], 
+    main #info input[type=password]{width: 20vw; height: 4vh; margin-left: 2.5vw;}
+    main #info #Mid{width:16vw;}
+    main #info .idCheck{height:4.5vh;}
+    main #info #Madd{width:14.5vw;}
+    main #info #Madd, #Madd2{margin-bottom: 5px;}
+    main #info #Address input{height:30px;}
     main #info #radioBox{text-align: center;}
 
     main #agreeCheck table{margin: 2vh auto 6vh auto; font-size: 1.7vh;
@@ -96,7 +102,7 @@
     footer #footer1 {padding-right: 10vw;}
     
     
-    /*¹ÝÀÀÇü »çÀÌÁî Á¶Àý*/
+    /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 	@media screen and (max-width: 1580px) {
 	    .navbar {flex-direction: column; align-items: flex-start;}            
 	    .navbar_menu{margin:0;}

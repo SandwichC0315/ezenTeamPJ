@@ -205,7 +205,10 @@
                 </li><br>
                 <li class="on">
                     <a href="<%=request.getContextPath()%>/MyPage/MyPageOrderView.do">주문배송조회</a>
-                </li><br>
+                </li><br>                
+	            <li>
+	            	<a href="<%=request.getContextPath()%>/MyPage/member_Delete.do?Mid=${Mid}">회원 탈퇴</a>
+	            </li>
             </ul>
         </nav>        
 		<!-- 서브메뉴 -->

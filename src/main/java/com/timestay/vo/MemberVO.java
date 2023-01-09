@@ -8,7 +8,10 @@ public class MemberVO {
 	private String NewMpwd;
 	private String Mname;
 	private String Mphone;
+	private String Memail;
 	private String Madd;
+	private String Madd2;
+	private String Madd3;
 	private String Mgrade;
 	private String Menter;
 	private String Mmdate;
@@ -51,12 +54,30 @@ public class MemberVO {
 	}
 	public void setMphone(String mphone) {
 		Mphone = mphone;
+	}	
+	public String getMemail() {
+		return Memail;
+	}
+	public void setMemail(String memail) {
+		Memail = memail;
 	}
 	public String getMadd() {
 		return Madd;
 	}
 	public void setMadd(String madd) {
 		Madd = madd;
+	}	
+	public String getMadd2() {
+		return Madd2;
+	}
+	public void setMadd2(String madd2) {
+		Madd2 = madd2;
+	}
+	public String getMadd3() {
+		return Madd3;
+	}
+	public void setMadd3(String madd3) {
+		Madd3 = madd3;
 	}
 	public String getMgrade() {
 		return Mgrade;

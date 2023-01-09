@@ -1,81 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 탈퇴</title>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css"/>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login_pop.css"/>  
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member_Delete.css">
 
-	<!--//location-->
-    <script>
-        $(function(){
-            $('.sel_box').selectric();
-        })
-    </script>
-
-	<!--삭제할 상품을 선택하세요-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script> <!--생년월일 select 박스-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->    
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><!-- 주소검색 적용 -->
+	
 	<script type="text/javascript">
-	    function DelChk(){
-	        var select_obj = '';
-	        
-	        $('input[name="idx"]:checked').each(function(index){
-	            if(index != 0){
-	                select_obj += ', ';
-	            }
-	            select_obj += $(this).val();
-	        });
-	
-	        if(select_obj==""){
-	            alert('삭제할 상품을 선택하세요');
-	            return;
-	        }
-	
-	        location.href="? mode=cart_seldel&idx="+select_obj;
-	    }
-
-        // 스크롤 시 header 색변화 fade-in
-        $(function(){
-            $(document).on('scroll', function(){
-                if($(window).scrollTop() > 100){
-                    $("#header").removeClass("deactive");
-                    $("#header").addClass("active");
-                }else{
-                    $("#header").removeClass("active");
-                    $("#header").addClass("deactive");
-                }
-            })
-        });
-        
-        //로그인 팝업창
-        window.onload = function() {     
-            function onClick() {
-                document.querySelector('.modal_wrap').style.display ='block';
-                document.querySelector('.black_bg').style.display ='block';
-            }   
-            function offClick() {
-                document.querySelector('.modal_wrap').style.display ='none';
-                document.querySelector('.black_bg').style.display ='none';
-            }
-        
-            document.getElementById('modal_btn').addEventListener('click', onClick);
-            document.querySelector('.modal_close').addEventListener('click', offClick);     
-        };
+		$(document).ready(function(){
+			// 취소
+			$(".cencle").on("click", function(){
+				
+				location.href = "/";
+						    
+			})
+		
+			$("#delete").on("click", function(){
+				if($("#Mpwd").val()==""){
+					alert("비밀번호를 입력해주세요.");
+					$("#Mpwd").focus();
+					return false;
+				}	
+				
+				if($("#Mpwd").val()!="${Mpwd}"){
+					alert("비밀번호가 다릅니다.");
+					$("#Mpwd").focus();
+					return false;
+				}	
+				
+				
+		        //최종 확인 
+		        if (!confirm('탈퇴한 계정은 다시 복구할 수 없습니다. 정말 탈퇴하시겠습니까?')) {
+		        	return false;
+		        }      
+			});
+			
+			
+				
+			
+		})
 	</script>
-<title>장바구니</title>
-
- 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css"/>
-  	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login_pop.css"/>  
-  	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/MyPageshoppingCart.css" type="text/css"/>
+    <style>
     
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
-    
+    </style>
 </head>
 <body>
-<header id="header" class="deactive">
-        
+    <header id="header" class="deactive">        
         <nav class="navbar">
             <div class="navbar_menu">
                 <div id="title"> 
@@ -104,13 +86,13 @@
                     <li><a href="#">EVENT</a>
                         <div class="sub">
                             <ul>
-                               <li><a href="<%=request.getContextPath()%>/Event/EventNowEvent.do">진행중 이벤트</a></li>
+                               	<li><a href="<%=request.getContextPath()%>/Event/EventNowEvent.do">진행중 이벤트</a></li>
                                 <li><a href="<%=request.getContextPath()%>/Event/EventEndEvent.do">종료된 이벤트</a></li>
                                 <li><a href="#"></a></li>
                             </ul>
                         </div>
                     </li>
-                    <li><a href="#">공지사항</a>
+                    <li><a href="<%=request.getContextPath()%>/Board/BoardNotice.do">공지사항</a>
                         <div class="sub">
                             <ul>
                                 <li><a href="<%=request.getContextPath()%>/Board/BoardNotice.do">공지사항</a></li>
@@ -123,8 +105,8 @@
                 </ul>
             </div>          
             <a href="#" class="navbar_toggleBtn"><i class="fas fa-bars"></i></a>
-        </nav>    
-             
+        </nav>
+         
   		<c:if test= "${login==null}">
 	  		<ul class="navbar_links">
 	 			<li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>  		    
@@ -142,8 +124,8 @@
   		</c:if>  
         
     </header>
- <main>
-        
+    <main>
+      
       <c:if test="${login==null }">
         <div class="find">   
             <div class="Login">
@@ -175,94 +157,54 @@
       </c:if>   
       
       <c:if test="${login!=null}">
-        <!--서브메뉴-->
-        <nav id="lnb">
-            <ul>
-            	<li>
-            		<a href="<%=request.getContextPath()%>/MyPage/member_Modify.do?Mid=${Mid}" >회원정보 수정</a>
-            	</li><br>
-	            <li>
-	            	<a href="<%=request.getContextPath()%>/MyPage/member_Point.do">나의 마일리지</a>
-	            </li><br>
-	            <li>
-	            	<a href="<%=request.getContextPath()%>/MyPage/member_QA.do">나의 문의내역</a>
-	            </li><br>
-                <li class="on">
-                    <a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a>
-                </li><br>
-                <li>
-                    <a href="<%=request.getContextPath()%>/MyPage/MyPageOrderView.do">주문배송조회</a>
-                </li><br>                
-	            <li>
-	            	<a href="<%=request.getContextPath()%>/MyPage/member_Delete.do?Mid=${Mid}">회원 탈퇴</a>
-	            </li>
-            </ul>
-        </nav> 
-
-        <!--서브메뉴-->
-        <div id="contents">
-            <div class="contbox">
-                <!--마이페이지-->
-                <div class="location">
-                    <span class="tit">마이페이지</span>
-                    <span class="bar"></span>
-                    <strong>장바구니</strong>
-                </div>
-                <div class="cart_box">
-                    <div class="table_list">
-                        <div class="titlebox">
-                            <div class="box_cell box_1">선택</div>
-                            <div class="box_cell box_2"></div>
-                            <div class="box_cell box_3 txt_left">상품정보</div>
-                            <div class="box_cell box_4 txt_right">적립금</div>
-                            <div class="box_cell box_5">판매가</div>
-                            <div class="box_cell box_6">구매수량</div>
-                            <div class="box_cell box_7">합계</div>
-                        </div>
-
-                        <!--list-->
-                        <ul>
-                            <li class="nolist">
-                                <p>장바구니가 비었습니다</p>
-                            </li>
-                        </ul>
-
-                        <!--//list-->
-                        <!--total-->
-                        <div class="totalbox">
-                            총 주문 금액
-                            <strong>0원</strong>
-                            <span class="plus">+</span>
-                            배송비
-                            <strong>0원</strong>
-                        </div>
-                        <!--//total-->
-                    </div>
-                </div>
-
-                <div class="naver_paybox"></div>
-            </div>
+	    <div class="member_menu">
+	        <p>마이 페이지</p>
+	        <ul>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/member_Modify.do?Mid=${Mid}" style="font-weight: bold;">회원정보 수정</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/member_Point.do">나의 마일리지</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/member_QA.do">나의 문의내역</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageOrderView.do">주문/배송조회</a></li>
+	            <li><a href="<%=request.getContextPath()%>/MyPage/member_Delete.do?Mid=${Mid}">회원 탈퇴</a></li>
+	        </ul>
+	    </div>
+	   <div class="delete">
+        <div class="member_delete">
+            <h4>회원 탈퇴</h4>
+            
+            <form action="member_Delete.do" method="post">
+				<table>
+	                    <tr>
+	                        <td>아이디</td>
+	                        <td><input type="hidden" name="Mid" value="${Mid}">${Mid}</td>
+	                    </tr>
+				 		<tr>
+	                        <td>이름</td>
+	                        <td><input type="hidden" name="Mname" value="${Mname}">${Mname}</td>
+	                    </tr>
+						<tr>
+	                        <td>비밀번호</td>
+	                        <td><input name="Mpwd" id="Mpwd" type="password" placeholder="현재 비밀번호를 입력하세요"><span class="result"></span></td>
+	                    </tr>
+	            </table>
+	            <div>
+	            	<p id="warning">* 탈퇴한 계정의 정보는 복구할 수 없습니다</p>
+	            </div>
+				<div class="form-group has-feedback">
+					<button type="submit" id="delete">회원탈퇴</button>
+				</div>
+			</form>
+			<div>
+				<c:if test="${msg == false}">
+					비밀번호가 맞지 않습니다.
+				</c:if>
+			</div>
         </div>
-
-        <div class="totalbox">총 주문 금액
-        <strong></strong>
-        <span class="plus">+</span>배송비
-        <strong></strong>
         </div>
-        <div class="btn_box">
-            <div class="btn_left">
-                <a href="#" class="a_btn">선택삭제</a>
-            </div>
-            <div class="btn_right">
-                <span class="sbox">
-                    <a href="#" class="shopping">계속 쇼핑하기</a>
-                    <a href="#" class="payment">전체주문하기</a>
-                </span>
-            </div>
-        </div>
-        </c:if>
+     	</c:if>
+     	
     </main>
-     <footer>
+    <footer>
         <div id="container">
             <div id="footer1">
                 <h2>Cafe Time Stay</h2>
@@ -272,11 +214,11 @@
                     이메일 : cafetimestay@help.com</p>
             </div>
             <!--//footer1-->
-
+        
             <div id="footer2">
                 <h2>대표전화 : 1234-5678</h2>
-                <p> 팩스 : 063) 123 - 4567<br />
-                    운영시간 : 10:00 ~ 18:00<br />
+                <p> 팩스 : 063) 123 - 4567<br/>
+                    운영시간 : 10:00 ~ 18:00<br/>
                     매주 월요일은 휴무일입니다.</p>
             </div>
             <!--//footer2-->
@@ -308,5 +250,38 @@
 	                  
         </div>
     </div>  
+            
+    <script>  
+
+        // 스크롤 시 header 색변화 fade-in
+        $(function(){
+            $(document).on('scroll', function(){
+                if($(window).scrollTop() > 100){
+                    $("#header").removeClass("deactive");
+                    $("#header").addClass("active");
+                }else{
+                    $("#header").removeClass("active");
+                    $("#header").addClass("deactive");
+                }
+            })
+        });   
         
+        //로그인 팝업창
+        window.onload = function() {     
+            function onClick() {
+                document.querySelector('.modal_wrap').style.display ='block';
+                document.querySelector('.black_bg').style.display ='block';
+            }   
+            function offClick() {
+                document.querySelector('.modal_wrap').style.display ='none';
+                document.querySelector('.black_bg').style.display ='none';
+            }
+        
+            document.getElementById('modal_btn').addEventListener('click', onClick);
+            document.querySelector('.modal_close').addEventListener('click', offClick);     
+        };
+       
+
+    </script>
+</body>
 </html>

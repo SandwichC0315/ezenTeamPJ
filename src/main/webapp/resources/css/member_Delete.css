@@ -1,13 +1,13 @@
-/*Point Style*/
+/*Modify Style*/
 body{margin:0; padding:0;width:100%;}
 a {text-decoration:none; color:inherit; position: inherit;}
 header{height:100px; top:0; z-index: 100; width:100%; position:fixed; }
 
-/*스크롤시 변경되는 header 스타일*/
-.active{background:rgba(0,0,0, 0.6 ); /*스크롤 후*/
+/*�뒪�겕濡ㅼ떆 蹂�寃쎈릺�뒗 header �뒪���씪*/
+.active{background:rgba(0,0,0, 0.6 ); /*�뒪�겕濡� �썑*/
 transition-duration: 0.5s; transition-timing-function: ease;    
 -webkit-transition-duration:0.3s;-webkit-transition-timing-function:ease;}
-.deactive{background: #000; /*스크롤 전*/
+.deactive{background: #000; /*�뒪�겕濡� �쟾*/
 transition-duration: 0.5s; transition-timing-function: ease;    
 -webkit-transition-duration:0.3s; -webkit-transition-timing-function:ease;}
 
@@ -18,7 +18,7 @@ transition-duration: 0.5s; transition-timing-function: ease;
 .navbar_menu {display: flex; list-style: none; padding-left: 0; margin:0; width:100%; }        
 .navbar_menu li {padding: 8px 12px;}
 
-/*메뉴바 상단 로그인 메뉴*/
+/*硫붾돱諛� �긽�떒 濡쒓렇�씤 硫붾돱*/
 .navbar_links {list-style: none; padding-left: 0; width:250px; float:right; position:relative; margin:16px 0;}
 .navbar_links li{display: inline-block; position:relative;}
 .navbar_links li a{color: #fff;  padding:0 9px; display: inline-block;} 
@@ -54,31 +54,35 @@ header .sub{display:none; width:inherit;}
 .navbar .sub a::after{display:none;}
 .navbar .sub a:hover{text-decoration:underline;}
 
-.member_menu{width:110px; height:200px;margin:80px 0 0 180px; position: absolute; background-color:aliceblue;}
-.member_menu p{font-weight: bold; padding:5px 0;border-bottom: 1px solid gainsboro; text-align: center; } 
-.member_menu li{font-size:13px; padding-left:13px; margin-top:10px;}
-.member_menu li:nth-child(4){font-size:15px;margin-top:30px;}
-.member_menu li:nth-child(6){font-size:15px;margin-top:30px;}
-.member_menu li:hover{text-decoration:underline; color:#666;}
+.login_bottom{text-align: center; margin-top:15px;}
+.find_bottom a{font-size: 14px; color:#666;}
+.find_bottom a::before{content:"|"; font-size:12px;display:inline-block; width:2px; height:18px; margin-right: 5px; color:#666;  vertical-align:middle;} 
+.find_bottom a:first-child::before{display:none;}
 
-main h4{width:800px; font-size: 30px; font-weight: bold; padding-bottom:7px; margin:40px 0; border-bottom: #333 3px solid;}
-main{height: 100%;}
-.member_point{margin: 250px auto 350px; width:800px; }
-#current_point{width: 800px; height: 300px; position: relative;  margin-bottom:20px;}
-#current_point table{width:800px; height:130px; background-color: burlywood; text-align:center; 
-    font-size:30px; font-weight:bold;  border-radius:10px;}
-#current_point td{vertical-align: middle;}
-#point_list table{width:800px; }
-#point_list tr:first-child{background:burlywood; text-align: center; border:gainsboro;}
-#point_list tr{height:50px; border-bottom:1px solid gainsboro;}
-#point_list td{vertical-align: middle; border:1px solid gainsboro;}
-#point_list td:nth-child(1),#point_list td:nth-child(3),
-#point_list td:nth-child(4),#point_list td:nth-child(5){width:100px;}
-#point_list #page{ margin-top:100px; text-align: center; font-size: 17px; }
+    .member_menu{width:110px; height:200px;margin:80px 0 0 180px; position: absolute; background-color:aliceblue;}
+    .member_menu p{font-weight: bold; padding:5px 0;border-bottom: 1px solid gainsboro; text-align: center; } 
+    .member_menu li{font-size:13px; padding-left:13px; margin-top:10px;}
+    .member_menu li:nth-child(4){font-size:15px;margin-top:30px;}    
+    .member_menu li:nth-child(6){font-size:15px;margin-top:30px;}
+    .member_menu li:hover{text-decoration:underline; color:#666;}
+
+/*硫붿씤*/
+main h4{text-align: center;width:320px; font-size:30px; font-weight:bold; padding-bottom:7px; margin:40px 0; border-bottom: #333 3px solid;}
+
+.delete{margin: 350px auto 250px; width:320px; height: 80vh;}
+.delete table{width:320px;}
+.delete tr{height:45px;}
+.delete td{vertical-align:middle; font-size:18px; font-weight:bold;}
+.delete input{height:30px; font-size:15px; padding-left:7px; width:206px;}
+.delete select{width:150px; height:36px; position:relative; bottom: 1px;}
+.delete td:nth-child(1){width:100px;}
+.delete #warning{color:red; margin:30px 0 30px 0;}
 
 
-
-
+	#delete{width:320px; height:40px; font-size: 18px; font-weight: bold; border: none; border-radius: 5px;}
+    #delete{background-color: rgb(230, 179, 114);}
+    #delete:hover{background-color: rgb(212, 155, 80); }
+    #delete:active{background-color: rgb(230, 179, 114);}
 
 footer{width: 100vw; height: 300px; margin: 0 auto; background: rgb(93, 80, 82); }
 footer #container{ margin: auto; padding-left: 10vw; padding-top: 6vh;} 
@@ -87,7 +91,7 @@ footer h2{font-size: 25px; font-weight: bold;}
 footer #footer1 {padding-right: 10vw;}
 
 
-/*반응형 사이즈 조절*/
+/*諛섏쓳�삎 �궗�씠利� 議곗젅*/
 @media screen and (max-width: 1580px) {
     .navbar {flex-direction: column; align-items: flex-start;}            
     .navbar_menu{margin:0;}

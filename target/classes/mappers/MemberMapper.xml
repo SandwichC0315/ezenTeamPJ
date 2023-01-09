@@ -9,7 +9,10 @@
 		     , Mpwd
 		     , Mname
 		     , Mphone
+		     , Memail
 		     , Madd
+		     , Madd2
+		     , Madd3
 		     , Mgrade
 		     , Menter
 		     , Mmdate
@@ -26,7 +29,10 @@
 		     , Mpwd
 		     , Mname
 		     , Mphone
+		     , Memail
 		     , Madd
+		     , Madd2
+		     , Madd3
 		     , Mgrade
 		     , Menter
 		     , Mmdate
@@ -42,9 +48,81 @@
 		   	 , Mpwd = #{NewMpwd}
 		   	 , Mname = #{Mname}
 		   	 , Mphone = #{Mphone}
+		   	 , Memail = #{Memail}
 		   	 , Madd = #{Madd}
-		   	 , Mmdate = null
+		   	 , Madd2 = #{Madd2}
+		   	 , Madd3 = #{Madd3}
+		   	 , Mmdate = sysdate
 		 WHERE Mid = #{Mid}	
+	</update>
+	
+	<insert id="signUp" parameterType="MemberVO">
+		<![CDATA[
+		INSERT INTO TB_MEMBER (
+					 Midx
+				   , Mid
+				   , Mpwd
+				   , Mname
+				   , Mphone
+		     	   , Memail 
+				   , Madd
+				   , Madd2
+				   , Madd3
+				   , Mgrade
+				   , Menter
+				   , Mbreakyn
+				   ) VALUES (
+				     TB_MIDX_SEQ.nextval
+				   , #{Mid}
+				   , #{Mpwd}
+				   , #{Mname}
+				   , #{Mphone}
+				   , #{Memail}
+				   , #{Madd}
+				   , #{Madd2}
+				   , #{Madd3}
+				   , 'M'
+				   , sysdate
+				   , 'N'
+				   )
+		]]>
+		<selectKey order="AFTER" resultType="integer" keyProperty="Midx">
+		SELECT MAX(Midx) from TB_MEMBER	
+		</selectKey>
+	</insert>
+	
+	<select id="idCheck" resultType="MemberVO">
+	 select Mid from TB_MEMBER
+	     where Mid = #{Mid}
+	</select>
+	
+	<delete id="memberDelete">
+		DELETE FROM TB_MEMBER
+		WHERE Mid = #{Mid}
+		AND Mpwd = #{Mpwd}
+	</delete>
+	
+	<select id="findId" parameterType="MemberVO" resultType="MemberVO">
+		select * from TB_MEMBER 
+		where Mname = #{Mname} 
+		and Memail = #{Memail}
+	</select>
+	
+	
+	<select id="findPw" parameterType="MemberVO" resultType="MemberVO">
+		select * from TB_MEMBER 
+		where Mid = #{Mid} 
+		and Memail = #{Memail}
+		and Mname = #{Mname}
+	</select>
+    
+    	
+	<update id="updatePw" parameterType="MemberVO">
+		update TB_MEMBER 
+		set Mpwd = #{Mpwd} 
+		where Mid = #{Mid} 
+		and Memail = #{Memail}
+		and Mname = #{Mname}
 	</update>
 </mapper>
 

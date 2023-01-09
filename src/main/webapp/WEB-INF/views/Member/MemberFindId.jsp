@@ -13,12 +13,9 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login_pop.css"/>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/find_ID.css">
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script> <!--생년월일 select 박스-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
 
-    <style>
-    
-    </style>
+
 </head>
 <body>
     <header id="header" class="deactive">        
@@ -71,8 +68,8 @@
         </nav>    
     
   		<c:if test= "${login==null}">
-	  		<ul class="navbar_links">
-	 			<li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>  		    
+	  		<ul class="navbar_links">	 			
+            	<li><a href="<%=request.getContextPath()%>/Member/Login.do">로그인</a></li>  		    
 	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
 	            <li><a href="#">고객센터</a></li>
 	        </ul>
@@ -91,9 +88,10 @@
         <div class="find">         
             <div class="find_ID">  
                 <h4>아이디 찾기</h4>
+                <form action="find_ID.do" method="post" name="find_ID" >
                 <table>
                     <tr>
-                        <td><input class="member_email" type="text" placeholder="이메일">
+                        <td><input name="Memail" class="Memail" type="text" placeholder="이메일">
                             <select name="email_domain">
                                 <option value="self">직접입력</option>
                                 <option value="naver">@naver.com</option>
@@ -105,15 +103,35 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><input class="member_name" type="text" placeholder="이름"></td>   
+                        <td><input name="Mname" class="Mname" type="text" placeholder="이름"></td>   
+                    </tr>
+                    <tr>
+                    	<td class="result">
+		                    <c:if test="${check == 1}">
+								<script>
+									alert("입력하신 정보로 가입한 아이디가 존재하지 않습니다")
+								</script>
+								<p>해당 정보로 가입한 아이디가 존재하지 않습니다</p>
+							</c:if>
+					
+							<!-- 이메일과 이름이 일치할 때 -->
+							<c:if test="${check == 0 }">
+							<script>
+								alert("입력하신 정보로 가입된 아이디는 '${Mid}' 입니다")
+							</script>
+								<p>해당 정보로 가입된 아이디는 <span>'${Mid}'</span> 입니다.</p>		
+							</c:if>                    	
+                    	</td>
                     </tr>
                     <tr>
                         <td>
-                            <button id="submit">아이디 확인</button>
-                            <button id="cancel"> 취 소</button>
+                            <button id="submit" class="findId" onclick="return findId()">아이디 확인</button>
+                            <button id="cancel" onclick="location.href='<%=request.getContextPath()%>/'"> 취 소</button>
                         </td>
                     </tr>
+                    
                 </table> 
+                </form>
                 <div class="find_bottom">
                     <a href="<%= request.getContextPath() %>/Member/Login.do">로그인</a> 
                     <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
@@ -144,21 +162,7 @@
         </div>
         <!--//container-->
     </footer>
-    <div class="black_bg"></div>
-    <div class="modal_wrap">
-        <div class="modal_close"><a href="#" onclick="return false;">close</a></div>
-        <div class="modalContents">
-            <h2>로그인</h2>
-            <input name="id" class="loginId" type="text" placeholder="아이디"/>
-            <input name="password" class="loginPw" type="password" placeholder="비밀번호"/>
-            <button class="login_btn">로그인</button>
-            <div class="login_bottom">
-                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
-                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
-                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
-            </div>            
-        </div>
-    </div>  
+ 
     <script>  
 
         // 스크롤 시 header 색변화 fade-in
@@ -173,23 +177,27 @@
                 }
             })
         });   
-        
-        //로그인 팝업창
-        window.onload = function() {     
-            function onClick() {
-                document.querySelector('.modal_wrap').style.display ='block';
-                document.querySelector('.black_bg').style.display ='block';
-            }   
-            function offClick() {
-                document.querySelector('.modal_wrap').style.display ='none';
-                document.querySelector('.black_bg').style.display ='none';
-            }
-        
-            document.getElementById('modal_btn').addEventListener('click', onClick);
-            document.querySelector('.modal_close').addEventListener('click', offClick);     
-        };
 
-   
+
+        function findId()
+		{
+			//아이디 확인
+			if ($(".Memail").val() == ""){
+				alert("이메일을 입력해주세요.");
+				$(".Memail").focus();
+				
+				return false;
+			}
+			
+	        //비밀번호 확인	  
+	        if ($(".Mname").val() == "" ) {
+				alert("이름을 입력해주세요.");
+				$(".Mname").focus();
+	        		        	
+				return false;
+			}
+		}
+
     </script>
 </body>
 </html>

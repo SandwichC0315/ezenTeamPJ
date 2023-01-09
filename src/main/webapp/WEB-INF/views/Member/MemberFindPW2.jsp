@@ -13,7 +13,6 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Login_pop.css"/>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/find_PW2.css">
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script> <!--생년월일 select 박스-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--jquery 3.6 적용-->
 
     <style>
@@ -72,7 +71,7 @@
     
   		<c:if test= "${login==null}">
 	  		<ul class="navbar_links">
-	 			<li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>  		    
+            	<li><a href="<%=request.getContextPath()%>/Member/Login.do">로그인</a></li>  		    
 	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
 	            <li><a href="#">고객센터</a></li>
 	        </ul>
@@ -90,18 +89,17 @@
     <main>
         <div class="find">         
             <div class="find_PW">  
-                <h4>비밀번호 변경</h4>
-                <table>
+                <h4>비밀번호 발급 완료</h4>
+                <table style="font-size:18px;">
                     <tr>
-                        <td><input class="member_ID" type="password" placeholder="신규 비밀번호"></td>   
+                        <td>임시 비밀번호가 발급되었습니다.</td>   
                     </tr>
                     <tr>
-                        <td><input class="member_name" type="password" placeholder="신규 비밀번호 확인"></td>   
+                        <td>메일함을 확인해주세요.</td>   
                     </tr>
                     <tr>
-                        <td>
-                            <button id="submit">확 인</button>
-                            <button id="cancel"> 취 소</button>
+                        <td style="text-align:center;">
+                            <button id="submit" onclick="location.href='<%=request.getContextPath()%>/Member/Login.do'">확 인</button>
                         </td>
                     </tr>
                 </table> 
@@ -130,21 +128,7 @@
         </div>
         <!--//container-->
     </footer>
-    <div class="black_bg"></div>
-    <div class="modal_wrap">
-        <div class="modal_close"><a href="#" onclick="return false;">close</a></div>
-        <div class="modalContents">
-            <h2>로그인</h2>
-            <input name="id" class="loginId" type="text" placeholder="아이디"/>
-            <input name="password" class="loginPw" type="password" placeholder="비밀번호"/>
-            <button class="login_btn">로그인</button>
-            <div class="login_bottom">
-	                <a href="<%= request.getContextPath() %>/Member/signup1.do">회원가입</a> 
-	                <a href="<%= request.getContextPath() %>/Member/find_ID.do">아이디 찾기</a> 
-	                <a href="<%= request.getContextPath() %>/Member/find_PW.do">비밀번호 찾기</a>
-            </div>            
-        </div>  
-    </div>
+
     <script>  
 
         // 스크롤 시 header 색변화 fade-in
@@ -159,21 +143,6 @@
                 }
             })
         });   
-        
-        //로그인 팝업창
-        window.onload = function() {     
-            function onClick() {
-                document.querySelector('.modal_wrap').style.display ='block';
-                document.querySelector('.black_bg').style.display ='block';
-            }   
-            function offClick() {
-                document.querySelector('.modal_wrap').style.display ='none';
-                document.querySelector('.black_bg').style.display ='none';
-            }
-        
-            document.getElementById('modal_btn').addEventListener('click', onClick);
-            document.querySelector('.modal_close').addEventListener('click', offClick);     
-        };
 
    
     </script>
