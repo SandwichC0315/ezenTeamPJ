@@ -11,6 +11,15 @@
 		    from (
 		        select *
 		        from TB_BoardFaq
+				where BFdelyn = 'N'
+				]]>
+				
+				<if test="keyword != null">
+					and BFtitle like '%'||#{keyword}||'%'
+				</if>
+				
+				<![CDATA[
+		        
 		        order by bfidx desc ) A
 		    where rownum <= #{perPageNum}*#{page} ) B
 		where B.rnum > #{pageStart}
@@ -27,6 +36,9 @@
         WHERE
             BFDELYN='N'
     ]]>
+    	<if test="keyword != null">
+			and BFtitle like '%'||#{keyword}||'%'
+		</if>
 	</select>
 	
 	

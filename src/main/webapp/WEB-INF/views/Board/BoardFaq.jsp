@@ -150,9 +150,11 @@
 	<c:if test="${Mvo.getMgrade() == 'A'}"> <!-- admin만 보이게 -->
    		<button id="write" onclick="location.href='InsertFaq.do'">등록${Mgrade}</button>
    	</c:if>
-    	<div>
-	    	<input type="text" id="searchbar">
-    		<button id="search">검색</button>    	   	
+    	<div id="searchbox">
+	    	<button id="search" onclick="searchfrm.submit();">검색</button>
+	    	<form name="searchfrm" action="BoardFaq.do?page=1&keyword=${pageMaker.cri.keyword}" method="get">
+			    <input type="text" name="keyword" id="searchbar" value="${pageMaker.cri.keyword}">
+	    	</form>
     	</div>
     	</div>
     	   	
