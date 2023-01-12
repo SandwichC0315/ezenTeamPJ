@@ -112,7 +112,7 @@
                     <tr>
                         <td>
                             <input type="button" value="비밀번호 재발급" id="submit">
-                            <button id="cancel" onclick="location.href='<%=request.getContextPath()%>/'"> 취 소</button>
+                            <input type="button" value="취소" id="cancel" onclick="location.href='<%=request.getContextPath()%>/'">
                         </td>
                     </tr>
                 </table>

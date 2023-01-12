@@ -70,8 +70,8 @@ select{width:150px; height:36px; position:relative; bottom: 1px;}
 .result{color:red;}
 .result span{font-weight:bold; color:black;}
 
-button{width:206.5px; height:40px;}
-	#submit,#cancel{font-size: 18px; font-weight: bold; border: none; border-radius: 5px; }
+#submit,#cancel{width:206.5px; height:40px; font-size: 18px; font-weight: bold; border: none; 
+        border-radius: 5px; }
     #submit{background-color: rgb(230, 179, 114);}
     #submit:hover{background-color: rgb(212, 155, 80); }
     #submit:active{background-color: rgb(230, 179, 114);}

@@ -126,7 +126,7 @@
                     <tr>
                         <td>
                             <button id="submit" class="findId" onclick="return findId()">아이디 확인</button>
-                            <button id="cancel" onclick="location.href='<%=request.getContextPath()%>/'"> 취 소</button>
+                            <input type="button" value="취소" id="cancel" onclick="location.href='<%=request.getContextPath()%>/'">
                         </td>
                     </tr>
                     
