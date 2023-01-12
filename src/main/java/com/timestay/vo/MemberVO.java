@@ -109,7 +109,12 @@ public class MemberVO {
 	public void setMbreakyn(String mbreakyn) {
 		Mbreakyn = mbreakyn;
 	}
-
+	@Override
+	public String toString() {
+		return "MemberVO [Midx=" + Midx + ", Mid=" + Mid + ", Mpwd=" + Mpwd + ", Mname=" + Mname + ", Mphone=" + Mphone
+				+ ", Madd=" + Madd + ", Mgrade=" + Mgrade + ", Menter=" + Menter + ", Mmdate=" + Mmdate
+				+ ", Mbreakdate=" + Mbreakdate + ", Mbreakyn=" + Mbreakyn + "]";
+	}
 
 	
 }

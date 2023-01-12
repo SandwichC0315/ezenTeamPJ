@@ -112,7 +112,7 @@
 							    
 							    <div class="faqBtn">
 								    
-								    <c:if test="${Mid.equals('admin')}"> <!-- admin만 보이게 -->
+								    <c:if test="${Mvo.getMgrade() == 'A'}"> <!-- admin만 보이게 -->
 									    <!-- 질문 수정 -->
 									    <button id="modify" onclick="location.href='ModifyFaq.do?BFidx=${vo.BFidx}'" style="">수정</button>
 			
@@ -147,7 +147,7 @@
 			    </c:if>
 			</ul>
 			
-	<c:if test="${Mid.equals('admin')}"> <!-- admin만 보이게 -->
+	<c:if test="${Mvo.getMgrade() == 'A'}"> <!-- admin만 보이게 -->
    		<button id="write" onclick="location.href='InsertFaq.do'">등록${Mgrade}</button>
    	</c:if>
     	<div>

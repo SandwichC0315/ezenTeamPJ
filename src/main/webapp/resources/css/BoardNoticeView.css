@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+body{margin:0; padding:0;width:100%;  height:100%;} 
+    
+    main{position:relative; height:100vh; }
+    
+    a {text-decoration:none; color:inherit; position: inherit;}
+    header{height:100px; top:0; z-index: 100; width:100%; position:fixed; }
+    
+    .active{background:rgba(0,0,0, 0.6 );     
+    transition-duration: 0.5s; transition-timing-function: ease;    
+    -webkit-transition-duration:0.4s;-webkit-transition-timing-function:ease;}
+    .deactive{background-color: transparent;
+    transition-duration: 0.5s; transition-timing-function: ease;    
+    -webkit-transition-duration:0.4s; -webkit-transition-timing-function:ease;}
+    
+
+    .navbar {display: flex; justify-content: space-between; height:100px; padding:0;  width:100%; position:absolute;}
+    #title{ font-size:24px; font-weight:500; color:rgb(0, 0, 0);  margin:5px 115px 0 120px;}  
+    #title h4{margin:32px 0;}      
+    
+    .navbar_menu {display: flex; list-style: none; padding-left: 0; margin:0; width:100%; }        
+    .navbar_menu li {padding: 8px 12px;}
+
+    .navbar_links {list-style: none; padding-left: 0; width:250px; float:right; position:relative; margin:16px 0; }
+    .navbar_links li{display: inline-block; position:relative;}
+    .navbar_links li a{color: rgb(0, 0, 0);  padding:0 9px; display: inline-block;} 
+    .navbar_links li::after{content:"|"; font-size:10px;display:inline-block; width:2px; height:19px; color:#888; font-size:10px; vertical-align:middle;} 
+    .navbar_links li:last-child::after{display:none;}
+
+    .navbar_toggleBtn {display: none; position: absolute; right: 32px; font-size: 24px;}
+
+    .navbar_menu>ul{display:inline-block;  margin:0; padding:0; width:1200px;}
+    .navbar_menu>ul>li>a{text-align: left;}
+    .navbar_menu>ul>li{text-align:left;}
+    .navbar_menu li{width:100px;font-size:20px; float:left; padding:37px 30px 37px; margin:0 60px 0; display:block;}
+    .navbar_menu li:nth-child(3) .sub ul li{margin-left: -3px;} 
+    .navbar_menu a{font-weight:bold; color:rgb(0, 0, 0); width:70px; padding:15px;}
+    .navbar_menu a::after{content:'';  background:#000; height:2px; width:0; transition:all .2s ease-in-out;}
+
+    header:hover{ background:#fff; height:260px;  transition: 0.3s ease-in-out;  color:#000; border-bottom: 1px solid #666;} 
+    header:hover main{position:absolute; bottom:260px;}
+    header:hover .navbar{padding:0; margin:0;}
+    header:hover .navbar__menu{padding:0; margin:0;} 
+    header:hover .navbar__menu>li>a{text-align: center;} 
+    header:hover a{color:#000;} 
+    header:hover #lnb>ul>li::after{color:#000;}
+    header:hover .sub{display:block; transition:inherit; }    
+
+    header a:hover{color:#666; }
+    header a:hover::after{width:inherit; }
+    header .sub{display:none; width:inherit;}
+
+    .navbar .sub li{float:none; margin:0; padding:0; padding-top: 20px; height:20px; width:inherit;  }
+    .navbar .sub ul{padding:0; margin-left:20px; display: inline-block; width:inherit;}
+    .navbar .sub a{font-size:15px; padding:0; white-space:nowrap; }
+    .navbar .sub a::after{display:none;}
+    .navbar .sub a:hover{text-decoration:underline;} 
+    
+    
+    main h2 {text-align:center; font-size: 2.5vh; font-weight: bold; margin: 10vh auto 0 auto;}
+    main #btnlist {float:left; margin-left:15vw;}
+    main #btn {float:right; margin-right:15vw;}
+     
+
+	table {
+	  border: 1px #a39485 solid;
+	  font-size: .9em;
+	  box-shadow: 0 2px 5px rgba(0,0,0,.25);
+	  width: 70%;
+	  border-collapse: collapse;
+	  border-radius: 5px;
+	  overflow: hidden;
+	  margin: 7vh auto 3vh auto;
+	}
+	
+	th {text-align: left;}
+	  
+	thead {font-weight: bold; color: #000; background: #73685d;}
+	  
+	 td, th {padding: 1em .5em; vertical-align: middle;}
+	  
+	 td {border-bottom: 1px solid rgba(0,0,0,.1); background: #fff;}
+	
+	a {color: #73685d;}
+	  
+	 @media all and (max-width: 768px)
+	 { 
+		  table, thead, tbody, th, td, tr {display: block;}
+		  
+		  th {text-align: right;}
+		  
+		  table {
+		    position: relative; 
+		    padding-bottom: 0;
+		    border: none;
+		    box-shadow: 0 0 10px rgba(0,0,0,.2);
+		  }
+		  
+		  thead {float: left; white-space: nowrap;}
+		  
+		  tbody {
+		    overflow-x: auto;
+		    overflow-y: hidden;
+		    position: relative;
+		    white-space: nowrap;
+		  }
+		  
+		  tr {display: inline-block; vertical-align: top;}
+		  
+		  th {border-bottom: 1px solid #a39485;}
+		  
+		  td {border-bottom: 1px solid #e5e5e5;}
+	  }
+    
+    
+    main #contentbox {height: 500px;}
+ 
+    footer{ width: 100vw; height: 300px; margin: 0 auto; 
+        background: rgb(93, 80, 82); position:absolute;}
+
+    footer #container{ margin: auto; padding-left: 10vw; padding-top: 6vh;} 
+
+    footer #footer1, #footer2{display: inline-block;
+                                color:white; line-height: 2em;}
+    footer h2{font-size: 25px; font-weight: bold;}
+    footer #footer1 {padding-right: 10vw;}

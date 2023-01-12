@@ -40,7 +40,7 @@
 				   , BFwdate
 				   ) VALUES(
 				     bfidx_seq.nextval
-				   , 1
+				   , 41
 				   , #{BFtitle}
 				   , #{BFcontent}
 				   , sysdate

@@ -1,7 +1,5 @@
 package com.timestay.group;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -14,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Handles requests for the application home page.
  */
-@RequestMapping(value="/Event")
+@RequestMapping(value = "/Event")
 @Controller
 public class EventController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping(value = "/EventNowEvent.do", method = RequestMethod.GET)

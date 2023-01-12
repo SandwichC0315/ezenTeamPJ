@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="com.timestay.vo.BoardNoticeVO" %>
+<%@ page import="com.timestay.vo.MemberVO" %>
 <%@	page import="java.util.List" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% List<BoardNoticeVO> list = (List<BoardNoticeVO>)request.getAttribute("list"); %>
 <!DOCTYPE html>
 <html>
@@ -90,18 +90,12 @@
     
     <main>
     	<h2>공지사항</h2>
-    	<button id="write">등록</button>
-    	<input type="text" id="searchbar">
-    	<button id="search">검색</button>
-    	
-    	<h3>등록된 게시글이 없습니다.</h3>
-    	
-    	<table border="1">
+    	<table>
     		<thead>
     			<tr>
 	    			<th>글번호</th>
 	    			<th>제목</th>
-	    			<th>등록일</th>
+	    			<th>조회수</th>
     			</tr>
     		</thead>
     		
@@ -109,13 +103,57 @@
     			<%for (BoardNoticeVO vo : list) {%>
     			<tr>
     				<td><%=vo.getBNidx() %></td>
-    				<td><%=vo.getBNtitle() %></td>
-    				<td><%=vo.getBNwdate() %></td>
+    				<td><a href="BoardNoticeView.do?BNidx=<%=vo.getBNidx()%>"><%=vo.getBNtitle()%></a></td>
+    				<td><%=vo.getBNhit() %></td>
     			</tr>
     			<%} %>
     		</tbody>
     	</table>
-   
+    	
+    	<c:if test="${login != null}">
+	    	<c:if test="${Mvo.getMgrade() == 'A'}">
+	    		<button id="write" onclick="location.href='BoardNoticeWrite.do'">등록</button>
+			</c:if>
+		</c:if>
+		
+		
+		
+		
+		<ul class="btn-group pagination">
+			    <c:if test="${pageMaker.prev }">
+				    <li>
+				        <a href='<c:url value="/Board/BoardNotice.do?page=${pageMaker.startPage-1 }"/>'>◀<i class="fa fa-chevron-left"></i></a>
+				    </li>
+			    </c:if>
+			    
+			    <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">
+					<c:if test="${select ne pageNum}">
+						<a href='<c:url value="/Board/BoardNotice.do?page=${pageNum}"/>'>${pageNum }</a>
+					</c:if>
+
+					<c:if test="${pageNum eq select }">
+						<a id="bold" href='<c:url value="/Board/BoardNotice.do?page=${pageNum}"/>'>${pageNum }</a>
+					</c:if>
+			    </c:forEach>
+			    
+			    <c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+				       <a href='<c:url value="/Board/BoardNotice.do?page=${pageMaker.endPage+1 }"/>'>▶<i class="fa fa-chevron-right"></i></a>
+			    </c:if>
+		</ul>
+		
+		<!--  
+    	<div id="searchbox" class="search_area">
+	    	<button id="search" onclick="location.href='BoardNotice.do?page=1&keyword=${pageMaker.cri.keyword}'">검색</button>
+	    	<input type="text" name="keyword" id="searchbar" value="${pageMaker.cri.keyword}">
+    	</div>
+    	-->
+    	<div id="searchbox">
+	    	<button id="search" onclick="searchfrm.submit();">검색</button>
+	    	<form name="searchfrm" action="BoardNotice.do?page=1&keyword=${pageMaker.cri.keyword}" method="get">
+			    <input type="text" name="keyword" id="searchbar" value="${pageMaker.cri.keyword}">
+	    	</form>
+    	</div>
+
     </main>
     
     

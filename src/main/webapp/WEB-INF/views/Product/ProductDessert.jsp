@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+    <%@ page import="com.timestay.vo.ProductVO" %>
+    <%@	page import="java.util.List" %>
+    <% List<ProductVO> ProductList1 = (List<ProductVO>)request.getAttribute("ProductList1"); %>   
+    <% List<ProductVO> ProductList2 = (List<ProductVO>)request.getAttribute("ProductList2"); %>       
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -66,14 +70,15 @@
             </div>          
         </nav>    
     
-  		<c:if test= "${login==null}">
-	  		<ul class="navbar_links">
-	 			<li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>  		    
+      		
+		<c:if test= "${login==null}">
+	  	<ul class="navbar_links">
+		    <li><a href="#" onclick="return false;" id="modal_btn">로그인</a></li>   
 	            <li><a href="<%=request.getContextPath()%>/MyPage/MyPageShoppingCart.do">장바구니</a></li>
 	            <li><a href="#">고객센터</a></li>
 	        </ul>
-        </c:if>
-     	<c:if test ="${login!=null}">
+	        </c:if>
+	     	<c:if test ="${login!=null}">
 	        <ul class="navbar_links" style="width:330px;">
 	            <li><a href="<%=request.getContextPath()%>/Member/logout.do" style="padding:0 4px">로그아웃</a></li>
 	            <li><a href="<%=request.getContextPath()%>/MyPage/member_Modify.do?Mid=${Mid}" style="padding:0 4px">마이페이지</a></li>
@@ -81,6 +86,7 @@
 	            <li><a href="#" style="padding:0 4px">고객센터</a></li>
 	        </ul>
   		</c:if>  
+ 
         
     </header>
     <main> 
@@ -109,42 +115,32 @@
 		      <div class="product_b">
 		        <p>빵</p>
 		        <ul>
+		        <%for(ProductVO vo : ProductList1){ %>
    		          <li>
-     				<dl><a href="${pageContext.request.contextPath}/Product/ProductInfo.do"><img src="${pageContext.request.contextPath}/resources/images/소금빵.jpg" alt=""></a></dl>
- 					<dt>소금빵</dt>     				 
+     				<dl><a href="ProductInfo.do?Pidx=<%=vo.getPidx()%>"><img src="${pageContext.request.contextPath}/resources/images/<%=vo.getPimage() %>" alt=""></a></dl>
+ 					<dt><%=vo.getPtitle() %></dt>     				 
 		          </li>
-   		          <li>
-     				<dl><a href="${pageContext.request.contextPath}/Product/ProductInfo.do"><img src="${pageContext.request.contextPath}/resources/images/블루베리스콘.jpg" alt=""></a></dl>
- 					<dt>블루베리스콘</dt>     				 
-		          </li>
-		        </ul>
+		          		<%} 
+		%>		          	          
+		        </ul>		        
 		      </div>
 		      <div class="product_s">
 		
 		        <p>디저트</p>
 		        <ul>
+		        <%for(ProductVO vo : ProductList2){ %>
    		          <li>
-     				<dl><a href="${pageContext.request.contextPath}/Product/ProductInfo.do"><img src="${pageContext.request.contextPath}/resources/images/블루베리크럼블 케이크.jpg" alt=""></a></dl>
- 					<dt>블루베리크럼블 케이크</dt>     				 
+     				<dl><a href="ProductInfo.do?Pidx=<%=vo.getPidx()%>"><img src="${pageContext.request.contextPath}/resources/images/<%=vo.getPimage() %>" alt=""></a></dl>
+ 					<dt><%=vo.getPtitle() %></dt>     				 
 		          </li>
-		          <li>
-     				<dl><a href="${pageContext.request.contextPath}/Product/ProductInfo.do"><img src="${pageContext.request.contextPath}/resources/images/제과사진2.jpg" alt=""></a></dl>
- 					<dt>제과2</dt>     				 
-		          </li>	
+		          		<%} 
+		%>		         
 		        </ul>
 		      </div>
 		    </div>
    		   <div class="quickmenu">
 	          <div><a href="#"><img src="${pageContext.request.contextPath}/resources/images/free-icon-up-arrow-3042413.png" alt="위로가기"></a></div>
-	          <div><a href="#"><img src="${pageContext.request.contextPath}/resources/images/shopping-cart.png" alt="장바구니"></a></div>
-	          <div><a href="#"><img src="${pageContext.request.contextPath}/resources/images/free-icon-kakao-talk-3991924.png" alt="카카오톡"></a></div>
-	          <div><strong>최근상품</strong></div>
-	          <div class="recent_product"> 
-	            <ul>
-	              <li>1</li>
-	              <li>1</li>
-	            </ul>
-	          </div>
+	          <div><a href="<%=request.getContextPath()%>/Shopping/ShoppingCart.do"><img src="${pageContext.request.contextPath}/resources/images/shopping-cart.png" alt="장바구니"></a></div>
       		</div>	  
 		  </div>
     </main>

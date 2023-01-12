@@ -1,9 +1,10 @@
 @charset "utf-8";
 
-
 /* id  = '#' , class = '.' */
 
-    body{margin:0; padding:0;width:100%;  } 
+    body{margin:0; padding:0;width:100%;  height:100%;} 
+    
+    main{position:relative; height:100vh;}
     
     a {text-decoration:none; color:inherit; position: inherit;}
     header{height:100px; top:0; z-index: 100; width:100%; position:fixed; }
@@ -60,16 +61,72 @@
     .navbar .sub a:hover{text-decoration:underline;} 
     
     
+    .pagination{margin:0 auto; width:100px; text-align:center;}
+	.pagination li{display:inline-block;}
+    #bold {font-weight:bold;}
+    
+    
     main h2 {text-align:center; font-size: 2.5vh; font-weight: bold; margin: 10vh auto 0 auto;}
-    main #write{float:left; margin-left:25vw; margin-top:5vh;}
-    main #search, #searchbar {float:right; margin-top:5vh;}
-    main #searchbar {margin-right:25vw;}
+    main #write{float:left; margin-left:15vw;}
+    main #searchbar, #search  {float:right;}
+    main #searchbar {margin-right:5px;}
+    main #searchbox {margin-right:15vw;}
     
-    main h3{text-align: center; font-size: 1.5vh; margin: 15vh auto 500px auto;}    
+     
+
+	table {
+	  border: 1px #a39485 solid;
+	  font-size: .9em;
+	  box-shadow: 0 2px 5px rgba(0,0,0,.25);
+	  width: 70%;
+	  border-collapse: collapse;
+	  border-radius: 5px;
+	  overflow: hidden;
+	  margin: 7vh auto 3vh auto;
+	}
+	
+	th {text-align: left;}
+	  
+	thead {font-weight: bold; color: #fff; background: #73685d;}
+	  
+	 td, th {padding: 1em .5em; vertical-align: middle;}
+	  
+	 td {border-bottom: 1px solid rgba(0,0,0,.1); background: #fff;}
+	
+	a {color: #73685d;}
+	  
+	 @media all and (max-width: 768px)
+	 {
+		  table, thead, tbody, th, td, tr {display: block;}
+		  
+		  th {text-align: right;}
+		  
+		  table {
+		    position: relative; 
+		    padding-bottom: 0;
+		    border: none;
+		    box-shadow: 0 0 10px rgba(0,0,0,.2);
+		  }
+		  
+		  thead {float: left; white-space: nowrap;}
+		  
+		  tbody {
+		    overflow-x: auto;
+		    overflow-y: hidden;
+		    position: relative;
+		    white-space: nowrap;
+		  }
+		  
+		  tr {display: inline-block; vertical-align: top;}
+		  
+		  th {border-bottom: 1px solid #a39485;}
+		  
+		  td {border-bottom: 1px solid #e5e5e5;}
+	  }
     
-    
+   
     footer{ width: 100vw; height: 300px; margin: 0 auto; 
-        background: rgb(93, 80, 82);}
+        background: rgb(93, 80, 82);  position:absolute;}
 
     footer #container{ margin: auto; padding-left: 10vw; padding-top: 6vh;} 
 

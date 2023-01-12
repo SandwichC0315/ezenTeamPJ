@@ -3,11 +3,114 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.timestay.mapper.boardNoticeMapper">
 
-	<select id="test" resultType="boardnoticeVO">
-		select *
+	<select id="test" resultType="boardnoticeVO">	
+		<![CDATA[
+			select B.*
+			from
+			(select rownum as rnum, A.*
+				from(
+					select *
+					from TB_BoardNotice
+					where BNdelyn = 'N'
+					]]>
+					
+					<if test="keyword != null">
+						and BNtitle like '%'||#{keyword}||'%'
+					</if>
+					
+					<![CDATA[
+					order by BNidx DESC) A
+				where rownum <= #{perPageNum}*#{page}) B
+			where B.rnum > #{pageStart}
+		]]>
+		
+		
+	</select>
+	
+	<!-- 게시물 총 갯수 -->
+	<select id="count" resultType="int">
+		<![CDATA[
+			select count(*)
 			from TB_BoardNotice
+			where BNdelyn ='N'
+		]]>
+		
+		<if test="keyword != null">
+			and BNtitle like '%'||#{keyword}||'%'
+		</if>
 	</select>
 
+
+	<select id="selectOne" resultType="boardnoticeVO" parameterType="int">
+		select BNidx
+			, BNtitle
+			, BNcontent
+			, BNimage
+			, BNwdate
+			, BNhit
+			from TB_BoardNotice
+			where BNidx=#{BNidx}
+	</select>
+	
+	
+	<update id="update" parameterType="boardnoticeVO">
+		update TB_BoardNotice
+		set BNtitle = #{BNtitle}
+		, BNcontent = #{BNcontent}
+		where BNidx = #{BNidx}
+	</update>
+	
+	
+	<update id="updateNoticeHit" parameterType="boardnoticeVO">
+		update TB_BoardNotice
+		set BNhit = BNhit + 1
+		where BNidx = #{BNidx}
+	</update>
+	
+	<insert id="insertNotice" parameterType="boardNoticeVO">
+		<![CDATA[
+		insert into TB_BoardNotice(
+				BNidx
+				, Midx
+				, BNtitle
+				, BNcontent
+				, BNimage
+				, BNwdate
+				, BNhit)
+				values(
+					TB_BNIDX_SEQ.NEXTVAL
+					, #{Midx}
+					, #{BNtitle}
+					, #{BNcontent}
+					, #{BNimage}
+					, sysdate
+					, 0
+					)
+		]]>
+		<selectKey order="AFTER" resultType="int" keyProperty="BNidx">
+			select max(BNidx) from TB_BoardNotice
+		</selectKey>
+	</insert>
+	
+
+	<select id="getListWithPaging" resultType="boardNoticeVO">
+		<![CDATA[
+			select *
+			from(
+				select /** INDEX_DESC(TB_BoardNotice) */
+				rownum rn, BNidx, Midx, BNtitle, BNcontent, BNimage, BNwdate, BNmdate, BNdeln, BNhit
+				from TB_BoardNotice
+				where rownum <= #{pageNum} * #{amount}
+			)
+			where rn > (${pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
+	<update id="delete">
+		update TB_BoardNotice
+		set BNdelyn = 'Y'
+		where BNidx = #{BNidx}
+	</update>
 </mapper>
 
 

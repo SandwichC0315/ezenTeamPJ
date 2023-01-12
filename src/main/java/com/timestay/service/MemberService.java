@@ -11,6 +11,8 @@ public interface MemberService {
 
 	MemberVO selectOneByMid(MemberVO vo);
 	
+	MemberVO findMemberByMidx(int Midx);
+	
 	int modify(MemberVO vo);
 	
 	int signUp(MemberVO vo);
