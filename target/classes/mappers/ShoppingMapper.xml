@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0/EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.timestay.mapper.ShoppingMapper">
+
+
+	<insert id="ShoppingCart" parameterType="ShoppingCartVO">
+	<!-- 무조건 쿼리만 들어간다는 뜻 -->
+	<![CDATA[                               
+   INSERT INTO tb_shoppingcart(
+							  sidx,
+							  midx,
+						  	  Pidx,
+						 	  svol)
+							  SELECT
+							  tb_Sidx_seq.nextval,
+							   #{midx},
+							   #{Pidx},
+							   #{Svol}
+							 FROM DUAL  
+							 WHERE  not EXISTS
+							 (
+							  SELECT
+							  sidx,
+							  midx,
+							  Pidx,
+							  svol
+							  FROM
+							  tb_shoppingcart
+							  WHERE
+							  Pidx = #{Pidx}
+	          				)
+	]]>
+	<selectKey order= "AFTER" resultType="integer" keyProperty="Sidx"><!-- 원하는 select 절을 한번 더 날릴 수 있다. After써서 위의 쿼리 실행후 한번더 실행되도록-->
+		SELECT MAX(Sidx) from tb_shoppingcart
+	</selectKey>
+	</insert>	
+	
+ 	<select id="ShoppingList" parameterType="int" resultType="shoppingCartVO">
+ 	select a.Sidx,a.Pidx, b.Pimage,b.ptitle, b.pcontent, b.pprice,a.svol,(b.pprice*a.svol) as totalSum  
+ 	from tb_shoppingcart  a,  tb_Product  b,  tb_Member  c 
+	where a.Midx=#{Midx} and  a.Midx=c.Midx and b.Pidx =a.Pidx 
+ 	
+ 	</select>
+ 	<update id="ShoppingCartModify" parameterType="ShoppingCartVO">
+ 	update tb_ShoppingCart 
+ 	set Svol=#{Svol}
+ 	where Sidx=#{Sidx}
+ 	</update>
+	<delete id="ShoppingCartDelete" parameterType="int">
+		DELETE
+		  FROM tb_ShoppingCart
+		 WHERE Sidx=#{Sidx}
+	</delete>
+	<select id="ShoppingCartPidx" parameterType="ShoppingCartVO"  resultType="ShoppingCartVO">
+	<!-- 배열로 pidx를 받으려면 in절을 참고해봐라 -->
+	select a.Sidx,a.Pidx,a.Midx, b.Pimage,b.ptitle, b.pcontent, b.pprice,a.svol,(b.pprice*a.svol) as totalSum from tb_ShoppingCart a join tb_product b on a.Pidx=b.Pidx where a.Pidx in 
+	<foreach collection="pidxList" item="Pidx" open="(" close=")" separator=",">
+	#{Pidx}
+	</foreach>
+	And midx=#{Midx}
+	</select>
+	<select id="selectUser" parameterType="int" resultType="MemberVO" >
+		select * from tb_member where Midx=#{Midx}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

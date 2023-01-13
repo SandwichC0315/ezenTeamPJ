@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0/EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.timestay.mapper.boardQnaMapper">
+
+	<select id="selectlist" resultType="boardQnaVO"><!-- resulttype mybatis config에 정의한대로 쓰는거 아닌가 -->
+		select *from tb_boardqna
+	</select>
+	<insert id="insert" parameterType="BoardQnaVO">
+	<!-- 무조건 쿼리만 들어간다는 뜻 -->
+	<![CDATA[                               
+	INSERT INTO tb_boardqna(
+				bqidx,
+				midx,
+				BQCATEGORY,
+				BQTITLE,
+				BQCONTENT,
+				BQWDATE,
+				BQREWDATE,
+				BQREYN,
+				BQMDATE,
+				BQDELYN,
+				BQRECONTENT
+				) VALUES(
+			 	bqidx_seq.nextval,
+				#{midx},
+				pd,
+				#{BQTITLE},
+				#{BQCONTENT},
+				sysdate,
+				sysdate,
+				N,
+				sysdate,
+				n,
+				#{BQRECONTENT}
+				)
+	]]>
+	<selectKey order= "AFTER" resultType="integer" keyProperty="bqidx"><!-- 원하는 select 절을 한번 더 날릴 수 있다. After써서 위의 쿼리 실행후 한번더 실행되도록-->
+	<!-- ㅏ됴 -->
+		SELECT MAX(bqidx) from tb_boardqna
+	</selectKey>
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
