@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0/EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.timestay.mapper.Product2Mapper">
+
+	<!-- list + 페이징 적용 -->
+	<select id="getList" resultType="ProductVO2">
+		<![CDATA[
+		select B.* 
+		from 
+			(select rownum as rnum, A.*
+				from (
+					select *
+					from TB_Product
+					where pdelyn = 'N'
+					order by pidx desc) A
+				where rownum <= #{perPageNum}*#{page} )B
+			where B.rnum > #{pageStart}
+		]]>
+	</select>
+	
+	<!-- 게시글 총 갯수 -->
+	<select id="count" resultType="int">
+		<![CDATA[
+		select count(*)
+		from TB_Product 
+		where pdelyn = 'N'		
+		]]>
+	</select>
+	
+	<update id="delete">
+	 	update TB_Product
+	 	set pdelyn = 'Y'
+	 	where pidx = #{pidx}
+	</update>
+	
+	<insert id="insertProduct" parameterType="ProductVO2">
+		<![CDATA[
+			insert into TB_Product(
+				pIdx
+				, pcategoryidx
+				, ptitle
+				, pcontent
+				, pimage
+				, pprice
+				, pvol
+				, pimageplus)
+				values(
+				TB_Pidx_seq.nextval
+				, #{pcategoryidx}
+				, #{ptitle}
+				, #{pcontent}
+				, #{pimage}
+				, #{pprice}
+				, #{pvol}
+				, #{pimage})
+		]]>
+	</insert>
+
+	<select id="selectProduct" resultType="ProductVO2" parameterType="int">
+		select * 
+		from TB_Product 
+		where pidx = #{pidx}
+	</select>
+	
+	<update id="updateProduct" parameterType="ProductVO2">
+		<![CDATA[
+		update TB_Product
+		set ptitle = #{ptitle}
+		, pcategoryidx = #{pcategoryidx}
+		, pcontent = #{pcontent}
+		, pprice = #{pprice}
+		, pvol = #{pvol}
+		, pimage = #{pimage}
+		, pimageplus = #{pimage}
+		where pidx = #{pidx}
+		]]>
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
