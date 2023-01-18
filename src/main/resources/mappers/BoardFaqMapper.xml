@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0/EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.timestay.mapper.boardFaqMapper">
+
+	<select id="selectList" resultType="boardfaqVO"> <!-- list + 페이징 -->
+	<![CDATA[
+		SELECT *  
+		FROM TB_BoardFaq 
+		WHERE bfdelyn ='N'
+				]]>
+				
+				<if test="keyword != null">
+					AND BFtitle like Concat('%',(#{keyword}),'%')
+				</if>
+				
+				<![CDATA[
+		ORDER BY bfidx desc 
+		LIMIT #{pageStart}, #{perPageNum};
+	]]>
+		
+	</select>
+	
+	<select id="countBoardList" resultType="Integer">
+    <![CDATA[
+        SELECT
+            count(*)
+        FROM
+            TB_BoardFaq
+        WHERE
+            BFDELYN='N'
+    ]]>
+    	<if test="keyword != null">
+				AND BFtitle like Concat('%',(#{keyword}),'%')
+		</if>
+	</select>
+	
+	
+	<insert id="insertFaq" parameterType="boardfaqVO">	
+	<![CDATA[
+		INSERT INTO TB_BOARDFAQ (
+					 midx
+				   , BFtitle
+				   , BFcontent
+				   , BFwdate
+				   ) VALUES(
+				     1
+				   , #{BFtitle}
+				   , #{BFcontent}
+				   , sysdate()
+				   )
+	]]>
+	<selectKey order="AFTER" resultType="integer" keyProperty="BFidx">
+		SELECT MAX(BFidx) from TB_BOARDFAQ	
+	</selectKey>
+	</insert>
+	
+	<delete id="deleteFaq" parameterType="int" >
+		DELETE 
+		  FROM TB_BOARDFAQ
+		 WHERE BFidx = #{BFidx}		
+	</delete>
+	
+	<select id="selectOne" resultType="boardfaqVO" parameterType="int">
+		SELECT BFidx
+		     , BFtitle
+		     , BFcontent
+		  FROM TB_BOARDFAQ
+		 WHERE BFidx = #{BFidx} 
+	</select>
+	
+	<update id="modifyFaq" parameterType="boardfaqVO"> 
+		UPDATE TB_BOARDFAQ
+		   SET BFtitle = #{BFtitle}
+		   	 , BFcontent = #{BFcontent}
+		 WHERE BFidx = #{BFidx}	
+	</update>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
